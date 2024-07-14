@@ -1,0 +1,76 @@
+---
+title: "dash"
+format: dashboard
+---
+
+```{r}
+needs(tidyverse, crosstalk, DT, plotly, gt, palmerpenguins)
+
+penguins <- palmerpenguins::penguins
+
+sharedP <- SharedData$new(penguins)
+
+
+```
+
+# {.sidebar}
+
+Simple static dashboard
+
+```{r}
+filter_checkbox("sex", "Sex", sharedP, ~ sex)
+```
+
+# Analysis
+
+## Row
+
+### Column
+
+```{r}
+#| title: "Slider"
+
+slider_width = 800
+
+htmltools::div(
+    
+    id = "sliderdiv",
+    filter_slider("bill_mm", "bill_length", sharedP, ~bill_length_mm, width = slider_width)
+    
+)
+    
+```
+
+### column {width=200}
+
+```{r}
+#| content: valuebox
+#| title: "Penguin no."
+
+list(
+    icon = "tencent_qq",
+    colour = "primary",
+    value = nrow(penguins)
+)
+
+```
+
+## row (height = 60%)
+
+```{r}
+#| title: "Flipper vs body mass"
+
+p <- ggplot(sharedP, aes(flipper_length_mm, body_mass_g)) +
+                geom_point() 
+
+ggplotly(p)
+
+```
+
+# Table
+
+```{r}
+DT::datatable(sharedP)
+
+```
+

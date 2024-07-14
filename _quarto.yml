@@ -1,0 +1,32 @@
+project:
+  type: book
+
+book:
+  title: "Proof of concept for health indicators"
+  author: "Julian Flowers"
+  date: "2024-07-12"
+  chapters:
+    - index.qmd
+    - eda.qmd
+    - lookups.qmd
+    - amr_poc.qmd
+    - smoking-poc.qmd
+    - flu.qmd
+    - injury.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cerulean
+    toc: true
+    toc-location: right
+    code-fold: true
+    code-tools: true
+    prefer-html: true
+  docx: default
+  
+editor: visual
+

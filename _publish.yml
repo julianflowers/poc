@@ -1,0 +1,8 @@
+- source: project
+  quarto-pub:
+    - id: 2faa19a8-55ad-4327-9d05-383e4361f1a7
+      url: 'https://julianflowers.quarto.pub/spha'
+- source: dash.qmd
+  quarto-pub:
+    - id: 68b4940d-838d-4164-81fa-a32f22c44276
+      url: 'https://julianflowers.quarto.pub/dash'

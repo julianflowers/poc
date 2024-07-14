@@ -1,0 +1,27 @@
+# Introduction {.numbered}
+
+Outline an end-to-end process for creating public health indicators and generating public health profiles.
+
+```{mermaid}
+%%| label: fig-comp
+%%| fig-cap: "Workflow"
+%%| cache: true
+
+flowchart TD
+
+A[Source datasets] --> B[Cleaning] 
+B --> C[Recode area names to match across datasets] --> E
+D --> E[Aggregate indicator data by gender, age-band and area]
+B --> D[Create age bands from ages]
+E --> F[Link aggregate indicator data to population data]
+F --> G[Calculate rate and unceratinty intervals]
+G --> H[Pool regional rates across indicators]
+H--> I[Generate regional profile visualisations]
+
+classDef green fill:#9f6,stroke:#333,stroke-width:2px;
+     classDef orange fill:#f96,stroke:#333,stroke-width:4px;
+     class D,e green
+     class B orange
+
+
+```

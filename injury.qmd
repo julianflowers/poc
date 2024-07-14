@@ -1,0 +1,92 @@
+---
+title: "Injury"
+format: 
+   html: 
+      toc: true
+      toc-location: right
+editor: visual
+---
+
+## Injury
+
+```{r}
+#| label: setup
+#| include: false
+
+needs(data.table, tidyverse, readxl)
+
+pops <- fread("/Users/julianflowers/Library/CloudStorage/GoogleDrive-julian.flowers12@gmail.com/My Drive/Saudi/data/pop_ests.csv")
+
+injury <- read_xlsx("/Users/julianflowers/spha/data/fwdatastrategypocpublichealthframeworkindicators/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx") |>
+    setDT()
+
+
+```
+
+```{r}
+#| label: missing
+options(digits = 2)
+summary(injury)
+
+obs <- nrow(injury)
+na_dob <- injury[is.na(DateOfBirth), ]
+na_dob_n <- nrow(na_dob)
+
+```
+
+Overall there are `r obs` records, of which `r na_dob_n` (`r 100 * na_dob_n/obs`%  ) have missing dates of of birth.
+
+```{r}
+#| label: imjury types
+
+injury[, .N, by = .(diagnosis, code, Gender, Region )]
+```
+
+
+```{r}
+#| label: recode region names to enable linkage to population data
+
+unique(injury$Region)
+
+
+```
+
+The data contains values for `r length(unique(injury$Region))` of the 13 regions.
+
+```{r}
+#| label: estimate ages and create age band
+
+## exclude missing DoB
+injury_dob <-  injury[!is.na(DateOfBirth),]
+
+injury_dob <- injury_dob[!is.na(DateOfBirth), age := .(as.POSIXct(ymd("2023-06-01")) - DateOfBirth)][, age_year := floor(as.numeric(age) / 365)][, age_band := cut(age_year, seq(0, 120, 5))][]
+
+
+```
+
+## Aggregate injury data
+
+```{r}
+#| label: aggregate injury data
+
+injury_dob[, .N, by = .(Region, diagnosis, code, age_band, Gender)][order(Region)] |>
+    pivot_wider(names_from = Region, values_from = N) |>
+    arrange(age_band, code, Gender) |>
+    flextable::flextable()
+    
+
+```
+
+```{r}
+#| label: calculate age-standardised hospitalisation rates - link population data
+
+
+
+```
+
+```{r}
+#| label: add uncertainty intervals
+
+
+
+```

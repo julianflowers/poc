@@ -1,0 +1,114 @@
+---
+title: "Rapid EDA"
+format: 
+    html: 
+       code-fold: true
+       code-tools: true
+execute: 
+  warning: false
+  message: false
+---
+
+A first step is to rapidly evaluate raw data.
+
+In creating regional health indicators and profiles
+
+Store data in a single directory
+
+```{r}
+#| label: setup
+#| include: false
+
+library(needs)
+needs(tidyverse, data.table, here, fs, readxl)
+
+```
+
+```{r}
+#| label: load datasets
+
+dir <- here("data")
+
+xl_files <- fs::dir_ls(dir, regexp = "xls")
+
+csv_files <- fs::dir_ls(dir, regexp = "csv")
+
+## read_files 
+
+xl <- map(xl_files, read_xlsx)
+csvs <- map(csv_files, read_csv)
+
+```
+
+```{r}
+#| label: region names
+#| output: false
+
+map(xl, colnames)
+map(csvs, colnames)
+
+```
+
+| Dataset     | Area field name    |
+|-------------|--------------------|
+| AMR         | No area variable   |
+| Injury      | `Region`           |
+| Flu         | `region_en`        |
+| Smoking     | `directorate_name` |
+| Populations | `Region`           |
+
+: Area name labels
+
+To facilitate data linkage and creating indicator datasets, area variable names should be consistent between datasets.
+
+Directorate is not equivalent to region.
+
+There are 13 KSA regions and 20 health directorates
+
+### Area variable names
+
+```{r}
+#| label: area variable names
+#| output: false
+
+## rename area variables
+
+csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv` <- rename(csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv`, Region = region_en)
+
+#csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv`
+
+```
+
+### Area names
+
+```{r}
+#| label: area names
+
+flu_areas <- csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv` |>
+    select(Region) |> unique()
+
+smoking_areas <- csvs$`/Users/julianflowers/poc/data/Smoking 2022.csv` |>
+    select(directorate_name) |> unique()
+
+pop_areas <- csvs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Governorates.csv` |>
+    select(Region) |> unique()
+
+injury_areas <- xl$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx` |> select(Region) |> unique()
+
+n_areas <- data.frame(data = c("flu_areas", "smoking_areas", "pop_areas", "injury_areas"), no_areas = map_dbl(list(flu_areas, smoking_areas, pop_areas, injury_areas), nrow), area_type = c("region", "directorate", "region", "region")) |>
+    knitr::kable()
+    
+
+```
+
+The number of unique areas `r n_areas`
+
+```{r}
+#| label: area name overap
+
+setdiff(flu_areas, pop_areas)
+setdiff(pop_areas, injury_areas)
+setdiff(injury_areas, flu_areas)
+
+```
+

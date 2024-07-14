@@ -1,0 +1,342 @@
+---
+title: "Data preparation and cleaning"
+author: "Julian Flowers"
+format: 
+    html:
+      toc: true
+      toc-location: right
+      code-fold: true
+      code-tools: true
+editor: visual
+execute: 
+  cache: true
+  freeze: true
+  warning: false
+  message: false
+---
+
+## Data prep and clening
+
+### Creating a lookup table for KSA regions and health directorates
+
+1.  Population estimates by age, gender and region - downloaded from detailed census data 2022. source: <https://portal.saudicensus.sa/portal/public/1/15/101464?type=TABLE;> translated into English using ChatGPT4o.
+
+2.  This gives populations for 13 regions; smoking and injury date is based on health directorates - 20 units.
+
+3.  For these analyses aggregated directorates to regions to enable rate calculations
+
+4.  To map directorates to regions following steps were undertaken:
+
+    -   Shape file for KSA regional boundaries obtained from ...
+
+    -   Directorate based locations of smoking cessation clinics were scraped from <https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx>
+
+    -   Locations were spatially joined to KSA regional boundaries to create a region \<-\> directorate lookup
+
+5.  Naming systems differed between datasets so renaming and recoding necessary
+
+```{mermaid}
+%%| label: fig-comp
+%%| fig-cap: "Comparative analysis"
+%%| cache: true
+
+flowchart LR
+
+A[Comparison] --> B[Within population] 
+B --> C[Over time] --> I[Against standard or target]
+C --> J[Slope / regression coefficient]
+B --> K[Within subgroups e.g. age, sex, SES]
+A --> D[Between populations]
+D --> E[Cross-sectional variation]
+D --> F[Compare summary trends]
+D --> G[Compare trend in variation]
+
+classDef green fill:#9f6,stroke:#333,stroke-width:2px;
+     classDef orange fill:#f96,stroke:#333,stroke-width:4px;
+     class D,e green
+     class B orange
+
+
+```
+
+### Region names
+
+```{r}
+#| label: region names in population table
+
+
+devtools::install_github("yutannihilation/ggsflabel")
+needs(tidyverse, data.table, readxl, myScrapers, sf, curl, ggsflabel)
+
+pops <- fread("/Users/julianflowers/Library/CloudStorage/GoogleDrive-julian.flowers12@gmail.com/My Drive/Saudi/data/pop_ests.csv")
+
+region_names <- pops$Region |> unique()
+
+region_names |>
+    enframe()
+
+## region names for injury data (NB only 12 names)
+df_r <- read_xlsx("/Users/julianflowers/spha/data/fwdatastrategypocpublichealthframeworkindicators/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx") |> pluck("Region") |> unique()
+
+## directorate names for smoking data
+smok <- read_csv("/Users/julianflowers/spha/data/fwdatastrategypocpublichealthframeworkindicators/Smoking 2022.csv") 
+
+
+
+```
+
+### Scrape smoking clinic locations
+
+```{r}
+#| label: scrape locations of smoking cessation clinics
+
+url <- "https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx"
+
+scc_dir <- get_page_links(url) %>%
+  .[159:178] 
+
+sc_dir_links <- paste0("https://www.moh.gov.sa", scc_dir)
+
+sc_dir_names <- sc_dir_links |>
+  basename()
+
+## extract Google maps link of scc for each region and create data frame
+sc_loc <- map(sc_dir_links, get_page_links) %>%
+  map(\(x) x[grepl("https://goo.gl", x)]) %>%
+    set_names(., sc_dir_names) |>
+  enframe() |>
+    mutate(name = str_remove(name, ".aspx"))
+
+
+
+```
+
+### Function to extract coordinates from google map links
+
+```{r}
+#| label: function to extract coordinates from google map links
+
+get_coordinates_from_google_maps <- function(url) {
+  # Follow the redirect to get the final URL
+  url <- url
+  response <- HEAD(url, config(followlocation = TRUE))
+  final_url <- response$url
+  
+  # Use a regular expression to find the coordinates in the final URL
+  match <- str_match(final_url, "@(-?\\d+\\.\\d+),(-?\\d+\\.\\d+)")
+  if (!is.na(match[1,2]) && !is.na(match[1,3])) {
+    latitude <- as.numeric(match[1,2])
+    longitude <- as.numeric(match[1,3])
+    return(list(latitude = latitude, longitude = longitude))
+  } else {
+    return(NULL)
+  }
+}
+```
+
+### Extract smoking clinic coordinates
+
+```{r}
+#| label: extract lat longs for sccs
+
+sc_coords <- sc_loc |>
+  unnest(value) |>
+  mutate(ll = map(value, get_coordinates_from_google_maps, .progress = TRUE))
+
+## create table of sc clinic locations 
+sc_ll <- sc_coords |>
+    unnest_wider(ll)
+
+## convert to sf file (need to remove missing coordinate values)
+
+sc_ll_sf <- sc_ll |>
+    drop_na() |>
+    st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
+
+
+```
+
+### Obtain KSA region boundary file
+
+```{r}
+#| label: boundary files for KSA regions from https://data.humdata.org
+
+sa_shp <- curl_download("https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/a0188b1b-2f40-4f27-8a43-25913a7378ca/download/sau_adm_gadm_20210525_shp.zip", destfile = tempfile())
+
+tmpd <- tempdir()
+
+sa_shp_1 <- curl_download("https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip", destfile = tempfile())
+
+#sa_pop_d <- curl_download("https://data.humdata.org/dataset/14b288ca-1855-4025-9f01-41cba548e6f6/resource/44baa2f6-b6d8-4018-b9c6-fd81b493ec22/download/sau_general_2020_geotiff.zip", destfile = tempfile())
+
+sa_shp <- unzip(sa_shp, exdir = tmpd)
+
+sa_shp_1 <- unzip(sa_shp_1, exdir = tmpd)
+
+#sa_tif <- unzip(sa_pop_d, exdir = tmpd)
+
+shps <- fs::dir_ls(tmpd, regexp = "shp$")
+
+## boundary polygon file
+sa_bound <- read_sf(shps[2]) 
+
+```
+
+### Map smoking clinic locations against regional boundaries
+
+```{r}
+#| label: fig-scc
+#| fig-cap: "SCC location map with regional boundaries"
+#| fig-width: 8
+#| fig-height: 6
+
+sa_bound |>
+    ggplot() +
+    geom_sf(fill = "grey90") +
+    geom_sf_label_repel(aes(label = ADM1_EN)) +
+    geom_sf(data = sc_ll_sf, aes(colour = name)) +
+    theme_void() +
+    scale_colour_viridis_d(option = "turbo", name = "Directorates")
+
+```
+
+### Create a geographical lookup table
+
+```{r}
+#| label: create lookup
+
+reg_dir_lu <- sa_bound |>
+    st_join(sc_ll_sf) |>
+    st_drop_geometry() |>
+    select(ADM1_EN, name) |>
+    group_by(ADM1_EN, name) |>
+    summarise(n = n()) |>
+    ungroup() |>
+    group_by(name) |>
+    arrange(name) |>
+    filter(n == max(n)) |>
+    select(name, everything())
+
+```
+
+Now we want to attach region names tpo the smoking data so we can join with population data in order to calculate attendance rates by age.
+
+### Map directorates to regions
+
+```{r}
+#| label: add directorate labels from smoking dataset
+
+pops$Region |>
+    unique() |>
+    enframe() 
+
+smok_1 <- smok |>
+    mutate(directorate_name = recode(directorate_name, "Qurayyat" = "Al-Qurayyat", 
+                                     "Qunfotha" = "AL-Qunfudah", 
+                                     "AlAhsa" = "Al-Ahsa", 
+                                     "Baha" = "Al-Baha",
+                                     "Eastern" = "Eastern-Region", 
+                                     "Hafer AlBatin" = "Hafr-Al-Batin",
+                                     "Northern Borders" = "Northern-Borders",
+                                     "Qassim" = "Al-Qassim", 
+                                     "Jouf" = "Al-Jouf"
+                                     )) |>
+    left_join(reg_dir_lu, by = c("directorate_name" = "name")) 
+    #left_join(pops, by = c("ADM1_EN" = "Region"))
+
+
+```
+
+### Link smoking frequencies to population data
+
+```{r}
+#| label: link to pop data
+
+pops <- pops |>
+    mutate(age = parse_number(`Single Age Group`))
+
+pops$Region |>
+    unique()
+
+smok_pops_region <- smok_1 |>
+    mutate(Gender = str_to_title(patient_gender)) |>
+    count(ADM1_EN, age, Gender) 
+
+
+## recode region names (ADM1_EN)
+
+# smok_pops_region |>
+#     mutate(Region = recode(ADM1_EN, 
+#                            "`Asir" = "'Asir", 
+#                            "Ash Sharqiyah" = "Al Hudud ash Sharqiyah", 
+#                            "Al Madinah" = ))
+
+smok_pops_region <- smok_pops_region |>
+    full_join(pops, by = c("ADM1_EN" = "Region", "age", "Gender")) 
+
+
+
+## sense check
+smok_pops_region |>
+    count(Gender, ADM1_EN, `18-44`) |>
+    print(n = 42)
+
+```
+
+### Calculate regional smoking rates
+
+```{r}
+#| label: calculate smoking rates by region
+
+## 18-44 F
+smok_18_44 <- smok_pops_region |>
+    filter(Gender == "Female", `18-44` == "18-44") |>
+    group_by(ADM1_EN) |>
+    reframe(n = n(), 
+            sum_pop = sum(Population), 
+            rate_100k = 100000 * n / sum_pop)
+
+    smok_18_44_ci <- PHEindicatormethods::phe_rate(smok_18_44, n, sum_pop, multiplier = 100000)
+
+smok_18_44_ci |>
+    ggplot() +
+    geom_col(aes(reorder(ADM1_EN, -rate_100k), rate_100k), fill = "goldenrod") +
+    geom_point(aes(reorder(ADM1_EN, -rate_100k), rate_100k, colour = n)) +
+    geom_linerange(aes(x = ADM1_EN, ymin = lowercl, ymax = uppercl)) +
+    labs(y = "", 
+         x = "Region
+         ") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
+## 15+
+
+smok_15_ <- smok_pops_region |>
+    filter(`15+` == "15+") |>
+    group_by(ADM1_EN) |>
+    reframe(n = n(), 
+            sum_pop = sum(Population), 
+            rate_100k = 100000 * n / sum_pop)
+
+smok_15_ci <- PHEindicatormethods::phe_rate(smok_15_, n, sum_pop,  multiplier = 100000)
+
+smok_15_ci |>
+    ggplot() +
+    geom_point(aes(reorder(ADM1_EN, rate_100k), rate_100k)) +
+    geom_linerange(aes(x = ADM1_EN, ymin = lowercl, ymax = uppercl)) +
+    coord_flip() +
+    labs(x = "")
+
+## AS specific
+
+smok_pops_region |>
+    #filter(`15+` == "15+") |>
+    group_by(ADM1_EN, `Five-Year Age Group`, Gender) |>
+    reframe(n = n(), 
+            sum_pop = sum(Population), 
+            rate_100k = 100 * n / sum_pop) |>
+   # select(-c(n, sum_pop)) |>
+    pivot_wider(-c(n, rate_100k), names_from = c("Gender", "Five-Year Age Group"), values_from = "sum_pop") 
+```
+
+
