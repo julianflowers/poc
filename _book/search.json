@@ -20,6 +20,16 @@
     ]
   },
   {
+    "objectID": "eda.html#area-names",
+    "href": "eda.html#area-names",
+    "title": "2  Rapid EDA",
+    "section": "2.2 Area names",
+    "text": "2.2 Area names\n\n\nCode\nflu_areas &lt;- csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv` |&gt;\n    select(Region) |&gt; unique()\n\nsmoking_areas &lt;- csvs$`/Users/julianflowers/poc/data/Smoking 2022.csv` |&gt;\n    select(directorate_name) |&gt; unique()\n\npop_areas &lt;- csvs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Governorates.csv` |&gt;\n    select(Region) |&gt; unique()\n\ninjury_areas &lt;- xl$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx` |&gt; select(Region) |&gt; unique()\n\nn_areas &lt;- data.frame(data = c(\"flu_areas\", \"smoking_areas\", \"pop_areas\", \"injury_areas\"), no_areas = map_dbl(list(flu_areas, smoking_areas, pop_areas, injury_areas), nrow), area_type = c(\"region\", \"directorate\", \"region\", \"region\")) |&gt;\n    knitr::kable()\n\n\nThe number of unique areas\n\n\n\ndata\nno_areas\narea_type\n\n\n\n\nflu_areas\n13\nregion\n\n\nsmoking_areas\n20\ndirectorate\n\n\npop_areas\n13\nregion\n\n\ninjury_areas\n12\nregion\n\n\n\n\n\nCode\nsetdiff(flu_areas, pop_areas)\n\n\n# A tibble: 9 × 1\n  Region              \n  &lt;chr&gt;               \n1 Riyadh              \n2 Sharqiya            \n3 Makkah Al Mukarramah\n4 Asir                \n5 madina              \n6 Al Qassim           \n7 Hail                \n8 Al Baha             \n9 Northern Frontier   \n\n\nCode\nsetdiff(pop_areas, injury_areas)\n\n\n# A tibble: 10 × 1\n   Region                   \n   &lt;chr&gt;                    \n 1 Al Bahah                 \n 2 Al Hudud ash Shamaliyah  \n 3 Ar Riyadh                \n 4 Al Qasim                 \n 5 Al Madinah al Munawwarah \n 6 Al Mintaqah ash Sharqiyah\n 7 Tabuk                    \n 8 Ha'il                    \n 9 'Asir                    \n10 Makkah al Mukarramah     \n\n\nCode\nsetdiff(injury_areas, flu_areas)\n\n\n# A tibble: 2 × 1\n  Region \n  &lt;chr&gt;  \n1 Makkah \n2 Madinah",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rapid EDA</span>"
+    ]
+  },
+  {
     "objectID": "lookups.html",
     "href": "lookups.html",
     "title": "3  Data preparation and cleaning",
@@ -227,16 +237,6 @@
     "text": "In summary, this book has no content whatsoever.\n\n\nCode\n1 + 1\n\n\n[1] 2",
     "crumbs": [
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "eda.html#area-names",
-    "href": "eda.html#area-names",
-    "title": "2  Rapid EDA",
-    "section": "2.2 Area names",
-    "text": "2.2 Area names\n\n\nCode\nflu_areas &lt;- csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv` |&gt;\n    select(Region) |&gt; unique()\n\nsmoking_areas &lt;- csvs$`/Users/julianflowers/poc/data/Smoking 2022.csv` |&gt;\n    select(directorate_name) |&gt; unique()\n\npop_areas &lt;- csvs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Governorates.csv` |&gt;\n    select(Region) |&gt; unique()\n\ninjury_areas &lt;- xl$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx` |&gt; select(Region) |&gt; unique()\n\nn_areas &lt;- data.frame(data = c(\"flu_areas\", \"smoking_areas\", \"pop_areas\", \"injury_areas\"), no_areas = map_dbl(list(flu_areas, smoking_areas, pop_areas, injury_areas), nrow), area_type = c(\"region\", \"directorate\", \"region\", \"region\")) |&gt;\n    knitr::kable()\n\n\nThe number of unique areas\n\n\n\ndata\nno_areas\narea_type\n\n\n\n\nflu_areas\n13\nregion\n\n\nsmoking_areas\n20\ndirectorate\n\n\npop_areas\n13\nregion\n\n\ninjury_areas\n12\nregion\n\n\n\n\n\nCode\nsetdiff(flu_areas, pop_areas)\n\n\n# A tibble: 9 × 1\n  Region              \n  &lt;chr&gt;               \n1 Riyadh              \n2 Sharqiya            \n3 Makkah Al Mukarramah\n4 Asir                \n5 madina              \n6 Al Qassim           \n7 Hail                \n8 Al Baha             \n9 Northern Frontier   \n\n\nCode\nsetdiff(pop_areas, injury_areas)\n\n\n# A tibble: 10 × 1\n   Region                   \n   &lt;chr&gt;                    \n 1 Al Bahah                 \n 2 Al Hudud ash Shamaliyah  \n 3 Ar Riyadh                \n 4 Al Qasim                 \n 5 Al Madinah al Munawwarah \n 6 Al Mintaqah ash Sharqiyah\n 7 Tabuk                    \n 8 Ha'il                    \n 9 'Asir                    \n10 Makkah al Mukarramah     \n\n\nCode\nsetdiff(injury_areas, flu_areas)\n\n\n# A tibble: 2 × 1\n  Region \n  &lt;chr&gt;  \n1 Makkah \n2 Madinah",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Rapid EDA</span>"
     ]
   }
 ]
