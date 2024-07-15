@@ -26,6 +26,7 @@ needs(tidyverse, data.table, here, fs, readxl)
 
 ```{r}
 #| label: load datasets
+#| output: false
 
 dir <- here("data")
 
@@ -65,7 +66,7 @@ Directorate is not equivalent to region.
 
 There are 13 KSA regions and 20 health directorates
 
-### Area variable names
+## Area variable names
 
 ```{r}
 #| label: area variable names
@@ -79,7 +80,7 @@ csvs$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv` <- re
 
 ```
 
-### Area names
+## Area names
 
 ```{r}
 #| label: area names

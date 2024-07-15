@@ -201,9 +201,9 @@ sa_bound |>
     theme_void() +
     scale_colour_viridis_d(option = "turbo", name = "Directorates")
 
-pops$Region |>
-    unique() |>
-    enframe() 
+# pops$Region |>
+#     unique() |>
+#     enframe() 
 
 reg_dir_lu <- sa_bound |>
     st_join(sc_ll_sf) |>
@@ -320,13 +320,11 @@ pop_agg <- dfs1$pop |>
 ## 
 
 final_poc_data <- regional_counts_complete |>
-    bind_cols(pop_agg) |>
-    select(Region = Region...1, 
-           age_band = age_band...2, sum_f_Smoking:sum_m_injury, Male:Female) |>
+    bind_cols(pop_agg |> select(Female:Male)) |>
     pivot_longer(names_to = "Indicator", values_to = "Values", cols = 3:8) |>
     mutate(Gender = str_extract(Indicator, "_(m|f)")) |>
     #mutate(rate = ifelse(Gender == "_f", 100000 * Values / Female, 100000 * Values / Male)) |>
-    pivot_longer(names_to = "pops_gender", values_to = "pops", cols = 3:4) |>
+    pivot_wider(names_from = Gender, values_from = Values) |>
     mutate(Indicator = str_remove(Indicator, "sum_(m|f)_"))
 
 ## add uncertainty
@@ -335,6 +333,16 @@ final_poc_data <- regional_counts_complete |>
 needs(PHEindicatormethods)
     
     
-phe_rate(final_poc_data, x = Values, n = pops)
+f_r <- phe_rate(final_poc_data, x = `_f`, n = Female) |>
+    select(Region, age_band, Indicator, value, lowercl, uppercl) |>
+    mutate(gender = "Female")
+
+m_r <- phe_rate(final_poc_data, x = `_m`, n = Male) |>
+    select(Region, age_band, Indicator, value, lowercl, uppercl) |>
+    mutate(gender = "Male")
+
+bind_rows(f_r, m_r) |>
+
+    write_csv("data/pop_rates.csv")
 
 

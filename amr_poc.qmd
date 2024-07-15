@@ -11,6 +11,9 @@ format:
        fig-height: 10
        fig-width: 8
 editor: visual
+execute: 
+  warning: false
+  message: false
 ---
 
 ```{r}
@@ -30,7 +33,7 @@ theme_set(ggthemes::theme_economist())
 
 ```
 
-# Introduction
+## Introduction
 
 This document outlines a stepwise approach to calculating AMR indicators from dummy data kindly supplied by PHA.
 
@@ -50,7 +53,7 @@ There are x steps
 
 5.  Suggested indicator visualisations (if appropriate).
 
-# AMR indicators
+## AMR indicators
 
 ### MRSA
 
@@ -84,7 +87,7 @@ df <- amr
 
 ```{r}
 
-amr <- amr[, `:=` (five_year = cut(age_year, breaks = seq(0, 100, 5), right = FALSE))][]
+amr <- amr[, `:=` (age_band = cut(age_year, breaks = seq(0, 100, 5), right = FALSE))][]
 
 head(amr)
 
@@ -107,18 +110,18 @@ amr <- amr |> select(-c(family_name, first_name, sample_no, patient_mrn, second_
 ```{r}
 
 amr_long <- amr |>
-    pivot_longer(names_to = "antibiotic_test", values_to = "resistance", cols = minocycline:spectinomycin) |> setDT()
+    pivot_longer(names_to = "antibiotic", values_to = "resistance", cols = minocycline:spectinomycin) |> setDT()
     
 ```
 
-### recode 3rd generation cephalosporins
+### Recode 3rd generation cephalosporins
 
 -   this step adds a new variable which labels 3rd generation cephalosporins
 
 ```{r}
 #| label: recode
 
-amr_long <- amr_long[, gen_3 := case_when(str_detect(antibiotic_test, "cef") ~ "3rd-gen", TRUE ~ "other")][]
+amr_long <- amr_long[, gen_3 := case_when(str_detect(antibiotic, "cef") ~ "3rd-gen", TRUE ~ "other")][]
 
 ```
 
@@ -134,18 +137,18 @@ gtsummary::tbl_summary(amr)
 
 ```
 
--   represent this visually - we'll use decompostion trees
+-   represent this visually - we'll use decomposition trees
 
 ```{r}
 #| label: fig-decomposition-trees
 #| fig-cap: "Decomposition tree for E. coli"
 #| fig-height: 12
-#| eval: false
+#| eval: true
 
-amr_freq <- amr_long[pathogen_name == "Escherichia coli", .N, by = .(five_year, gen_3, resistance, pathogen_name)]
+amr_freq <- amr_long[pathogen_name == "Escherichia coli", .N, by = .(age_band, gen_3, resistance, pathogen_name, community_origin)]
 
 collapsibleTreeSummary(amr_freq, 
-                       c("gen_3", "resistance"), 
+                       c( "community_origin", "gen_3","resistance"), 
                        root = "E. coli", 
                        nodeSize = "N", 
                        attribute = "N", 
@@ -156,7 +159,8 @@ collapsibleTreeSummary(amr_freq,
 
 ## Numerators and denominators
 
--   to calculate indicators we need to calculate
+To calculate indicators we need to calculate
+
 -   patients with blood stream infection
 -   samples with antibiotic resistance
 
@@ -170,25 +174,28 @@ amr_long
 ## Calculate resistance rates
 
 -   calculate proportion of tests resistant
--   calculate confidence interval (using Wilsons score method for proportions via the `PHEindicatormethods` R package)
+-   calculate confidence interval (using Wilson's score method for proportions via the `PHEindicatormethods` R package)
 
 ```{r}
+#| label: tbl-E.coli
+#| tbl-cap: "E. coli resistance rates to 3rd generation cephalosporins"
 
-amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(resistance), .N, by = .(resistance)] |>
+amr_long[pathogen_name == "Escherichia coli" & !is.na(resistance), .N, by = .(resistance, gen_3)] |>
     pivot_wider(names_from = resistance, values_from = N) |>
     rowwise() |>
-    mutate(total_tests = sum(c_across(S:I), na.rm = TRUE), 
-           resistance_rate = R / total_tests)
+    mutate(total_tests = sum(c_across(R:I), na.rm = TRUE), 
+           resistance_rate = R / total_tests) |>
+    flextable::flextable()
 
 ```
 
-by antibiotic
+### by antibiotic
 
 ```{r}
 
 options(digits = 2)
 
-amr_res_ci_sa <- amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(resistance), .N, by = .(antibiotic_test, resistance)] |>
+amr_res_ci_sa <- amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(resistance), .N, by = .(antibiotic, resistance)] |>
     pivot_wider(names_from = resistance, values_from = N, values_fill = 0) |>
     rowwise() |>
     mutate(total_tests = sum(c_across(S:I), na.rm = TRUE), 
@@ -197,21 +204,21 @@ amr_res_ci_sa <- amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(resi
 phe_proportion(amr_res_ci_sa, R, total_tests) |>
     bind_cols(amr_res_ci_sa) |>
     ggplot() +
-    geom_point(aes(reorder(antibiotic_test, value), value)) +
-    geom_linerange(aes(antibiotic_test, ymin = lowercl, ymax = uppercl)) +
+    geom_point(aes(reorder(antibiotic, value), value)) +
+    geom_linerange(aes(antibiotic, ymin = lowercl, ymax = uppercl)) +
     coord_flip() +
     labs(y = "Staph. aureus resistance rate", x = "") + 
     scale_y_continuous(position = "right")
 
 ```
 
-by age
+### by age
 
 ```{r}
 #| label: by age
 
 
-amr_res_ci_age <- amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(resistance), .N, by = .(five_year, resistance)] |>
+amr_res_ci_age <- amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(resistance), .N, by = .(age_band, resistance)] |>
     pivot_wider(names_from = resistance, values_from = N, values_fill = 0) |>
     rowwise() |>
     mutate(total_tests = sum(c_across(S:I), na.rm = TRUE), 
@@ -220,8 +227,8 @@ amr_res_ci_age <- amr_long[pathogen_name == "Staphylococcus aureus" & !is.na(res
 phe_proportion(amr_res_ci_age, R, total_tests) |>
     bind_cols(amr_res_ci_age) |>
     ggplot() +
-    geom_point(aes(reorder(five_year, value), value)) +
-    geom_linerange(aes(five_year, ymin = lowercl, ymax = uppercl)) +
+    geom_point(aes(reorder(age_band, value), value)) +
+    geom_linerange(aes(age_band, ymin = lowercl, ymax = uppercl)) +
     coord_flip() +
     labs(y = "Staph. aureus resistance rate", x = "") + 
     scale_y_continuous(position = "right")
@@ -234,7 +241,7 @@ phe_proportion(amr_res_ci_age, R, total_tests) |>
 ```{r}
 #| label: e coli
 
-amr_res_ci_ec <- amr_long[str_detect(pathogen_name, "coli") & !is.na(resistance), .N, by = .(antibiotic_test, resistance, gen_3)] |>
+amr_res_ci_ec <- amr_long[str_detect(pathogen_name, "coli") & !is.na(resistance), .N, by = .(antibiotic, resistance, gen_3)] |>
     pivot_wider(names_from = resistance, values_from = N, values_fill = 0) |>
     rowwise() |>
     mutate(total_tests = sum(c_across(R:I), na.rm = TRUE), 
@@ -243,8 +250,8 @@ amr_res_ci_ec <- amr_long[str_detect(pathogen_name, "coli") & !is.na(resistance)
 phe_proportion(amr_res_ci_ec, R, total_tests) |>
     bind_cols(amr_res_ci_ec) |>
     ggplot() +
-    geom_point(aes(reorder(antibiotic_test, value), value, colour = gen_3)) +
-    geom_linerange(aes(antibiotic_test, ymin = lowercl, ymax = uppercl)) +
+    geom_point(aes(reorder(antibiotic, value), value, colour = gen_3)) +
+    geom_linerange(aes(antibiotic, ymin = lowercl, ymax = uppercl)) +
     coord_flip() +
     labs(y = "E. coli resistance rate", x = "") + scale_y_continuous(position = "right")
 
@@ -252,9 +259,3 @@ phe_proportion(amr_res_ci_ec, R, total_tests) |>
 
 ```
 
-#### select methicillin tested samples
-
-```{r}
-
-amr[, .SD, .SDcols = c("record_number", "location", "patient_hospitalized", "specific_location", "community_origin", "site", "pathogen_name", "five_year")]
-```

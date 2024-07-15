@@ -1,14 +1,25 @@
 ---
-title: "dash"
-format: dashboard
+title: "Dashboard"
+format: 
+    dashboard:
+        scrolling: true
 ---
 
 ```{r}
-needs(tidyverse, crosstalk, DT, plotly, gt, palmerpenguins)
+needs(tidyverse, crosstalk, DT, plotly, gt, readxl, Hmisc)
 
-penguins <- palmerpenguins::penguins
+data <- read_csv("data/pop_rates.csv")
 
-sharedP <- SharedData$new(penguins)
+amr <- read_xlsx("data/AMR 2022 POC.xlsx") |>
+    janitor::clean_names() |>
+    select(age_year, community_origin, pathogen_name:spectinomycin) |>
+    pivot_longer(names_to = "antibiotic", values_to = "resistance", cols = 4:26) |>
+        mutate(age_band = cut2(age_year, cuts = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 118))) |>
+    count(age_band, pathogen_name, antibiotic, resistance)
+
+
+sharedP <- SharedData$new(data)
+shared_amr <- SharedData$new(amr)
 
 
 ```
@@ -18,17 +29,29 @@ sharedP <- SharedData$new(penguins)
 Simple static dashboard
 
 ```{r}
-filter_checkbox("sex", "Sex", sharedP, ~ sex)
+filter_checkbox("gender", "Gender", sharedP, ~ gender)
+filter_checkbox("region", "Region", sharedP, ~ Region)
+filter_checkbox("ind", "Indicator", sharedP, ~ Indicator)
+
+
 ```
 
+
+---
+
+```{r}
+filter_checkbox("path", "Pathogen", shared_amr, ~ pathogen_name)
+filter_checkbox("antibiotic", "Antibiotic", shared_amr, ~ antibiotic)
+
+```
+
+
 # Analysis
-
-## Row
-
 ### Column
 
 ```{r}
 #| title: "Slider"
+#| eval: false
 
 slider_width = 800
 
@@ -41,27 +64,31 @@ htmltools::div(
     
 ```
 
-### column {width=200}
+### column {width=100}
 
 ```{r}
 #| content: valuebox
-#| title: "Penguin no."
+#| title: "Records no."
+#| eval: false
 
 list(
     icon = "tencent_qq",
     colour = "primary",
-    value = nrow(penguins)
+    value = nrow(data)
 )
 
 ```
 
-## row (height = 60%)
+## row (height = 80%)
 
 ```{r}
-#| title: "Flipper vs body mass"
+#| title: "Rates"
 
-p <- ggplot(sharedP, aes(flipper_length_mm, body_mass_g)) +
-                geom_point() 
+p <- sharedP |>
+    ggplot(aes(age_band, value, colour = Indicator, shape = gender)) + 
+    geom_point() +
+    facet_wrap(~Indicator + gender, ncol = 2, scales = "free") +
+    labs(y = "Rate")
 
 ggplotly(p)
 
@@ -70,7 +97,29 @@ ggplotly(p)
 # Table
 
 ```{r}
+#| title: "Indicator data"
+
 DT::datatable(sharedP)
+
+```
+
+# AMR
+
+```{r}
+#| title: "AMR data"
+
+DT::datatable(shared_amr)
+
+```
+
+# AMR charts
+
+```{r}
+
+amr |>
+    head()
+
+
 
 ```
 
