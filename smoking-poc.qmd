@@ -6,8 +6,6 @@ execute:
   warning: false
 ---
 
-## 
-
 ```{r}
 #| label: setup
 #| include: false
@@ -19,32 +17,43 @@ theme_set(ggthemes::theme_economist())
 
 dir <- here::here("~/spha/data/fwdatastrategypocpublichealthframeworkindicators")
 
-smoking <-  fread("/Users/julianflowers/spha-1/data/fwdatastrategypocpublichealthframeworkindicators/Smoking 2022.csv")
+smoking <-  smoking |> setDT()
 
 
 ```
 
 ### Data preparation
 
-```{r}
-#| label: create age bands
+#### load census population  and create age bands
 
-smoking <- smoking[, `:=` (five_year = cut(age, breaks = seq(0, 100, 5), right = FALSE), `18-44` = between(age, 18, 44), `15+` = age >= 15)][]
+```{r}
+#| label: pop data
+
+pops <- setDT(dfs1$pop)[, `:=` (five_year = cut(age, breaks = seq(0, 100, 5), right = FALSE), `18-44` = between(age, 18, 44), `15+` = age >= 15)][]
+
+pop_agg <- pops[, .(n = .N, sumpops = sum(Population, na.rm = TRUE)), by = .(Region, five_year, `18-44`, `15+`,  Gender)]
 
 ```
 
-### Calculate numerator and denominator
+#### load smoking data and create age bands
 
 ```{r}
-#| label: numerator
+#| label: create age bands - 5 yr, 18-44, 15+
 
-smoking[patient_gender == "female" & `18-44` == TRUE, .N, by = .(directorate_name, year)]
+smoking <- smoking[, `:=` (five_year = cut(age, breaks = seq(0, 100, 5), right = FALSE), `18-44` = between(age, 18, 44), `15+` = age >= 15)][]
 
-## probably better - easier to calculate / matching age bands/ more statitsical power NB crude rates
+smoking[, .N, by = .(Region, age, Gender)]
 
-smoking[patient_gender == "female" & `15+` == TRUE, .N, by = .(directorate_name, year)]
+```
 
-## denominator
+#### join datasets
+
+```{r}
+#| label: join data
+
+smoking[, age := NULL][] |>
+  full_join(pop_agg, by = c("Region", "five_year", "Gender")) |>
+  arrange(Gender)
 
 ```
 
