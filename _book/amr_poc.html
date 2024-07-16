@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.5.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Julian Flowers">
 <meta name="dcterms.date" content="2024-07-16">
 
-<title>Proof of concept for health indicators - 4&nbsp; AMR walkthrough</title>
+<title>Proof of concept for health indicators – 4&nbsp; AMR walkthrough</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,13 +121,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./amr_poc.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">AMR walkthrough</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -467,11 +467,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">fontSize =</span> <span class="dv">16</span>, </span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">collapsed =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-decomposition-trees" class="cell-output-display quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-decomposition-trees" class="cell-output-display quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-decomposition-trees-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="collapsibleTree html-widget html-fill-item" id="htmlwidget-1955821ce9562c49acb6" style="width:100%;height:975px;"></div>
-<script type="application/json" data-for="htmlwidget-1955821ce9562c49acb6">{"x":{"data":{"name":"E. coli","fill":"#D33F6A","SizeOfNode":19.87,"WeightOfNode":"61","children":[{"name":"Community Origin","fill":"#D33F6A","SizeOfNode":16.29,"WeightOfNode":"41","children":[{"name":"other","fill":"#D33F6A","SizeOfNode":10.49,"WeightOfNode":"17","children":[{"name":"S","fill":"#D33F6A","SizeOfNode":7.63,"WeightOfNode":"9"},{"name":"R","fill":"#E1704C","SizeOfNode":4.41,"WeightOfNode":"3"},{"name":"NA","fill":"#E1704C","SizeOfNode":4.41,"WeightOfNode":"3"},{"name":"I","fill":"#E99A2C","SizeOfNode":3.6,"WeightOfNode":"2"}]},{"name":"3rd-gen","fill":"#DD6157","SizeOfNode":7.2,"WeightOfNode":"8","children":[{"name":"S","fill":"#D33F6A","SizeOfNode":4.41,"WeightOfNode":"3"},{"name":"R","fill":"#D33F6A","SizeOfNode":3.6,"WeightOfNode":"2"},{"name":"NA","fill":"#D33F6A","SizeOfNode":3.6,"WeightOfNode":"2"},{"name":"I","fill":"#E99A2C","SizeOfNode":2.54,"WeightOfNode":"1"}]}]},{"name":"Hospital Origin","fill":"#D33F6A","SizeOfNode":11.38,"WeightOfNode":"20","children":[{"name":"other","fill":"#D33F6A","SizeOfNode":11.93,"WeightOfNode":"22","children":[{"name":"S","fill":"#D33F6A","SizeOfNode":8.81,"WeightOfNode":"12"},{"name":"R","fill":"#D54865","SizeOfNode":5.69,"WeightOfNode":"5"},{"name":"NA","fill":"#E1704C","SizeOfNode":5.09,"WeightOfNode":"4"},{"name":"I","fill":"#E7CA45","SizeOfNode":2.54,"WeightOfNode":"1"}]},{"name":"3rd-gen","fill":"#D33F6A","SizeOfNode":10.18,"WeightOfNode":"16","children":[{"name":"R","fill":"#D33F6A","SizeOfNode":7.2,"WeightOfNode":"8"},{"name":"S","fill":"#D33F6A","SizeOfNode":6.73,"WeightOfNode":"7"},{"name":"NA","fill":"#E8C33C","SizeOfNode":2.54,"WeightOfNode":"1"}]}]}]},"options":{"hierarchy":["community_origin","gen_3","resistance"],"input":null,"attribute":"N","linkLength":null,"fontSize":16,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":90.87,"right":41}}},"evals":[],"jsHooks":[]}</script>
+<div class="collapsibleTree html-widget html-fill-item" id="htmlwidget-27d8bb72007b24e18420" style="width:100%;height:975px;"></div>
+<script type="application/json" data-for="htmlwidget-27d8bb72007b24e18420">{"x":{"data":{"name":"E. coli","fill":"#D33F6A","SizeOfNode":19.87,"WeightOfNode":"61","children":[{"name":"Community Origin","fill":"#D33F6A","SizeOfNode":16.29,"WeightOfNode":"41","children":[{"name":"other","fill":"#D33F6A","SizeOfNode":10.49,"WeightOfNode":"17","children":[{"name":"S","fill":"#D33F6A","SizeOfNode":7.63,"WeightOfNode":"9"},{"name":"R","fill":"#E1704C","SizeOfNode":4.41,"WeightOfNode":"3"},{"name":"NA","fill":"#E1704C","SizeOfNode":4.41,"WeightOfNode":"3"},{"name":"I","fill":"#E99A2C","SizeOfNode":3.6,"WeightOfNode":"2"}]},{"name":"3rd-gen","fill":"#DD6157","SizeOfNode":7.2,"WeightOfNode":"8","children":[{"name":"S","fill":"#D33F6A","SizeOfNode":4.41,"WeightOfNode":"3"},{"name":"R","fill":"#D33F6A","SizeOfNode":3.6,"WeightOfNode":"2"},{"name":"NA","fill":"#D33F6A","SizeOfNode":3.6,"WeightOfNode":"2"},{"name":"I","fill":"#E99A2C","SizeOfNode":2.54,"WeightOfNode":"1"}]}]},{"name":"Hospital Origin","fill":"#D33F6A","SizeOfNode":11.38,"WeightOfNode":"20","children":[{"name":"other","fill":"#D33F6A","SizeOfNode":11.93,"WeightOfNode":"22","children":[{"name":"S","fill":"#D33F6A","SizeOfNode":8.81,"WeightOfNode":"12"},{"name":"R","fill":"#D54865","SizeOfNode":5.69,"WeightOfNode":"5"},{"name":"NA","fill":"#E1704C","SizeOfNode":5.09,"WeightOfNode":"4"},{"name":"I","fill":"#E7CA45","SizeOfNode":2.54,"WeightOfNode":"1"}]},{"name":"3rd-gen","fill":"#D33F6A","SizeOfNode":10.18,"WeightOfNode":"16","children":[{"name":"R","fill":"#D33F6A","SizeOfNode":7.2,"WeightOfNode":"8"},{"name":"S","fill":"#D33F6A","SizeOfNode":6.73,"WeightOfNode":"7"},{"name":"NA","fill":"#E8C33C","SizeOfNode":2.54,"WeightOfNode":"1"}]}]}]},"options":{"hierarchy":["community_origin","gen_3","resistance"],"input":null,"attribute":"N","linkLength":null,"fontSize":16,"tooltip":true,"collapsed":false,"zoomable":true,"margin":{"top":20,"bottom":20,"left":90.87,"right":41}}},"evals":[],"jsHooks":[]}</script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-decomposition-trees-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Decomposition tree for E. coli
@@ -565,14 +565,14 @@ Figure&nbsp;4.1: Decomposition tree for E. coli
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">resistance_rate =</span> R <span class="sc">/</span> total_tests) <span class="sc">|&gt;</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-E.coli" class="cell quarto-float anchored">
+<div id="tbl-E.coli" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-E.coli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;4.1: E. coli resistance rates to 3rd generation cephalosporins
 </figcaption>
 <div aria-describedby="tbl-E.coli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-25d62a24{}.cl-25d0b40e{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-25d2d450{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-25d2d45a{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-25d2e3dc{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-25d2e3e6{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-25d2e3e7{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-25d2e3e8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-25d2e3f0{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-25d2e3f1{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-25d62a24"><thead><tr style="overflow-wrap:break-word;"><th class="cl-25d2e3dc"><p class="cl-25d2d450"><span class="cl-25d0b40e">gen_3</span></p></th><th class="cl-25d2e3e6"><p class="cl-25d2d45a"><span class="cl-25d0b40e">R</span></p></th><th class="cl-25d2e3e6"><p class="cl-25d2d45a"><span class="cl-25d0b40e">NA</span></p></th><th class="cl-25d2e3e6"><p class="cl-25d2d45a"><span class="cl-25d0b40e">S</span></p></th><th class="cl-25d2e3e6"><p class="cl-25d2d45a"><span class="cl-25d0b40e">I</span></p></th><th class="cl-25d2e3e6"><p class="cl-25d2d45a"><span class="cl-25d0b40e">total_tests</span></p></th><th class="cl-25d2e3e6"><p class="cl-25d2d45a"><span class="cl-25d0b40e">resistance_rate</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-25d2e3e7"><p class="cl-25d2d450"><span class="cl-25d0b40e">other</span></p></td><td class="cl-25d2e3e8"><p class="cl-25d2d45a"><span class="cl-25d0b40e">300</span></p></td><td class="cl-25d2e3e8"><p class="cl-25d2d45a"><span class="cl-25d0b40e">193</span></p></td><td class="cl-25d2e3e8"><p class="cl-25d2d45a"><span class="cl-25d0b40e">646</span></p></td><td class="cl-25d2e3e8"><p class="cl-25d2d45a"><span class="cl-25d0b40e">7</span></p></td><td class="cl-25d2e3e8"><p class="cl-25d2d45a"><span class="cl-25d0b40e">1,146</span></p></td><td class="cl-25d2e3e8"><p class="cl-25d2d45a"><span class="cl-25d0b40e">0.2617801</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-25d2e3f0"><p class="cl-25d2d450"><span class="cl-25d0b40e">3rd-gen</span></p></td><td class="cl-25d2e3f1"><p class="cl-25d2d45a"><span class="cl-25d0b40e">269</span></p></td><td class="cl-25d2e3f1"><p class="cl-25d2d45a"><span class="cl-25d0b40e">56</span></p></td><td class="cl-25d2e3f1"><p class="cl-25d2d45a"><span class="cl-25d0b40e">192</span></p></td><td class="cl-25d2e3f1"><p class="cl-25d2d45a"><span class="cl-25d0b40e">4</span></p></td><td class="cl-25d2e3f1"><p class="cl-25d2d45a"><span class="cl-25d0b40e">521</span></p></td><td class="cl-25d2e3f1"><p class="cl-25d2d45a"><span class="cl-25d0b40e">0.5163148</span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-3909910c{}.cl-3906e22c{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3907fa5e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3907fa68{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3908036e{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3908036f{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-39080378{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-39080379{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3908037a{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3908037b{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-3909910c"><thead><tr style="overflow-wrap:break-word;"><th class="cl-3908036e"><p class="cl-3907fa5e"><span class="cl-3906e22c">gen_3</span></p></th><th class="cl-3908036f"><p class="cl-3907fa68"><span class="cl-3906e22c">R</span></p></th><th class="cl-3908036f"><p class="cl-3907fa68"><span class="cl-3906e22c">NA</span></p></th><th class="cl-3908036f"><p class="cl-3907fa68"><span class="cl-3906e22c">S</span></p></th><th class="cl-3908036f"><p class="cl-3907fa68"><span class="cl-3906e22c">I</span></p></th><th class="cl-3908036f"><p class="cl-3907fa68"><span class="cl-3906e22c">total_tests</span></p></th><th class="cl-3908036f"><p class="cl-3907fa68"><span class="cl-3906e22c">resistance_rate</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-39080378"><p class="cl-3907fa5e"><span class="cl-3906e22c">other</span></p></td><td class="cl-39080379"><p class="cl-3907fa68"><span class="cl-3906e22c">300</span></p></td><td class="cl-39080379"><p class="cl-3907fa68"><span class="cl-3906e22c">193</span></p></td><td class="cl-39080379"><p class="cl-3907fa68"><span class="cl-3906e22c">646</span></p></td><td class="cl-39080379"><p class="cl-3907fa68"><span class="cl-3906e22c">7</span></p></td><td class="cl-39080379"><p class="cl-3907fa68"><span class="cl-3906e22c">1,146</span></p></td><td class="cl-39080379"><p class="cl-3907fa68"><span class="cl-3906e22c">0.2617801</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-3908037a"><p class="cl-3907fa5e"><span class="cl-3906e22c">3rd-gen</span></p></td><td class="cl-3908037b"><p class="cl-3907fa68"><span class="cl-3906e22c">269</span></p></td><td class="cl-3908037b"><p class="cl-3907fa68"><span class="cl-3906e22c">56</span></p></td><td class="cl-3908037b"><p class="cl-3907fa68"><span class="cl-3906e22c">192</span></p></td><td class="cl-3908037b"><p class="cl-3907fa68"><span class="cl-3906e22c">4</span></p></td><td class="cl-3908037b"><p class="cl-3907fa68"><span class="cl-3906e22c">521</span></p></td><td class="cl-3908037b"><p class="cl-3907fa68"><span class="cl-3906e22c">0.5163148</span></p></td></tr></tbody></table></div>
 </div>
 </div>
 </figure>
@@ -708,18 +708,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -751,7 +740,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -810,7 +821,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1399,7 +1410,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
