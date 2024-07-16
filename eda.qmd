@@ -22,7 +22,42 @@ Store data in a single directory
 library(needs)
 needs(tidyverse, data.table, here, fs, readxl)
 
+## run this script - creates various outputs but imports, cleans, relabels, recodes and reshape data into a single data table
+
+#source("~/poc/scripts/pre-process.R") 
+## load rates
+## 
+
+rates <- read_csv("data/pop_rates.csv")
+skimr::skim(rates)
+
 ```
+
+```{r}
+#| label: fig-rates
+#| fig-cap: "Regional age-specific rates by indicator and gender"
+#| fig-height: 6
+#| fig-width: 8
+
+rates |>
+    ggplot() +
+    geom_point(aes(age_band, value, colour = gender)) +
+    geom_linerange(aes(age_band, ymin = lowercl, ymax = uppercl, group = Indicator, colour = gender)) +
+    theme(axis.text.x = element_blank(), 
+          strip.text = element_text(size = 9), 
+          legend.position = "bottom") +
+    labs(y = "Rate per 100,000") +
+    scale_y_continuous(position = "right") +
+    facet_grid(Indicator ~ Region, scales = "free")
+
+
+```
+
+```{r}
+
+```
+
+
 
 ```{r}
 #| label: load datasets

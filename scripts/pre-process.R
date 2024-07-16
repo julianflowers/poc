@@ -334,11 +334,11 @@ needs(PHEindicatormethods)
     
     
 f_r <- phe_rate(final_poc_data, x = `_f`, n = Female) |>
-    select(Region, age_band, Indicator, value, lowercl, uppercl) |>
+    select(Region, age_band, Indicator, value, lowercl, uppercl, pop = Female, count = `_f`) |>
     mutate(gender = "Female")
 
 m_r <- phe_rate(final_poc_data, x = `_m`, n = Male) |>
-    select(Region, age_band, Indicator, value, lowercl, uppercl) |>
+    select(Region, age_band, Indicator, value, lowercl, uppercl, pop = Male, count = `_m`) |>
     mutate(gender = "Male")
 
 bind_rows(f_r, m_r) |>
