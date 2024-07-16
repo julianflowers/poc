@@ -2,8 +2,10 @@
 ## 
 ## 
 ## 
-
-needs(fs, tidyverse, data.table, readxl)
+# install.packages("devtools")
+devtools::install_github("yutannihilation/ggsflabel")
+needs(fs, tidyverse, data.table, readxl, ggsflabel, conflicted)
+conflicted::conflicts_prefer(dplyr::select, dplyr::filter)
 
 ## load data
 
@@ -29,7 +31,7 @@ dfs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Regions.csv`
 ## ## we want to make key diemnsion names and variable names consistent between datasets
 
 cnames <- map(dfs, colnames)
-cnames
+#cnames
 
 area_names <- c(cnames[2]$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[5], 
                 cnames[3]$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv`[11], 
@@ -60,8 +62,10 @@ dfs$`/Users/julianflowers/poc/data/Fully_Translated_Population_Data.csv` <- dfs$
 
 dfs1 <- set_names(dfs[c(1:5)], c("amr", "injury", "flu", "pop", "smoking"))
 
-dfs1$pop <- dfs1$pop |>
-    select(Region = 8, Gender, age = `Single Age Group`, Population)
+
+
+pops <- dfs1$pop |>
+    dplyr::select(Region = 8, Gender, age = `Single Age Group`, Population)
 
 ## rename age field
 
@@ -87,8 +91,8 @@ dfs1$flu <- dfs1$flu |>
 ## area names
 ## 
 
-dfs1$pop |>
-    pluck("Region") |>
+pops |>
+   purrr::pluck("Region") |>
     unique()
 
 ## for injury data convert dote of birth to age  - assume admission is 1st June 2023
@@ -103,7 +107,7 @@ dfs1$injury <- dfs1$injury |>
 
 map(dfs1, str)  ## pop age is character field
 
-dfs1$pop <- dfs1$pop |>
+pops <- pops |>
     mutate(age = parse_number(age))
 
 ## now count
@@ -208,14 +212,14 @@ sa_bound |>
 reg_dir_lu <- sa_bound |>
     st_join(sc_ll_sf) |>
     st_drop_geometry() |>
-    select(ADM1_EN, name) |>
+    dplyr::select(ADM1_EN, name) |>
     group_by(ADM1_EN, name) |>
     summarise(n = n()) |>
     ungroup() |>
     group_by(name) |>
     arrange(name) |>
     filter(n == max(n)) |>
-    select(name, everything())
+    dplyr::select(name, everything())
 
 smok_1 <- dfs1$smoking |>
     mutate(directorate_name = recode(directorate_name, "Qurayyat" = "Al-Qurayyat", 
@@ -310,7 +314,7 @@ regional_counts_complete <- regional_counts |>
 ## pops
 ## 
 
-pop_agg <- dfs1$pop |>
+pop_agg <- pops |>
     mutate(age_band = cut2(age, cuts = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 118))) |>
     group_by(Region, Gender, age_band) |>
     reframe(sum_pop = sum(Population)) |>
@@ -343,6 +347,6 @@ m_r <- phe_rate(final_poc_data, x = `_m`, n = Male) |>
 
 bind_rows(f_r, m_r) |>
 
-    write_csv("data/pop_rates.csv")
+    write_csv("~/poc/data/pop_rates.csv")
 
 

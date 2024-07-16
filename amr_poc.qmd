@@ -258,4 +258,3 @@ phe_proportion(amr_res_ci_ec, R, total_tests) |>
 
 
 ```
-

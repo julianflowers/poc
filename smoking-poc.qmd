@@ -24,7 +24,7 @@ smoking <-  smoking |> setDT()
 
 ### Data preparation
 
-#### load census population  and create age bands
+#### load census population and create age bands
 
 ```{r}
 #| label: pop data
@@ -56,4 +56,3 @@ smoking[, age := NULL][] |>
   arrange(Gender)
 
 ```
-

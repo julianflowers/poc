@@ -1,0 +1,114 @@
+---
+title: "Getting started"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+render:
+    - "*.{R}"
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+if(!require("needs"))install.packages("needs")
+
+library(needs)
+
+needs(tidyverse, data.table, sf)
+
+```
+
+These pages set out the process for loading, cleaning, reshaping and
+recoding provided datasets for calculating indicator values as a proof
+of concept, and creating a health profile from those indicators.
+
+To facilitate reproducibility the analyses are written in R code in the
+form of a notebook and R scripts which do much of the pre-processing.
+The full code is made available as a Github repository at
+<https://github.com/julianflowers/poc>. The files can be cloned
+(downloaded)
+
+-   In RStudio, go to “File \> New Project” Click on “Version Control:
+
+-   Checkout a project from a version control repository” Click on “Git:
+
+-   Clone a project from a repository”
+
+-   Fill in the info: URL: use HTTPS address
+
+-   Create as a subdirectory of: Browse to where you would like to
+    create this folder
+
+### The indicators
+
+4 sets of indicators are used for this PoC:
+
+-   Methicillin resistant Staph aureus and 3rd generation cephalosporin
+    resistant E.coli - proportion of samples tested which are resistant
+
+-   Flu vaccination coverage rates
+
+-   Smoking rates in women
+
+-   Injury admission rates
+
+Fully specifying the indicators
+
+1.  The proportion of blood samples which grow either Staph aureaus
+    or E. coli, which are tested for antibiotic sensitivity and which
+    are found to be resistant to oxacllin or 3rd generation
+    cephalosporins respectively for time period X to Y, stratified by
+    \[area\] / \[time period\] / \[age group\] / \[gender\]
+
+2.  The proportion of the population which has been vaccinated against
+    flu for the time period X to Y stratified by \[area\] / \[time
+    period\] / \[age group\] / \[gender\]
+
+3.  The rate of smoking in women aged 15+ / 18-44, per 100,000 female
+    population for the time period X to Y stratified by \[area\] /
+    \[time period\] / \[age group\] / \[gender\]
+
+4.  The rate of hospitalisation for injury for the time period X to Y
+    stratified by \[area\] / \[time period\] / \[age group\] /
+    \[gender\]
+
+### Preprocessing script
+
+As a first step we will run a script which does a number of things.
+
+1.  Imports the datasets for each indicator
+
+2.  Loads KSA 2022 census data by age, gender and region[^1]
+
+3.  Makes variable names consistent
+
+4.  Recodes `region` names so that they match the names used in the
+    Census 2022 data
+
+5.  Maps directorate names (used in smoking data) to `region`[^2]
+
+6.  Ensures numeric variables (e.g. age) are converted to numbers
+
+7.  Creates a set of intermediate data tables
+
+8.  Saves a file of reshaped population data
+
+[^1]: Note. The census data was downloaded from
+    <https://tableau.saudicensus.sa/#/views/TA3-PopulationbydetailedAgebyRegionGovernorateNationalityandGenderAR_16850208449070/PopulationbydetailedAgebyRegionGovernorateNationalityandGenderARCSV.csv>
+    and variable and region names translated to English using ChatGPT4o
+
+[^2]: This uses the spatial locations of smoking clinics which include
+    directorate names to map to KSA regional boundaries
+
+The intermediate tables can be reused for further analysis and
+generating profiles.
+
+The script can be run by typing
+
+```         
+"~/poc/scripts/pre-process.R" 
+```
+
+at the prompt in the console

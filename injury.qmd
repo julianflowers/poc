@@ -34,14 +34,13 @@ na_dob_n <- nrow(na_dob)
 
 ```
 
-Overall there are `r obs` records, of which `r na_dob_n` (`r 100 * na_dob_n/obs`%  ) have missing dates of of birth.
+Overall there are `r obs` records, of which `r na_dob_n` (`r 100 * na_dob_n/obs`% ) have missing dates of of birth.
 
 ```{r}
 #| label: imjury types
 
 injury[, .N, by = .(diagnosis, code, Gender, Region )]
 ```
-
 
 ```{r}
 #| label: recode region names to enable linkage to population data

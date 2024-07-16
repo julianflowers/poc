@@ -27,7 +27,7 @@ Injury
 
 needs(data.table, tidyverse)
 
-pops <- fread("/Users/julianflowers/Library/CloudStorage/GoogleDrive-julian.flowers12@gmail.com/My Drive/Saudi/data/pop_ests.csv")
+pops <- fread("/Users/julianflowers/poc/data/pop_ests.csv")
 
 flu <- fread("/Users/julianflowers/spha/data/fwdatastrategypocpublichealthframeworkindicators/Flu Vaccine Coverage 2023 updated.csv")
 
@@ -50,7 +50,6 @@ max(flu$AgeAtAdministration)
 
 
 ```
-
 
 ```{r}
 #| label: recode region names to enable linkage to population data
@@ -78,7 +77,6 @@ flu <- flu[, region := recode(region_en, "Riyadh" = "Ar Riyadh",
 intersect(unique(flu$region), pops_reg_names)
 
 ```
-
 
 ```{r}
 #| label: estimate ages and create age bands
@@ -154,8 +152,6 @@ summary(flu_agg)
 
 ```
 
-
-
 ## Calculate rates
 
 ```{r}
@@ -171,7 +167,6 @@ flu_agg[, rate := 100000 * N/sum_pop][]
 Using KSA population as standard rate
 
 To do this will use the `phe_dsr` function from the `PHEindicatormethods` package from CRAN (see DSR vignette)
-
 
 ```{r}
 #| label: generate reference population
@@ -193,7 +188,6 @@ ksa_pop_f <- filter(ksa_pop, Gender == "Female") |> select(-Gender)
 ```
 
 ## Calculate coverage
-
 
 ```{r}
 #| label: crude rates
@@ -225,11 +219,9 @@ flu_coverage |>
 
 ```
 
-
-
 ## Age-standarised coverage
 
-Note 
+Note
 
 ```{r}
 #| label: calculate asr
@@ -271,4 +263,3 @@ flu_dsrs |>
 
 
 ```
-
