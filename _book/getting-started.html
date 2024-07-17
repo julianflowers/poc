@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./eda.html" rel="next">
+<link href="./amr_poc.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="site_libs/tabwid-1.1.3/tabwid.css" rel="stylesheet">
+<script src="site_libs/tabwid-1.1.3/tabwid.js"></script>
 
 
 </head>
@@ -154,32 +156,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./eda.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rapid EDA</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./amr_poc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">AMR walkthrough</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AMR walkthrough</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./flu.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">flu</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">flu</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./injury.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Injury</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Injury</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -198,8 +194,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-indicators" id="toc-the-indicators" class="nav-link active" data-scroll-target="#the-indicators"><span class="header-section-number">2.0.1</span> The indicators</a></li>
-  <li><a href="#preprocessing-script" id="toc-preprocessing-script" class="nav-link" data-scroll-target="#preprocessing-script"><span class="header-section-number">2.0.2</span> Preprocessing script</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link active" data-scroll-target="#getting-started"><span class="header-section-number">2.1</span> Getting started</a>
+  <ul class="collapse">
+  <li><a href="#the-indicators" id="toc-the-indicators" class="nav-link" data-scroll-target="#the-indicators"><span class="header-section-number">2.1.1</span> The indicators</a></li>
+  <li><a href="#pre-processing-script" id="toc-pre-processing-script" class="nav-link" data-scroll-target="#pre-processing-script"><span class="header-section-number">2.1.2</span> Pre-processing script</a></li>
+  <li><a href="#mapping-health-directorates-to-regions-for-smoking-data" id="toc-mapping-health-directorates-to-regions-for-smoking-data" class="nav-link" data-scroll-target="#mapping-health-directorates-to-regions-for-smoking-data"><span class="header-section-number">2.1.3</span> Mapping health directorates to regions for smoking data</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Getting started</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -225,6 +225,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="getting-started" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">2.1</span> Getting started</h2>
 <p>These pages set out the process for loading, cleaning, reshaping and recoding provided datasets for calculating indicator values as a proof of concept, and creating a health profile from those indicators.</p>
 <p>To facilitate reproducibility the analyses are written in R code in the form of a notebook and R scripts which do much of the pre-processing. The full code is made available as a Github repository at <a href="https://github.com/julianflowers/poc" class="uri">https://github.com/julianflowers/poc</a>. The files can be cloned (downloaded)</p>
 <ul>
@@ -236,8 +238,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Fill in the info: URL: use HTTPS address</p></li>
 <li><p>Create as a subdirectory of: Browse to where you would like to create this folder</p></li>
 </ul>
-<section id="the-indicators" class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="the-indicators"><span class="header-section-number">2.0.1</span> The indicators</h3>
+<section id="the-indicators" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="the-indicators"><span class="header-section-number">2.1.1</span> The indicators</h3>
 <p>4 sets of indicators are used for this PoC:</p>
 <ul>
 <li><p>Methicillin resistant Staph aureus and 3rd generation cephalosporin resistant E.coli - proportion of samples tested which are resistant</p></li>
@@ -253,8 +255,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The rate of hospitalisation for injury for the time period X to Y stratified by [area] / [time period] / [age group] / [gender]</p></li>
 </ol>
 </section>
-<section id="preprocessing-script" class="level3" data-number="2.0.2">
-<h3 data-number="2.0.2" class="anchored" data-anchor-id="preprocessing-script"><span class="header-section-number">2.0.2</span> Preprocessing script</h3>
+<section id="pre-processing-script" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="pre-processing-script"><span class="header-section-number">2.1.2</span> Pre-processing script</h3>
 <p>As a first step we will run a script which does a number of things.</p>
 <ol type="1">
 <li><p>Imports the datasets for each indicator</p></li>
@@ -264,24 +266,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Maps directorate names (used in smoking data) to <code>region</code><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p></li>
 <li><p>Ensures numeric variables (e.g.&nbsp;age) are converted to numbers</p></li>
 <li><p>Creates a set of intermediate data tables</p></li>
-<li><p>Saves a file of reshaped population data</p></li>
+<li><p>Saves file of reshaped population data,</p></li>
 </ol>
 <p>The intermediate tables can be reused for further analysis and generating profiles.</p>
 <p>The script can be run by typing</p>
-<pre><code>"~/poc/scripts/pre-process.R" </code></pre>
+<pre><code>```
+`source("~/proof-of-concept/scripts/pre-process.R")`
+
+```</code></pre>
 <p>at the prompt in the console</p>
 <p>This generates a set of objects in the R environment</p>
-<p>pandoc_dir, quarto_bin_path</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">objects</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "age_names"                        "area_names"                      
+ [3] "census_names"                     "cnames"                          
+ [5] "csv"                              "csvs"                            
+ [7] "data"                             "dfs"                             
+ [9] "dfs_3"                            "dfs_4"                           
+[11] "dfs1"                             "dfs2_agg"                        
+[13] "dfs3"                             "f_r"                             
+[15] "final_poc_data"                   "gender_names"                    
+[17] "get_coordinates_from_google_maps" "m_r"                             
+[19] "pop_agg"                          "pops"                            
+[21] "reg_dir_lu"                       "regional_counts"                 
+[23] "regional_counts_complete"         "sa_bound"                        
+[25] "sa_shp"                           "sa_shp_1"                        
+[27] "sc_coords"                        "sc_dir_links"                    
+[29] "sc_dir_names"                     "sc_ll"                           
+[31] "sc_ll_sf"                         "sc_loc"                          
+[33] "scc_dir"                          "shps"                            
+[35] "smok_1"                           "smok_agg"                        
+[37] "tmpd"                             "url"                             
+[39] "xl"                               "xls"                             </code></pre>
+</div>
+</div>
+<p>Objects called <code>dfs</code> reflect pre-processing of the original datasets. Objects containing <code>names</code>, contain the different variables used for age, gender and area variables across datasets. Those called <code>sc</code> are used to map locations of smoking clinics as part of recoding directorates to regions for the smoking data (see below).</p>
+<p>The object <code>regional_counts_complete</code> is a data frame of regional age_band, gender specific counts for each indicator and forms the basis of indicator generation. Note, this includes region-age-band-gender combinations for which there is no data (because these combinations are not present in the original data - although they maybe in the full datasets).</p>
+<div class="cell" data-tbl-cap-location="bottom">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="tbl-counts" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-tbl-cap-location="bottom">
+<figure class="quarto-float quarto-float-tbl figure">
+<div aria-describedby="tbl-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<div class="tabwid"><style>.cl-9142000e{}.cl-913f04e4{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-91403d5a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-91403d5b{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-914046d8{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-914046d9{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-914046e2{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-914046e3{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-914046ec{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-914046ed{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-9142000e"><thead><tr style="overflow-wrap:break-word;"><th class="cl-914046d8"><p class="cl-91403d5a"><span class="cl-913f04e4">Region</span></p></th><th class="cl-914046d8"><p class="cl-91403d5a"><span class="cl-913f04e4">age_band</span></p></th><th class="cl-914046d9"><p class="cl-91403d5b"><span class="cl-913f04e4">sum_f_Smoking</span></p></th><th class="cl-914046d9"><p class="cl-91403d5b"><span class="cl-913f04e4">sum_f_flu</span></p></th><th class="cl-914046d9"><p class="cl-91403d5b"><span class="cl-913f04e4">sum_f_injury</span></p></th><th class="cl-914046d9"><p class="cl-91403d5b"><span class="cl-913f04e4">sum_m_Smoking</span></p></th><th class="cl-914046d9"><p class="cl-91403d5b"><span class="cl-913f04e4">sum_m_flu</span></p></th><th class="cl-914046d9"><p class="cl-91403d5b"><span class="cl-913f04e4">sum_m_injury</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">`Asir</span></p></td><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">[  0,  5)</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">140</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">160</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">26</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">`Asir</span></p></td><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">[  5, 10)</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">0</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">7</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">1</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">1</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">`Asir</span></p></td><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">[ 10, 15)</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">5</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">4</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">355</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">2</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">`Asir</span></p></td><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">[ 15, 20)</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">39</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">13</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">2,744</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">4</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">`Asir</span></p></td><td class="cl-914046e2"><p class="cl-91403d5a"><span class="cl-913f04e4">[ 20, 25)</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">79</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4">25</span></p></td><td class="cl-914046e3"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-914046ec"><p class="cl-91403d5a"><span class="cl-913f04e4">`Asir</span></p></td><td class="cl-914046ec"><p class="cl-91403d5a"><span class="cl-913f04e4">[ 25, 30)</span></p></td><td class="cl-914046ed"><p class="cl-91403d5b"><span class="cl-913f04e4">1</span></p></td><td class="cl-914046ed"><p class="cl-91403d5b"><span class="cl-913f04e4">76</span></p></td><td class="cl-914046ed"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td><td class="cl-914046ed"><p class="cl-91403d5b"><span class="cl-913f04e4">21</span></p></td><td class="cl-914046ed"><p class="cl-91403d5b"><span class="cl-913f04e4">22</span></p></td><td class="cl-914046ed"><p class="cl-91403d5b"><span class="cl-913f04e4"></span></p></td></tr></tbody></table></div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2.1: Region age-band specific counts by gender and indicator
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="mapping-health-directorates-to-regions-for-smoking-data" class="level3" data-number="2.1.3">
+<h3 data-number="2.1.3" class="anchored" data-anchor-id="mapping-health-directorates-to-regions-for-smoking-data"><span class="header-section-number">2.1.3</span> Mapping health directorates to regions for smoking data</h3>
+<p>The smoking data provided is clinic based data disaggregated at the level of health directorate. There are 20 directorates in KSA, and 13 regions.</p>
+<p>Available population data is at regional level, so to generate population denominators for the smoking data I have mapped directorates to regions as follows:</p>
+<ul>
+<li><p>I used a dataset which contained spatial locations of healthcare facilities (smoking cessation clinics) at health directorate level<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p></li>
+<li><p>For each location I extracted spatial coordinates (longitude and latitude)</p></li>
+<li><p>I obtained a regional boundary file (shape file) from <a href="https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip" class="uri">https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip</a></p></li>
+<li><p>I spatially joined the clinic location and boundary files (see</p>
+<ol class="example" type="1">
+<li></li>
+</ol></li>
+<li><p>This created a lookup table for directorates and regions and enabled the smoking data to be recoded to regions and calculation of rates using the census regional population estimates</p></li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> sa_bound) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> name)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-map" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="getting-started_files/figure-html/fig-map-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-map-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.1: Location map of smoking clinics mapped to KSA regional boundaries
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
 
 
 <!-- -->
 
+</section>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn1"><p>Note. The census data was downloaded from <a href="https://tableau.saudicensus.sa/#/views/TA3-PopulationbydetailedAgebyRegionGovernorateNationalityandGenderAR_16850208449070/PopulationbydetailedAgebyRegionGovernorateNationalityandGenderARCSV.csv" class="uri">https://tableau.saudicensus.sa/#/views/TA3-PopulationbydetailedAgebyRegionGovernorateNationalityandGenderAR_16850208449070/PopulationbydetailedAgebyRegionGovernorateNationalityandGenderARCSV.csv</a> and variable and region names translated to English using ChatGPT4o<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>This uses the spatial locations of smoking clinics which include directorate names to map to KSA regional boundaries<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p><a href="https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx%22">https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -764,133 +856,218 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./eda.html" class="pagination-link" aria-label="Rapid EDA">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Rapid EDA</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./amr_poc.html" class="pagination-link" aria-label="AMR walkthrough">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">AMR walkthrough</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Getting started"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="an">render:</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">    - "*.{R}"</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"needs"</span>))<span class="fu">install.packages</span>(<span class="st">"needs"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(needs)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">needs</span>(tidyverse, data.table, sf)</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>These pages set out the process for loading, cleaning, reshaping and</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>recoding provided datasets for calculating indicator values as a proof</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>of concept, and creating a health profile from those indicators.</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>To facilitate reproducibility the analyses are written in R code in the</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>form of a notebook and R scripts which do much of the pre-processing.</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>The full code is made available as a Github repository at</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://github.com/julianflowers/poc&gt;</span>. The files can be cloned</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>(downloaded)</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In RStudio, go to “File <span class="sc">\&gt;</span> New Project” </span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">-  </span>Click on “Version Control:</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Checkout a project from a version control repository” </span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Click on “Git:</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Clone a project from a repository”</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Fill in the info: URL: use HTTPS address</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Create as a subdirectory of: Browse to where you would like to</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    create this folder</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### The indicators</span></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>4 sets of indicators are used for this PoC:</span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Methicillin resistant Staph aureus and 3rd generation cephalosporin</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    resistant E.coli - proportion of samples tested which are resistant</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Flu vaccination coverage rates</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Smoking rates in women</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Injury admission rates</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>Fully specifying the indicators</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>The proportion of blood samples which grow either Staph aureaus</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    or E. coli, which are tested for antibiotic sensitivity and which</span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    are found to be resistant to oxacllin or 3rd generation</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    cephalosporins respectively for time period X to Y, stratified by</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\[</span>area<span class="sc">\]</span> / <span class="sc">\[</span>time period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> / <span class="sc">\[</span>gender<span class="sc">\]</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>The proportion of the population which has been vaccinated against</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    flu for the time period X to Y stratified by <span class="sc">\[</span>area<span class="sc">\]</span> / <span class="sc">\[</span>time</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> / <span class="sc">\[</span>gender<span class="sc">\]</span></span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>The rate of smoking in women aged 15+ / 18-44, per 100,000 female</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    population for the time period X to Y stratified by <span class="sc">\[</span>area<span class="sc">\]</span> /</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\[</span>time period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> / <span class="sc">\[</span>gender<span class="sc">\]</span></span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>The rate of hospitalisation for injury for the time period X to Y</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    stratified by <span class="sc">\[</span>area<span class="sc">\]</span> / <span class="sc">\[</span>time period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> /</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\[</span>gender<span class="sc">\]</span></span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### Preprocessing script</span></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>As a first step we will run a script which does a number of things.</span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Imports the datasets for each indicator</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Loads KSA 2022 census data by age, gender and region<span class="ot">[^1]</span></span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Makes variable names consistent</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Recodes <span class="in">`region`</span> names so that they match the names used in the</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    Census 2022 data</span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Maps directorate names (used in smoking data) to <span class="in">`region`</span><span class="ot">[^2]</span></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Ensures numeric variables (e.g. age) are converted to numbers</span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>Creates a set of intermediate data tables</span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="ss">8.  </span>Saves a file of reshaped population data</span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>Note. The census data was downloaded from</span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    <span class="ot">&lt;https://tableau.saudicensus.sa/#/views/TA3-PopulationbydetailedAgebyRegionGovernorateNationalityandGenderAR_16850208449070/PopulationbydetailedAgebyRegionGovernorateNationalityandGenderARCSV.csv&gt;</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>    and variable and region names translated to English using ChatGPT4o</span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span>This uses the spatial locations of smoking clinics which include</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    directorate names to map to KSA regional boundaries</span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>The intermediate tables can be reused for further analysis and</span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>generating profiles.</span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>The script can be run by typing</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="in">"~/poc/scripts/pre-process.R" </span></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>at the prompt in the console</span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>This generates a set of objects in the R environment</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="in">`r ls()`</span></span>
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Getting started"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">   cache: false</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">   message: false</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">   warning: false</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(<span class="st">"needs"</span>))<span class="fu">install.packages</span>(<span class="st">"needs"</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(needs)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="fu">needs</span>(tidyverse, data.table, sf)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## Getting started</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>These pages set out the process for loading, cleaning, reshaping and</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>recoding provided datasets for calculating indicator values as a proof</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>of concept, and creating a health profile from those indicators.</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>To facilitate reproducibility the analyses are written in R code in the</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>form of a notebook and R scripts which do much of the pre-processing.</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>The full code is made available as a Github repository at</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;https://github.com/julianflowers/poc&gt;</span>. The files can be cloned</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>(downloaded)</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>In RStudio, go to “File <span class="sc">\&gt;</span> New Project”</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Click on “Version Control:</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Checkout a project from a version control repository”</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Click on “Git:</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Clone a project from a repository”</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Fill in the info: URL: use HTTPS address</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Create as a subdirectory of: Browse to where you would like to</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>    create this folder</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### The indicators</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>4 sets of indicators are used for this PoC:</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Methicillin resistant Staph aureus and 3rd generation cephalosporin</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    resistant E.coli - proportion of samples tested which are resistant</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Flu vaccination coverage rates</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Smoking rates in women</span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Injury admission rates</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>Fully specifying the indicators</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>The proportion of blood samples which grow either Staph aureaus</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>    or E. coli, which are tested for antibiotic sensitivity and which</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>    are found to be resistant to oxacllin or 3rd generation</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>    cephalosporins respectively for time period X to Y, stratified by</span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\[</span>area<span class="sc">\]</span> / <span class="sc">\[</span>time period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> / <span class="sc">\[</span>gender<span class="sc">\]</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>The proportion of the population which has been vaccinated against</span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>    flu for the time period X to Y stratified by <span class="sc">\[</span>area<span class="sc">\]</span> / <span class="sc">\[</span>time</span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>    period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> / <span class="sc">\[</span>gender<span class="sc">\]</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>The rate of smoking in women aged 15+ / 18-44, per 100,000 female</span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>    population for the time period X to Y stratified by <span class="sc">\[</span>area<span class="sc">\]</span> /</span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\[</span>time period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> / <span class="sc">\[</span>gender<span class="sc">\]</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>The rate of hospitalisation for injury for the time period X to Y</span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>    stratified by <span class="sc">\[</span>area<span class="sc">\]</span> / <span class="sc">\[</span>time period<span class="sc">\]</span> / <span class="sc">\[</span>age group<span class="sc">\]</span> /</span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\[</span>gender<span class="sc">\]</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pre-processing script</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>As a first step we will run a script which does a number of things.</span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Imports the datasets for each indicator</span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Loads KSA 2022 census data by age, gender and</span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>    region<span class="ot">[^getting-started-1]</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Makes variable names consistent</span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>Recodes <span class="in">`region`</span> names so that they match the names used in the</span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>    Census 2022 data</span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>Maps directorate names (used in smoking data) to</span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>    <span class="in">`region`</span><span class="ot">[^getting-started-2]</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>Ensures numeric variables (e.g. age) are converted to numbers</span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>Creates a set of intermediate data tables</span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a><span class="ss">8.  </span>Saves file of reshaped population data,</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="ot">[^getting-started-1]: </span>Note. The census data was downloaded from</span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a>    <span class="ot">&lt;https://tableau.saudicensus.sa/#/views/TA3-PopulationbydetailedAgebyRegionGovernorateNationalityandGenderAR_16850208449070/PopulationbydetailedAgebyRegionGovernorateNationalityandGenderARCSV.csv&gt;</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>    and variable and region names translated to English using ChatGPT4o</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="ot">[^getting-started-2]: </span>This uses the spatial locations of smoking clinics</span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>    which include directorate names to map to KSA regional boundaries</span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>The intermediate tables can be reused for further analysis and</span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>generating profiles.</span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a>The script can be run by typing</span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="in">`r source("~/proof-of-concept/scripts/pre-process.R")`</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="in">````         </span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="in">`source("~/proof-of-concept/scripts/pre-process.R")`</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>at the prompt in the console</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a>This generates a set of objects in the R environment</span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: environment objects</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a><span class="fu">objects</span>() </span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>Objects called <span class="in">`dfs`</span> reflect pre-processing of the original datasets.</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>Objects containing <span class="in">`names`</span>, contain the different variables used for</span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>age, gender and area variables across datasets. Those called <span class="in">`sc`</span> are</span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>used to map locations of smoking clinics as part of recoding</span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>directorates to regions for the smoking data (see below).</span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>The object <span class="in">`regional_counts_complete`</span> is a data frame of regional</span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>age_band, gender specific counts for each indicator and forms the basis</span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>of indicator generation. Note, this includes region-age-band-gender</span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>combinations for which there is no data (because these combinations are</span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a>not present in the original data - although they maybe in the full</span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>datasets).</span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-counts</span></span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap-location: bottom</span></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Region age-band specific counts by gender and indicator"</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="sc">|&gt;</span></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mapping health directorates to regions for smoking data</span></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a>The smoking data provided is clinic based data disaggregated at the</span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>level of health directorate. There are 20 directorates in KSA, and 13</span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>regions.</span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a>Available population data is at regional level, so to generate</span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a>population denominators for the smoking data I have mapped directorates</span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a>to regions as follows:</span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I used a dataset which contained spatial locations of healthcare</span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a>    facilities (smoking cessation clinics) at health directorate</span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a>    level<span class="ot">[^getting-started-3]</span></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For each location I extracted spatial coordinates (longitude and</span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a>    latitude)</span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I obtained a regional boundary file (shape file) from</span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a>    <span class="ot">&lt;https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip&gt;</span></span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I spatially joined the clinic location and boundary files (see</span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a>    @fig-map)</span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>This created a lookup table for directorates and regions and enabled</span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a>    the smoking data to be recoded to regions and calculation of rates</span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a>    using the census regional population estimates</span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a><span class="ot">[^getting-started-3]: </span><span class="co">[</span><span class="ot">https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx</span><span class="co">](https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx")</span></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-map</span></span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Location map of smoking clinics mapped to KSA regional boundaries"</span></span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="sc">|&gt;</span></span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> sa_bound) <span class="sc">+</span></span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> name)) </span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

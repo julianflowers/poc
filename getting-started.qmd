@@ -4,8 +4,10 @@ format: html
 editor: 
   markdown: 
     wrap: 72
-render:
-    - "*.{R}"
+execute:
+   cache: false
+   message: false
+   warning: false
 ---
 
 ```{r}
@@ -20,6 +22,8 @@ needs(tidyverse, data.table, sf)
 
 ```
 
+## Getting started
+
 These pages set out the process for loading, cleaning, reshaping and
 recoding provided datasets for calculating indicator values as a proof
 of concept, and creating a health profile from those indicators.
@@ -30,11 +34,11 @@ The full code is made available as a Github repository at
 <https://github.com/julianflowers/poc>. The files can be cloned
 (downloaded)
 
--   In RStudio, go to “File \> New Project” 
+-   In RStudio, go to “File \> New Project”
 
--  Click on “Version Control:
+-   Click on “Version Control:
 
--   Checkout a project from a version control repository” 
+-   Checkout a project from a version control repository”
 
 -   Click on “Git:
 
@@ -78,45 +82,126 @@ Fully specifying the indicators
     stratified by \[area\] / \[time period\] / \[age group\] /
     \[gender\]
 
-### Preprocessing script
+### Pre-processing script
 
 As a first step we will run a script which does a number of things.
 
 1.  Imports the datasets for each indicator
 
-2.  Loads KSA 2022 census data by age, gender and region[^1]
+2.  Loads KSA 2022 census data by age, gender and
+    region[^getting-started-1]
 
 3.  Makes variable names consistent
 
 4.  Recodes `region` names so that they match the names used in the
     Census 2022 data
 
-5.  Maps directorate names (used in smoking data) to `region`[^2]
+5.  Maps directorate names (used in smoking data) to
+    `region`[^getting-started-2]
 
 6.  Ensures numeric variables (e.g. age) are converted to numbers
 
 7.  Creates a set of intermediate data tables
 
-8.  Saves a file of reshaped population data
+8.  Saves file of reshaped population data,
 
-[^1]: Note. The census data was downloaded from
+[^getting-started-1]: Note. The census data was downloaded from
     <https://tableau.saudicensus.sa/#/views/TA3-PopulationbydetailedAgebyRegionGovernorateNationalityandGenderAR_16850208449070/PopulationbydetailedAgebyRegionGovernorateNationalityandGenderARCSV.csv>
     and variable and region names translated to English using ChatGPT4o
 
-[^2]: This uses the spatial locations of smoking clinics which include
-    directorate names to map to KSA regional boundaries
+[^getting-started-2]: This uses the spatial locations of smoking clinics
+    which include directorate names to map to KSA regional boundaries
 
 The intermediate tables can be reused for further analysis and
 generating profiles.
 
 The script can be run by typing
 
-```         
-"~/poc/scripts/pre-process.R" 
+`r source("~/proof-of-concept/scripts/pre-process.R")`
+
+````         
 ```
+`source("~/proof-of-concept/scripts/pre-process.R")`
+
+```
+````
 
 at the prompt in the console
 
 This generates a set of objects in the R environment
 
-`r ls()`
+```{r}
+#| label: environment objects
+
+
+
+objects() 
+
+```
+
+Objects called `dfs` reflect pre-processing of the original datasets.
+Objects containing `names`, contain the different variables used for
+age, gender and area variables across datasets. Those called `sc` are
+used to map locations of smoking clinics as part of recoding
+directorates to regions for the smoking data (see below).
+
+The object `regional_counts_complete` is a data frame of regional
+age_band, gender specific counts for each indicator and forms the basis
+of indicator generation. Note, this includes region-age-band-gender
+combinations for which there is no data (because these combinations are
+not present in the original data - although they maybe in the full
+datasets).
+
+```{r}
+#| label: tbl-counts
+#| tbl-cap-location: bottom
+#| tbl-cap: "Region age-band specific counts by gender and indicator"
+
+
+regional_counts_complete |>
+    head() |>
+    flextable::flextable()
+
+```
+
+### Mapping health directorates to regions for smoking data
+
+The smoking data provided is clinic based data disaggregated at the
+level of health directorate. There are 20 directorates in KSA, and 13
+regions.
+
+Available population data is at regional level, so to generate
+population denominators for the smoking data I have mapped directorates
+to regions as follows:
+
+-   I used a dataset which contained spatial locations of healthcare
+    facilities (smoking cessation clinics) at health directorate
+    level[^getting-started-3]
+
+-   For each location I extracted spatial coordinates (longitude and
+    latitude)
+
+-   I obtained a regional boundary file (shape file) from
+    <https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip>
+
+-   I spatially joined the clinic location and boundary files (see
+    @fig-map)
+
+-   This created a lookup table for directorates and regions and enabled
+    the smoking data to be recoded to regions and calculation of rates
+    using the census regional population estimates
+
+[^getting-started-3]: [https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx](https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx")
+
+```{r}
+#| label: fig-map
+#| fig-cap: "Location map of smoking clinics mapped to KSA regional boundaries"
+
+
+sc_ll_sf |>
+    ggplot() +
+    geom_sf(data = sa_bound) +
+    geom_sf(aes(colour = name)) 
+    
+
+```

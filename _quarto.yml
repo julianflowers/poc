@@ -8,7 +8,7 @@ book:
   chapters:
     - index.qmd
     - getting-started.qmd
-    - eda.qmd
+    # - eda.qmd
     #- lookups.qmd
     - amr_poc.qmd
     #- smoking-poc.qmd

@@ -18,13 +18,14 @@ data <- here::here("data")
 xl <- fs::dir_ls(data, regexp = "xls")
 csv <- fs::dir_ls(data, regexp = "csv")
 
-
+## read datasets into R
 xls <- map(xl, readxl::read_xlsx)
 csvs <- map(csv, read_csv, show_col_types = FALSE)
 
+## combine into single list
 dfs <- c(xls, csvs)
 
-dfs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Regions.csv`
+dfs$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv` 
 
 ## look at structure
 ## area names - AMR data is saudi wide (not stratified be geographical or admnistrative unit) and not split be gender
@@ -33,32 +34,33 @@ dfs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Regions.csv`
 cnames <- map(dfs, colnames)
 #cnames
 
-area_names <- c(cnames[2]$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[5], 
-                cnames[3]$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv`[11], 
-                cnames[5]$`/Users/julianflowers/poc/data/Smoking 2022.csv`[2], 
-                cnames[7]$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Regions.csv`[8]
+area_names <- c(cnames[2]$`/Users/julianflowers/proof-of-concept/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[5], 
+                cnames[3]$`/Users/julianflowers/proof-of-concept/data/Flu Vaccine Coverage 2023 updated.csv`[11], 
+                cnames[5]$`/Users/julianflowers/proof-of-concept/data/Smoking 2022.csv`[2], 
+                cnames[7]$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv`[8]
 )
 
-age_names <- c(cnames[1]$`/Users/julianflowers/poc/data/AMR 2022 POC.xlsx`[7], 
-               cnames[2]$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[1],
-               cnames[3]$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv`[3],
-               cnames[4]$`/Users/julianflowers/poc/data/Fully_Translated_Population_Data.csv`[2],
-               cnames[5]$`/Users/julianflowers/poc/data/Smoking 2022.csv`[7])
+age_names <- c(cnames[1]$`/Users/julianflowers/proof-of-concept/data/AMR 2022 poc.xlsx`[7], 
+               cnames[2]$`/Users/julianflowers/proof-of-concept/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[1],
+               cnames[3]$`/Users/julianflowers/proof-of-concept/data/Flu Vaccine Coverage 2023 updated.csv`[3],
+               cnames[4]$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv`[2],
+               cnames[5]$`/Users/julianflowers/proof-of-concept/data/Smoking 2022.csv`[7])
 
 gender_names <- c(
-                  cnames[2]$`/Users/julianflowers/poc/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[4],
-                  cnames[3]$`/Users/julianflowers/poc/data/Flu Vaccine Coverage 2023 updated.csv`[2],
-                  cnames[4]$`/Users/julianflowers/poc/data/Fully_Translated_Population_Data.csv`[6],
-                  cnames[5]$`/Users/julianflowers/poc/data/Smoking 2022.csv`[6]
+                  cnames[2]$`/Users/julianflowers/proof-of-concept/data/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx`[4],
+                  cnames[3]$`/Users/julianflowers/proof-of-concept/data/Flu Vaccine Coverage 2023 updated.csv`[2],
+                  cnames[4]$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv`[6],
+                  cnames[5]$`/Users/julianflowers/proof-of-concept/data/Smoking 2022.csv`[6]
                   )
 
 
 
 ## population data
 
-dfs$`/Users/julianflowers/poc/data/Fully_Translated_Population_Data.csv` <- dfs$`/Users/julianflowers/poc/data/Fully_Translated_Population_Data.csv` |>
-    cbind(dfs$`/Users/julianflowers/poc/data/Translated_Population_Data_with_Regions.csv`$Region)
+dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv` <- dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv` |>
+    cbind(dfs$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv`$Region)
 
+dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv`
 
 dfs1 <- set_names(dfs[c(1:5)], c("amr", "injury", "flu", "pop", "smoking"))
 
@@ -117,7 +119,7 @@ pops <- pops |>
 ## 
 ## 
 
-dfs1[[1]]
+
 
 dfs2_agg <- map(2:3, \(x) dfs1[[x]] |> count(Region, age, Gender) |> mutate(id = names(dfs1[x]))) 
 
@@ -222,7 +224,7 @@ reg_dir_lu <- sa_bound |>
     filter(n == max(n)) |>
     dplyr::select(name, everything())
 
-smok_1 <- smoking |>
+smok_1 <- dfs1$smoking |>
     mutate(directorate_name = recode(directorate_name, "Qurayyat" = "Al-Qurayyat", 
                                      "Qunfotha" = "AL-Qunfudah", 
                                      "AlAhsa" = "Al-Ahsa", 
@@ -308,8 +310,7 @@ regional_counts <- dfs_4 |>
  
 regional_counts_complete <- regional_counts |>
     pivot_wider(names_from = id, values_from = c("sum_f", "sum_m")) |>
-    complete(Region, age_band) |>
-    print(n = 100)
+    complete(Region, age_band) 
 
 
 ## pops
@@ -322,7 +323,7 @@ pop_agg <- pops |>
     pivot_wider(names_from = Gender, values_from = sum_pop)
 
 pop_agg |>
-    write_csv("~/poc/data/populations.csv")
+    write_csv("~/proof-of-concept/data/populations.csv")
 
 ## link agg data and pops
 ## 
@@ -350,8 +351,7 @@ m_r <- phe_rate(final_poc_data, x = `_m`, n = Male) |>
     mutate(gender = "Male")
 
 bind_rows(f_r, m_r) |>
+    write_csv("~/proof-of-concept/data/pop_rates.csv")
 
-    write_csv("~/poc/data/pop_rates.csv")
-
-    regional_counts_complete |>
-write_csv("~/poc/data/regional_counts.csv")
+regional_counts_complete |>
+    write_csv("~/proof-of-concept/data/regional_counts.csv")

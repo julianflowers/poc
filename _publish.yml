@@ -6,3 +6,7 @@
   quarto-pub:
     - id: 68b4940d-838d-4164-81fa-a32f22c44276
       url: 'https://julianflowers.quarto.pub/dash'
+- source: viz_dash.qmd
+  quarto-pub:
+    - id: 1e4faa5d-5553-4c8e-b95c-510032ce6158
+      url: 'https://julianflowers.quarto.pub/visualisation'

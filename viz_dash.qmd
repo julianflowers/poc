@@ -1,0 +1,109 @@
+---
+title: "Visualisation"
+format: dashboard
+---
+
+# {.sidebar}
+
+```{r}
+needs(tidyverse, crosstalk, DT, plotly, gt, readxl, Hmisc)
+
+data <- read_csv("data/pop_rates.csv")
+
+amr <- read_xlsx("data/AMR 2022 POC.xlsx") |>
+    janitor::clean_names() |>
+    select(age_year, community_origin, location, patient_hospitalized, community_origin, pathogen_name:spectinomycin) |>
+    pivot_longer(names_to = "antibiotic", values_to = "resistance", cols = 6:last_col()) |>
+        mutate(age_band = cut2(age_year, cuts = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 118))) 
+
+
+sharedP <- SharedData$new(data)
+shared_amr <- SharedData$new(amr)
+
+```
+
+Variable filter
+
+```{r}
+filter_checkbox("path", "Pathogen", shared_amr, ~ pathogen_name)
+filter_checkbox("patient_hospitalized", "Hospitalised", shared_amr, ~ patient_hospitalized)
+filter_checkbox("community_origin", "Source", shared_amr, ~ community_origin)
+filter_select("antibiotic", "Antibiotic", shared_amr, ~ antibiotic)
+filter_select("age_band", "Age band", shared_amr, ~ age_band)
+
+```
+
+# AMR data
+
+Record exploration - drill down through data dimensions[^viz_dash-1] in `r nrow(shared_amr$data())` samples
+
+[^viz_dash-1]: Assumes each record is a separate sample
+
+```{r}
+amr <- DT::datatable(shared_amr,
+              extensions = 'Buttons', 
+              options = list(pageLength = 25, 
+                             lengthMenu = c(10, 25, 50),
+                        dom = 'Bfrtip',
+    buttons = c('csv', 'pdf', 'print')
+  )
+)
+
+amr
+
+```
+
+# E. coli resistance rate
+
+```{r}
+options(digits = 3)
+agg_amr <- shared_amr$data() |>
+    filter(pathogen_name == "Escherichia coli") |>
+    mutate(gen_3 = case_when(str_detect(antibiotic, "^cef") ~ "3rd-gen", TRUE ~ "other")) |>
+    select(age_band, gen_3, pathogen_name, resistance) |>
+    ungroup() |>
+    group_by(age_band, gen_3) |>
+    mutate(totals = n()) |>
+    ungroup() |>
+    group_by(age_band, gen_3, resistance) |>
+    reframe(res = n(), 
+        resistance_rate = res / totals) |>
+    distinct()
+
+shared_amr_agg <- SharedData$new(agg_amr)
+
+shared_amr_agg |>
+    DT::datatable(extensions = 'Buttons', 
+              options = list(pageLength = 25, 
+                             lengthMenu = c(10, 25, 50),
+                        dom = 'Bfrtip',
+    buttons = c('csv', 'pdf', 'print')
+  ), 
+  filter = "top") |>
+    formatRound('resistance_rate', 3)
+
+
+```
+
+# E. coli chart
+
+```{r}
+needs(PHEindicatormethods)
+
+agg_amr_1 <- agg_amr |>
+    mutate(den = res / resistance_rate)
+
+phe_proportion(agg_amr_1, x = res, n = den) |>
+    filter(resistance == "R", gen_3 == "3rd-gen") |>
+    ggplot() +
+    geom_point(aes(age_band, value)) +
+    geom_linerange(aes(age_band, ymin = lowercl, ymax = uppercl)) +
+    labs(y = "Resistance (%)", 
+         x = "Age band", 
+         titel = "E.coli resistance to 3rd generation cephalosporins") +
+    theme_minimal() +
+    scale_y_continuous(label = scales::percent)
+
+```
+
+
