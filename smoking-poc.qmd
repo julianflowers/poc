@@ -15,7 +15,7 @@ needs(tidyverse, data.table, googledrive, readxl, skimr, janitor, gt, gtsummary,
 
 theme_set(ggthemes::theme_economist())
 
-dir <- here::here("~/spha/data/fwdatastrategypocpublichealthframeworkindicators")
+dir <- here::here("~/s/data/fwdatastrategypocpublichealthframeworkindicators")
 
 smoking <-  smoking |> setDT()
 
@@ -24,7 +24,7 @@ smoking <-  smoking |> setDT()
 
 ### Data preparation
 
-#### load census population and create age bands
+#### load census population  and create age bands
 
 ```{r}
 #| label: pop data
@@ -56,3 +56,4 @@ smoking[, age := NULL][] |>
   arrange(Gender)
 
 ```
+

@@ -30,9 +30,13 @@ The full code is made available as a Github repository at
 <https://github.com/julianflowers/poc>. The files can be cloned
 (downloaded)
 
--   In RStudio, go to “File \> New Project” Click on “Version Control:
+-   In RStudio, go to “File \> New Project” 
 
--   Checkout a project from a version control repository” Click on “Git:
+-  Click on “Version Control:
+
+-   Checkout a project from a version control repository” 
+
+-   Click on “Git:
 
 -   Clone a project from a repository”
 
@@ -112,3 +116,7 @@ The script can be run by typing
 ```
 
 at the prompt in the console
+
+This generates a set of objects in the R environment
+
+`r ls()`

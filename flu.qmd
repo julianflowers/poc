@@ -19,148 +19,40 @@ execute:
   cache: false
 ---
 
-Injury
-
 ```{r}
 #| label: setup
 #| include: false
 
-needs(data.table, tidyverse)
+needs(data.table, tidyverse, conflicted)
 
-pops <- fread("/Users/julianflowers/poc/data/pop_ests.csv")
+conflicts_prefer(base::intersect, 
+dplyr::filter, 
+dplyr::select())
 
-flu <- fread("/Users/julianflowers/spha/data/fwdatastrategypocpublichealthframeworkindicators/Flu Vaccine Coverage 2023 updated.csv")
+rates <- fread("/Users/julianflowers/poc/data/pop_rates.csv")
+
+pops <- fread("/Users/julianflowers/poc/data/populations.csv")
+
+
+indicators <- fread("/Users/julianflowers/poc/data/regional_counts.csv")
 
 theme_set(ggthemes::theme_base() + theme(text = element_text(size = 9), panel.background = element_blank()))
 
 ```
 
 ```{r}
-#| label: clean data
+#| label: flu vaccinations
 
-flu$region_en |> unique()
+flu <- indicators |> select(Region, age_band, contains("flu"))
+flu_rates <- rates |>
+    filter(Indicator == "flu")
 
-flu[, .N, by = .(Gender, AgeAtAdministration, region_en)]
-
-length(flu$region_en |> unique())
-length(flu$AgeAtAdministration |> unique())
-
-max(flu$AgeAtAdministration)
-
+ 
+ head(flu)
 
 
 ```
 
-```{r}
-#| label: recode region names to enable linkage to population data
-
-flu_reg_names <- pluck(flu, "region_en") |> unique()
-pops_reg_names <- pluck(pops, "Region") |> unique()
-
-intersect(flu_reg_names, pops_reg_names)
-## only 4 names are identical between datasets
-## will need to recode region names in flu dataset to pop data names
-## also add new variable `region` to facilitate linkage between datasets
-
-flu <- flu[, region := recode(region_en, "Riyadh" = "Ar Riyadh", 
-                                  "Al Baha" = "Al Bahah", 
-                                  "Sharqiya"  = "Al Mintaqah ash Sharqiyah",
-                                  "Makkah Al Mukarramah" = "Makkah al Mukarramah",
-                                  "Al Qassim" = "Al Qasim",
-                                  "Hail" = "Ha'il",
-                                  "madina" = "Al Madinah al Munawwarah",
-                                  "Asir" = "'Asir", 
-                                  "Northern Frontier" = "Al Hudud ash Shamaliyah")]
-
-
-## check names match
-intersect(unique(flu$region), pops_reg_names)
-
-```
-
-```{r}
-#| label: estimate ages and create age bands
-
-labels <- unique(pops$`Five-Year Age Group`)
-
-#cut(flu$AgeAtAdministration, breaks = seq(0, max(flu$AgeAtAdministration), 5))
-##  first create a terminal age band 80+ to match population data
-## 
-flu <- flu[!is.na(AgeAtAdministration), age := ifelse(AgeAtAdministration >= 80, 85, AgeAtAdministration)]
-
-cut(flu$age, breaks = seq(0, 85, 5)) |> unique()
-length(pops$`Five-Year Age Group` |> unique())
-
-flu <- flu[, age_band := cut(age, breaks = seq(0, 85, 5), labels = labels,  right = TRUE)][]
-
-## count vaccinations by age, gender and region
-flu_freq <- flu[, .N, by = .(Gender, region, age_band)][order(region, age_band, Gender)][, age_band := as.character(age_band)]
-
-flu_freq[]
-
-```
-
-```{r}
-#| label: recode age bands to match population age bands and gender names
-
-## first remove NAs
-
-flu_freq <- flu_freq[!(is.na(age_band)),]
-flu_freq <- flu_freq[, Gender := recode(Gender, "M" = "Male", "F" = "Female")][]
-
-## check age bands match
-
-identical(flu_freq$age_band |> unique(), pops$`Five-Year Age Group` |> unique())
-
-```
-
-```{r}
-#| label: calculate age-standardised hospitalisation rates - link population data
-
-## join population and aggregated flu data
-
-## first exclude nationality and single age columns from the pop data
-
-pops[, `:=` (`Single Age Group` = NULL, Nationality = NULL)][]
-
-## then calculate 5-year pops by age band, gender and region
-
-pops_agg <- pops[, sum_pop := sum(Population), by = .(Region, `Five-Year Age Group`, Gender)] |>
-    select(Region, Gender, `Five-Year Age Group`, sum_pop) 
-
-pops_agg$`Five-Year Age Group` |> unique()
-
-## Now join aggregate population data to aggregated flu data and replace structural zeros (missing region-age-gender combinations) by 0
-
-flu_agg <- complete(flu_freq, Gender, region, age_band) |>
-    inner_join(pops_agg, by = c("Gender", "region" = "Region",  "age_band" = "Five-Year Age Group")) |>
-    distinct() |>
-    mutate(N = ifelse(is.na(N), 0, N)) |>
-    setDT()
-
-```
-
-## Check
-
-```{r}
-#| label: check aggregations have worked
-
-
-which(is.na(flu_agg[, .(N, sum_pop),  by = .(age_band, Gender, region)])) ## no NAs
-
-summary(flu_agg)
-
-```
-
-## Calculate rates
-
-```{r}
-#| label: calculate A-S rates per 100,000
-
-flu_agg[, rate := 100000 * N/sum_pop][]
-
-## works!
-```
 
 ## Compare regions
 
@@ -178,11 +70,9 @@ needs(PHEindicatormethods, epitools)
 ## calculate gender, age-specific populations for KSA
 ## 
 
-ksa_pop <- pops[, ref_pop := sum(Population), by = .(Gender, `Five-Year Age Group`)][, .(`Five-Year Age Group`, Gender, ref_pop)] |>
-    distinct() |>
-    rename(age_band = `Five-Year Age Group`)
-
-ksa_pop_f <- filter(ksa_pop, Gender == "Female") |> select(-Gender)
+ksa_pop_f <- pops |> select(age_band, Female) |>
+    group_by(age_band) |>
+    reframe(sum_pop = sum(Female))
 
 ## 
 ```
@@ -192,10 +82,15 @@ ksa_pop_f <- filter(ksa_pop, Gender == "Female") |> select(-Gender)
 ```{r}
 #| label: crude rates
 
-flu_rate <- setDT(flu_agg)[, `:=` (tot_obs = sum(N, na.rm = TRUE), tot_pop = sum(sum_pop, na.rm = TRUE)), by = .(region, Gender)][,.(region, Gender, tot_obs, tot_pop)] |>
-    distinct()
+options(digits = 2, scipen = 999)
 
-flu_coverage <- phe_proportion(flu_rate, x = tot_obs, n = tot_pop)
+flu_coverage <- flu_rates |>
+    group_by(gender, Region) |>
+    reframe(tot_vacc = sum(count, na.rm = TRUE), 
+    reg_pop = sum(pop))
+flu_coverage <- phe_proportion(flu_coverage, x = tot_vacc, n = reg_pop) 
+
+
 
 ```
 
@@ -205,8 +100,8 @@ flu_coverage <- phe_proportion(flu_rate, x = tot_obs, n = tot_pop)
 
 flu_coverage |>
     ggplot() +
-    geom_col(aes(region, value, fill = Gender), position = position_dodge(width = 1)) +
-    geom_linerange(aes(region, ymin = lowercl, ymax = uppercl, group = Gender), position = position_dodge(width = 1)) +
+    geom_col(aes(Region, value, fill = gender), position = position_dodge(width = 1)) +
+    geom_linerange(aes(Region, ymin = lowercl, ymax = uppercl, group = gender), position = position_dodge(width = 1)) +
     labs(title = "Flu vaccination coverage", 
          y = "Coverage (%)", 
          x = "") +
@@ -224,10 +119,7 @@ flu_coverage |>
 Note
 
 ```{r}
-#| label: calculate asr
-
-flu_agg_std <- flu_agg |>
-    left_join(ksa_pop, by = c("age_band", "Gender"))
+#| label: calculate asr for female
 
 ## which region - gender combinations have data for 17 age bands?
 ## 
@@ -235,23 +127,21 @@ flu_agg_std <- flu_agg |>
 
 ksa_pop_f
 
-gp <- flu_agg_std |>
-    mutate(age_band = fct_relevel(as.factor(age_band), "5-9", after = 1)) |>
-    arrange(age_band)
+flu_nest <- flu_coverage |>
+    nest_by(Region, gender)
 
-gp_nest <- gp |>
-    nest_by(region, Gender)
+flu_nest$data[[1]]
     
-flu_dsrs <- gp_nest |>
-    mutate(ds_rates = list(epitools::ageadjust.direct(count = data$N, pop = data$sum_pop, stdpop = data$ref_pop))) |>
+flu_dsrs <- flu_nest |>
+    mutate(ds_rates = list(epitools::ageadjust.direct(count = data$tot_vacc, pop = data$reg_pop, stdpop = ksa_pop_f$sum_pop))) |>
     unnest_wider(ds_rates) |>
     select(-data) 
 
 
 flu_dsrs |>
     ggplot() +
-    geom_col(aes(region, adj.rate, fill = Gender), position = position_dodge(width = 1)) +
-    geom_linerange(aes(region, ymin = lci, ymax = uci, group = Gender), position = position_dodge(width = 1)) +
+    geom_col(aes(Region, adj.rate, fill = gender), position = position_dodge(width = 1)) +
+    geom_linerange(aes(Region, ymin = lci, ymax = uci, group = gender), position = position_dodge(width = 1)) +
     labs(title = "Standardised flu vaccination coverage", 
          y = "Coverage (%)", 
          x = "") +

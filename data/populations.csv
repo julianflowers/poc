@@ -1,0 +1,222 @@
+Region,age_band,Female,Male
+'Asir,"[  0,  5)",86076,89700
+'Asir,"[  5, 10)",93547,97241
+'Asir,"[ 10, 15)",89842,92719
+'Asir,"[ 15, 20)",80089,83336
+'Asir,"[ 20, 25)",70589,97290
+'Asir,"[ 25, 30)",72715,143912
+'Asir,"[ 30, 35)",72725,147078
+'Asir,"[ 35, 40)",67430,130793
+'Asir,"[ 40, 45)",52938,101461
+'Asir,"[ 45, 50)",37683,71396
+'Asir,"[ 50, 55)",29511,52222
+'Asir,"[ 55, 60)",22073,35437
+'Asir,"[ 60, 65)",15812,22158
+'Asir,"[ 65, 70)",10451,13111
+'Asir,"[ 70, 75)",7801,8653
+'Asir,"[ 75, 80)",5808,6074
+'Asir,"[ 80,118]",8164,8450
+Al Bahah,"[  0,  5)",13905,14292
+Al Bahah,"[  5, 10)",16234,16718
+Al Bahah,"[ 10, 15)",15738,16437
+Al Bahah,"[ 15, 20)",13866,14215
+Al Bahah,"[ 20, 25)",11620,15217
+Al Bahah,"[ 25, 30)",11446,20851
+Al Bahah,"[ 30, 35)",11901,21944
+Al Bahah,"[ 35, 40)",11884,20061
+Al Bahah,"[ 40, 45)",9903,16681
+Al Bahah,"[ 45, 50)",7009,11834
+Al Bahah,"[ 50, 55)",5688,8822
+Al Bahah,"[ 55, 60)",4579,6346
+Al Bahah,"[ 60, 65)",3352,4088
+Al Bahah,"[ 65, 70)",2299,2179
+Al Bahah,"[ 70, 75)",1733,1598
+Al Bahah,"[ 75, 80)",1473,1041
+Al Bahah,"[ 80,118]",2286,1934
+Al Hudud ash Shamaliyah,"[  0,  5)",20196,21493
+Al Hudud ash Shamaliyah,"[  5, 10)",20538,21322
+Al Hudud ash Shamaliyah,"[ 10, 15)",17737,18266
+Al Hudud ash Shamaliyah,"[ 15, 20)",14648,14774
+Al Hudud ash Shamaliyah,"[ 20, 25)",13565,17474
+Al Hudud ash Shamaliyah,"[ 25, 30)",14994,25486
+Al Hudud ash Shamaliyah,"[ 30, 35)",14226,25299
+Al Hudud ash Shamaliyah,"[ 35, 40)",12524,22060
+Al Hudud ash Shamaliyah,"[ 40, 45)",9305,17011
+Al Hudud ash Shamaliyah,"[ 45, 50)",6337,11211
+Al Hudud ash Shamaliyah,"[ 50, 55)",4665,7805
+Al Hudud ash Shamaliyah,"[ 55, 60)",3456,5053
+Al Hudud ash Shamaliyah,"[ 60, 65)",2374,2929
+Al Hudud ash Shamaliyah,"[ 65, 70)",1574,1857
+Al Hudud ash Shamaliyah,"[ 70, 75)",1153,1039
+Al Hudud ash Shamaliyah,"[ 75, 80)",754,696
+Al Hudud ash Shamaliyah,"[ 80,118]",999,757
+Al Jawf,"[  0,  5)",35470,36359
+Al Jawf,"[  5, 10)",35016,36051
+Al Jawf,"[ 10, 15)",29566,30401
+Al Jawf,"[ 15, 20)",23021,23527
+Al Jawf,"[ 20, 25)",20968,26933
+Al Jawf,"[ 25, 30)",22434,38384
+Al Jawf,"[ 30, 35)",20599,39371
+Al Jawf,"[ 35, 40)",17799,34839
+Al Jawf,"[ 40, 45)",13194,27317
+Al Jawf,"[ 45, 50)",9392,18381
+Al Jawf,"[ 50, 55)",7480,13791
+Al Jawf,"[ 55, 60)",5395,9059
+Al Jawf,"[ 60, 65)",3673,4997
+Al Jawf,"[ 65, 70)",2299,2816
+Al Jawf,"[ 70, 75)",1415,1478
+Al Jawf,"[ 75, 80)",1048,928
+Al Jawf,"[ 80,118]",1366,1055
+Al Madinah al Munawwarah,"[  0,  5)",92536,95669
+Al Madinah al Munawwarah,"[  5, 10)",97216,100259
+Al Madinah al Munawwarah,"[ 10, 15)",91346,94512
+Al Madinah al Munawwarah,"[ 15, 20)",78252,81401
+Al Madinah al Munawwarah,"[ 20, 25)",73438,103970
+Al Madinah al Munawwarah,"[ 25, 30)",79175,159005
+Al Madinah al Munawwarah,"[ 30, 35)",79749,164382
+Al Madinah al Munawwarah,"[ 35, 40)",71754,143363
+Al Madinah al Munawwarah,"[ 40, 45)",53914,109340
+Al Madinah al Munawwarah,"[ 45, 50)",38174,74418
+Al Madinah al Munawwarah,"[ 50, 55)",31603,56330
+Al Madinah al Munawwarah,"[ 55, 60)",24029,39536
+Al Madinah al Munawwarah,"[ 60, 65)",17581,24701
+Al Madinah al Munawwarah,"[ 65, 70)",11692,13964
+Al Madinah al Munawwarah,"[ 70, 75)",7385,7281
+Al Madinah al Munawwarah,"[ 75, 80)",5243,4569
+Al Madinah al Munawwarah,"[ 80,118]",6779,5417
+Al Mintaqah ash Sharqiyah,"[  0,  5)",200425,208376
+Al Mintaqah ash Sharqiyah,"[  5, 10)",210012,218554
+Al Mintaqah ash Sharqiyah,"[ 10, 15)",184743,191018
+Al Mintaqah ash Sharqiyah,"[ 15, 20)",149977,156003
+Al Mintaqah ash Sharqiyah,"[ 20, 25)",146845,237507
+Al Mintaqah ash Sharqiyah,"[ 25, 30)",186295,416190
+Al Mintaqah ash Sharqiyah,"[ 30, 35)",191046,463131
+Al Mintaqah ash Sharqiyah,"[ 35, 40)",169485,427291
+Al Mintaqah ash Sharqiyah,"[ 40, 45)",128280,331851
+Al Mintaqah ash Sharqiyah,"[ 45, 50)",88584,226893
+Al Mintaqah ash Sharqiyah,"[ 50, 55)",66731,166438
+Al Mintaqah ash Sharqiyah,"[ 55, 60)",51389,105800
+Al Mintaqah ash Sharqiyah,"[ 60, 65)",35494,59573
+Al Mintaqah ash Sharqiyah,"[ 65, 70)",20513,29654
+Al Mintaqah ash Sharqiyah,"[ 70, 75)",11277,14420
+Al Mintaqah ash Sharqiyah,"[ 75, 80)",6757,7962
+Al Mintaqah ash Sharqiyah,"[ 80,118]",7523,9217
+Al Qasim,"[  0,  5)",54714,56834
+Al Qasim,"[  5, 10)",59387,60955
+Al Qasim,"[ 10, 15)",57093,58495
+Al Qasim,"[ 15, 20)",50842,52609
+Al Qasim,"[ 20, 25)",48597,73217
+Al Qasim,"[ 25, 30)",52716,102136
+Al Qasim,"[ 30, 35)",49484,99006
+Al Qasim,"[ 35, 40)",43959,86441
+Al Qasim,"[ 40, 45)",34797,66272
+Al Qasim,"[ 45, 50)",26777,45932
+Al Qasim,"[ 50, 55)",20961,33669
+Al Qasim,"[ 55, 60)",15848,23248
+Al Qasim,"[ 60, 65)",11528,14625
+Al Qasim,"[ 65, 70)",6951,8078
+Al Qasim,"[ 70, 75)",4101,4198
+Al Qasim,"[ 75, 80)",2913,2969
+Al Qasim,"[ 80,118]",3284,3543
+Ar Riyadh,"[  0,  5)",307991,320698
+Ar Riyadh,"[  5, 10)",325374,338066
+Ar Riyadh,"[ 10, 15)",298933,309250
+Ar Riyadh,"[ 15, 20)",254888,263853
+Ar Riyadh,"[ 20, 25)",264498,443442
+Ar Riyadh,"[ 25, 30)",354155,742492
+Ar Riyadh,"[ 30, 35)",360116,776167
+Ar Riyadh,"[ 35, 40)",308676,684353
+Ar Riyadh,"[ 40, 45)",225656,513987
+Ar Riyadh,"[ 45, 50)",158059,344818
+Ar Riyadh,"[ 50, 55)",118275,251762
+Ar Riyadh,"[ 55, 60)",88875,176222
+Ar Riyadh,"[ 60, 65)",63412,106600
+Ar Riyadh,"[ 65, 70)",35760,54227
+Ar Riyadh,"[ 70, 75)",19088,25119
+Ar Riyadh,"[ 75, 80)",12673,15623
+Ar Riyadh,"[ 80,118]",12979,15661
+Ha'il,"[  0,  5)",32737,33782
+Ha'il,"[  5, 10)",35596,36733
+Ha'il,"[ 10, 15)",32674,33511
+Ha'il,"[ 15, 20)",27449,28182
+Ha'il,"[ 20, 25)",26743,35446
+Ha'il,"[ 25, 30)",28312,54316
+Ha'il,"[ 30, 35)",27291,56667
+Ha'il,"[ 35, 40)",24487,49336
+Ha'il,"[ 40, 45)",19123,37330
+Ha'il,"[ 45, 50)",13975,25083
+Ha'il,"[ 50, 55)",11426,19451
+Ha'il,"[ 55, 60)",7965,12995
+Ha'il,"[ 60, 65)",5488,8062
+Ha'il,"[ 65, 70)",3397,4838
+Ha'il,"[ 70, 75)",2270,2443
+Ha'il,"[ 75, 80)",1732,1900
+Ha'il,"[ 80,118]",2335,3331
+Jazan,"[  0,  5)",64626,67613
+Jazan,"[  5, 10)",70497,73489
+Jazan,"[ 10, 15)",64993,68873
+Jazan,"[ 15, 20)",59475,63210
+Jazan,"[ 20, 25)",52773,69559
+Jazan,"[ 25, 30)",51759,89053
+Jazan,"[ 30, 35)",52466,91256
+Jazan,"[ 35, 40)",49272,81668
+Jazan,"[ 40, 45)",38369,62723
+Jazan,"[ 45, 50)",26338,40382
+Jazan,"[ 50, 55)",20238,29916
+Jazan,"[ 55, 60)",15564,22143
+Jazan,"[ 60, 65)",12557,15145
+Jazan,"[ 65, 70)",9068,9843
+Jazan,"[ 70, 75)",6272,5798
+Jazan,"[ 75, 80)",4233,3946
+Jazan,"[ 80,118]",5918,5962
+Makkah al Mukarramah,"[  0,  5)",281082,292376
+Makkah al Mukarramah,"[  5, 10)",316008,329592
+Makkah al Mukarramah,"[ 10, 15)",299840,314392
+Makkah al Mukarramah,"[ 15, 20)",270382,276646
+Makkah al Mukarramah,"[ 20, 25)",268205,373513
+Makkah al Mukarramah,"[ 25, 30)",312332,605813
+Makkah al Mukarramah,"[ 30, 35)",316674,648544
+Makkah al Mukarramah,"[ 35, 40)",287573,576473
+Makkah al Mukarramah,"[ 40, 45)",217596,457851
+Makkah al Mukarramah,"[ 45, 50)",156085,314078
+Makkah al Mukarramah,"[ 50, 55)",129146,248608
+Makkah al Mukarramah,"[ 55, 60)",99278,184910
+Makkah al Mukarramah,"[ 60, 65)",73247,118242
+Makkah al Mukarramah,"[ 65, 70)",46405,64500
+Makkah al Mukarramah,"[ 70, 75)",28151,34235
+Makkah al Mukarramah,"[ 75, 80)",18578,18923
+Makkah al Mukarramah,"[ 80,118]",21955,20230
+Najran,"[  0,  5)",31863,33038
+Najran,"[  5, 10)",31449,33247
+Najran,"[ 10, 15)",27125,28865
+Najran,"[ 15, 20)",22482,23356
+Najran,"[ 20, 25)",20632,28390
+Najran,"[ 25, 30)",22151,42110
+Najran,"[ 30, 35)",21784,42836
+Najran,"[ 35, 40)",18941,37583
+Najran,"[ 40, 45)",14044,28554
+Najran,"[ 45, 50)",9323,18041
+Najran,"[ 50, 55)",7083,12898
+Najran,"[ 55, 60)",4901,8271
+Najran,"[ 60, 65)",3305,5159
+Najran,"[ 65, 70)",2394,2731
+Najran,"[ 70, 75)",1863,1748
+Najran,"[ 75, 80)",1281,1294
+Najran,"[ 80,118]",1746,1812
+Tabuk,"[  0,  5)",42296,44012
+Tabuk,"[  5, 10)",43892,45324
+Tabuk,"[ 10, 15)",39399,40646
+Tabuk,"[ 15, 20)",34513,35704
+Tabuk,"[ 20, 25)",32074,43477
+Tabuk,"[ 25, 30)",33904,63579
+Tabuk,"[ 30, 35)",32799,66291
+Tabuk,"[ 35, 40)",29499,57412
+Tabuk,"[ 40, 45)",21912,44468
+Tabuk,"[ 45, 50)",14520,30457
+Tabuk,"[ 50, 55)",11036,22817
+Tabuk,"[ 55, 60)",7929,14918
+Tabuk,"[ 60, 65)",5223,8327
+Tabuk,"[ 65, 70)",3312,4546
+Tabuk,"[ 70, 75)",2355,2469
+Tabuk,"[ 75, 80)",1607,1467
+Tabuk,"[ 80,118]",2085,1767

@@ -116,7 +116,8 @@ pops <- pops |>
 ## now select age, region, gender and value fields
 ## 
 ## 
-dfs1[[3]]
+
+dfs1[[1]]
 
 dfs2_agg <- map(2:3, \(x) dfs1[[x]] |> count(Region, age, Gender) |> mutate(id = names(dfs1[x]))) 
 
@@ -221,7 +222,7 @@ reg_dir_lu <- sa_bound |>
     filter(n == max(n)) |>
     dplyr::select(name, everything())
 
-smok_1 <- dfs1$smoking |>
+smok_1 <- smoking |>
     mutate(directorate_name = recode(directorate_name, "Qurayyat" = "Al-Qurayyat", 
                                      "Qunfotha" = "AL-Qunfudah", 
                                      "AlAhsa" = "Al-Ahsa", 
@@ -320,6 +321,9 @@ pop_agg <- pops |>
     reframe(sum_pop = sum(Population)) |>
     pivot_wider(names_from = Gender, values_from = sum_pop)
 
+pop_agg |>
+    write_csv("~/poc/data/populations.csv")
+
 ## link agg data and pops
 ## 
 
@@ -349,4 +353,5 @@ bind_rows(f_r, m_r) |>
 
     write_csv("~/poc/data/pop_rates.csv")
 
-
+    regional_counts_complete |>
+write_csv("~/poc/data/regional_counts.csv")
