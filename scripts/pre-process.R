@@ -3,8 +3,8 @@
 ## 
 ## 
 # install.packages("devtools")
-devtools::install_github("yutannihilation/ggsflabel")
-needs(fs, tidyverse, data.table, readxl, ggsflabel, conflicted)
+#devtools::install_github("yutannihilation/ggsflabel")
+needs(fs, tidyverse, data.table, readxl, conflicted)
 conflicted::conflicts_prefer(dplyr::select, dplyr::filter)
 
 ## load data
@@ -69,7 +69,21 @@ dfs1 <- set_names(dfs[c(1:5)], c("amr", "injury", "flu", "pop", "smoking"))
 pops <- dfs1$pop |>
     dplyr::select(Region = 8, Gender, age = `Single Age Group`, Population)
 
-## rename age field
+## aggregated regional populations
+
+pops <- pops |>
+    group_by(Region, Gender, age) |>
+    reframe(Population = sum(Population)) |>
+    mutate(age = parse_number(age), 
+           age_band = cut(age, seq(0, 105, 5), right = FALSE) ,
+           `1844` = dplyr::between(age, 18, 44), 
+           `15+` = age >= 15)
+
+## write to file
+pops |> 
+    write_csv("~/proof-of-concept/data/pops.csv")
+
+## rename age field for indicator data
 
 dfs1$amr <- rename(dfs1$amr, age = colnames(dfs1$amr[7]))
 dfs1$injury <- rename(dfs1$injury, age = colnames(dfs1$injury[1]))
@@ -107,10 +121,7 @@ dfs1$injury <- dfs1$injury |>
 
 ## need to make sure that variable types match
 
-map(dfs1, str)  ## pop age is character field
-
-pops <- pops |>
-    mutate(age = parse_number(age))
+# map(dfs1, str)  ## pop age is character field
 
 ## now count
 ## 
@@ -150,6 +161,7 @@ sc_loc <- map(sc_dir_links, get_page_links) %>%
     enframe() |>
     mutate(name = str_remove(name, ".aspx"))
 
+## function to extract lat - long from google map urls
 get_coordinates_from_google_maps <- function(url) {
     # Follow the redirect to get the final URL
     url <- url
@@ -167,6 +179,7 @@ get_coordinates_from_google_maps <- function(url) {
     }
 }
 
+## run on scc locations
 sc_coords <- sc_loc |>
     unnest(value) |>
     mutate(ll = map(value, get_coordinates_from_google_maps, .progress = TRUE))
@@ -203,7 +216,7 @@ sa_bound <- read_sf(shps[2])
 sa_bound |>
     ggplot() +
     geom_sf(fill = "grey90") +
-    geom_sf_label_repel(aes(label = ADM1_EN)) +
+    ggplot2::geom_sf_label(aes(label = ADM1_EN)) +
     geom_sf(data = sc_ll_sf, aes(colour = name)) +
     theme_void() +
     scale_colour_viridis_d(option = "turbo", name = "Directorates")
@@ -244,7 +257,10 @@ smok_agg <- smok_1 |>
     count(Region, age, Gender, id) |>
     drop_na(age)
 
-summary(smok_agg)
+smok_agg |>
+    write_csv("~/proof-of-concept/data/smoking.csv")
+
+#summary(smok_agg)
 
 ## add to `dfs3`
 ## 
@@ -355,3 +371,4 @@ bind_rows(f_r, m_r) |>
 
 regional_counts_complete |>
     write_csv("~/proof-of-concept/data/regional_counts.csv")
+

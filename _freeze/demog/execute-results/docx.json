@@ -1,0 +1,21 @@
+{
+  "hash": "f701047137394d997239c12a42af512f",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Population demography\"\nformat: \n    html:\n        fig-height: 10\n        fig-width: 8\n        toc: true\n        toc-location: right\n        code-fold: true\n        code-tools: true\nexecute:\n    freeze: true\n    echo: false\n---\n\n\n\n\n\n## Population pyramids\n\n\n\n::: {#fig-pyramid .cell}\n::: {.cell-output-display}\n![Absolute population](demog_files/figure-docx/fig-pyramid-1.png){#fig-pyramid-1}\n:::\n\n::: {.cell-output-display}\n![Relative population](demog_files/figure-docx/fig-pyramid-2.png){#fig-pyramid-2}\n:::\n\nPopulation pyramids\n:::\n",
+    "supporting": [
+      "demog_files/figure-docx"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

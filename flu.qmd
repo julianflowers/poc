@@ -1,5 +1,5 @@
 ---
-title: "flu"
+title: "Flu vaccination coverage"
 format: 
     html:
         toc: true
@@ -23,73 +23,137 @@ execute:
 #| label: setup
 #| include: false
 
-needs(data.table, tidyverse, conflicted)
+needs(data.table, tidyverse, conflicted, PHEindicatormethods)
 
 conflicts_prefer(base::intersect, 
 dplyr::filter, 
-dplyr::select())
+dplyr::select, 
+dplyr::between)
 
-rates <- fread("/Users/julianflowers/poc/data/pop_rates.csv")
+# rates <- fread("/Users/julianflowers/proof-of-concept/data/pop_rates.csv")
 
-pops <- fread("/Users/julianflowers/poc/data/populations.csv")
+pops <- fread("/Users/julianflowers/proof-of-concept/data/pops.csv")
 
-
-indicators <- fread("/Users/julianflowers/poc/data/regional_counts.csv")
+flu_data <- read_csv("data/Flu Vaccine Coverage 2023 updated.csv") |>
+    rename(age = AgeAtAdministration, Region = region_en) |>
+    select(Region, Gender, age) |>
+    mutate(Gender = recode(Gender, "M" = "male", "F" = "female"))
 
 theme_set(ggthemes::theme_base() + theme(text = element_text(size = 9), panel.background = element_blank()))
 
 ```
 
-```{r}
-#| label: flu vaccinations
+## Workflow
 
-flu <- indicators |> select(Region, age_band, contains("flu"))
-flu_rates <- rates |>
-    filter(Indicator == "flu")
+```{mermaid}
+%%| label: fig-workflow
+%%| fig-cap: "Proopsed workflow for calculating flu vaccination coverage"
 
- 
- head(flu)
+flowchart TD
+A[Data] --> B[population data]
+A --> C[vaccination data]
+C --> D[[recode region names]] --> E[[calculate age bands]] --> F[[calculate vaccination counts]]
+B --> G[[calculate age bands]] --> H[[calculate population counts]]
+F --> I[[join datasets]]
+H --> I
+I --> J[calculate rates and ci]
+
 
 
 ```
 
+## Clean data
 
-## Compare regions
-
-Using KSA population as standard rate
-
-To do this will use the `phe_dsr` function from the `PHEindicatormethods` package from CRAN (see DSR vignette)
+Recode region names Add new age bands
 
 ```{r}
-#| label: generate reference population
+#| label: flu vaccinations age bands
 
-## first load PHEindicatormethods and epitools
+flu_data <- flu_data |>
+    mutate(paed = dplyr::between(age, 0, 18), 
+           older = age >= 65) |>
+    mutate(Region = case_when(str_detect(Region, "Baha") ~ "Al Bahah", 
+                              str_detect(Region, "Qu?assim") ~ "Al Qasim",
+                              str_detect(Region, "Asir") ~ "`Asir",
+                              str_detect(Region, "Hail") ~ "Ha'il",
+                              str_detect(Region, "[Mm]adin") ~ "Al Madinah al Munawwarah",
+                              str_detect(Region, "Jizan") ~ "Jazan",
+                              str_detect(Region, "Makka") ~ "Makkah al Mukarramah",
+                              str_detect(Region, "Sharqiya" ) ~ "Al Mintaqah ash Sharqiyah",
+                              str_detect(Region, "Northern Frontier") ~ "Al Hudud ash Shamaliyah",
+                              str_detect(Region, "Riyad") ~ "Ar Riyadh",
+                              TRUE ~ Region ))
 
-needs(PHEindicatormethods, epitools)
 
-## calculate gender, age-specific populations for KSA
-## 
 
-ksa_pop_f <- pops |> select(age_band, Female) |>
-    group_by(age_band) |>
-    reframe(sum_pop = sum(Female))
 
-## 
+```
+
+## Calculate regional numerators and denominators
+
+-   Calculate region-by-gender populations for 0-18 and 65+
+
+-   Calculate region-by-gender vaccinations for 0-18 and 65+
+
+```{r}
+#| label: calculate region x gender populations and vaccinations
+
+pop_paed <- pops |>
+    group_by(Region, Gender, paed) |>
+    reframe(pop = sum(Population)) |>
+    filter(paed == "TRUE") |>
+    mutate(Gender = recode(Gender, "Female" = "female", "Male" = "male"), 
+           Region = recode(Region, "`Asir" = "'Asir"))
+
+pop_older <-pops |>
+    group_by(Region, Gender, older) |>
+    reframe(pop = sum(Population)) |>
+    filter(older == "TRUE") |>
+    mutate(Gender = recode(Gender, "Female" = "female", "Male" = "male"), 
+           Region = recode(Region, "`Asir" = "'Asir"))
+
+## fills all region-gender categories and remove unknown
+paed_flu <- flu_data |>
+    filter(paed == "TRUE") |>
+    count(Region, Gender) |>
+    complete(Region, Gender) |>
+    filter(Gender != "unknown") |>
+    mutate( Region = recode(Region, "`Asir" = "'Asir"))
+
+older_flu <- flu_data |>
+    filter(older == "TRUE") |>
+    count(Region, Gender) |>
+    complete(Region, Gender) |>
+    filter(Gender != "unknown") |>
+    mutate( Region = recode(Region, "`Asir" = "'Asir"))
+
+
+```
+
+## Join populations and vaccination data
+
+```{r}
+#| label: join data
+
+paed_nd <- paed_flu |>
+  left_join(pop_paed) |>
+  select(-paed)
+
+older_nd <- older_flu |>
+  left_join(pop_older) |>
+  select(-older)
 ```
 
 ## Calculate coverage
 
 ```{r}
-#| label: crude rates
+#| label: coverage
 
-options(digits = 2, scipen = 999)
+paed_coverage <- paed_nd |>
+  phe_proportion(x = n, n = pop)
 
-flu_coverage <- flu_rates |>
-    group_by(gender, Region) |>
-    reframe(tot_vacc = sum(count, na.rm = TRUE), 
-    reg_pop = sum(pop))
-flu_coverage <- phe_proportion(flu_coverage, x = tot_vacc, n = reg_pop) 
-
+older_coverage <- older_nd |>
+  phe_proportion(x = n, n = pop)
 
 
 ```
@@ -97,59 +161,30 @@ flu_coverage <- phe_proportion(flu_coverage, x = tot_vacc, n = reg_pop)
 ## Visualise
 
 ```{r}
+#| label: fig-flu_rates
+#| fig-cap: "Flu vaccination coverage"
+#| fig-subcap: 
+#|      - "Paediatric coverage"
+#|      - "65+ coverage"
 
-flu_coverage |>
-    ggplot() +
-    geom_col(aes(Region, value, fill = gender), position = position_dodge(width = 1)) +
-    geom_linerange(aes(Region, ymin = lowercl, ymax = uppercl, group = gender), position = position_dodge(width = 1)) +
-    labs(title = "Flu vaccination coverage", 
-         y = "Coverage (%)", 
-         x = "") +
-    ggthemes::theme_base() +
-    theme(plot.title.position = "plot", 
-          axis.text.x = element_text(angle = 45, hjust = 1, )) +
-    scale_y_continuous(label = scales::percent) +
-    scale_fill_discrete(type = c("red", "blue"))
-        
-
-```
-
-## Age-standarised coverage
-
-Note
-
-```{r}
-#| label: calculate asr for female
-
-## which region - gender combinations have data for 17 age bands?
-## 
-## 
-
-ksa_pop_f
-
-flu_nest <- flu_coverage |>
-    nest_by(Region, gender)
-
-flu_nest$data[[1]]
-    
-flu_dsrs <- flu_nest |>
-    mutate(ds_rates = list(epitools::ageadjust.direct(count = data$tot_vacc, pop = data$reg_pop, stdpop = ksa_pop_f$sum_pop))) |>
-    unnest_wider(ds_rates) |>
-    select(-data) 
+paed_coverage |>
+  ggplot() +
+  geom_col(aes(Region, value, fill = Gender)) +
+  geom_linerange(aes(Region, ymin = lowercl, ymax = uppercl)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1) ) +
+  facet_wrap(~ Gender) +
+  scale_fill_manual(values = c("blue", "red"))
 
 
-flu_dsrs |>
-    ggplot() +
-    geom_col(aes(Region, adj.rate, fill = gender), position = position_dodge(width = 1)) +
-    geom_linerange(aes(Region, ymin = lci, ymax = uci, group = gender), position = position_dodge(width = 1)) +
-    labs(title = "Standardised flu vaccination coverage", 
-         y = "Coverage (%)", 
-         x = "") +
-    theme(plot.title.position = "plot", 
-          axis.text.x = element_text(angle = 45, hjust = 1), 
-          panel.background = element_blank()) +
-    scale_fill_discrete(type = c("red", "blue")) +
-    scale_y_continuous(label = scales::percent)
+older_coverage |>
+  ggplot() +
+  geom_col(aes(Region, value, fill = Gender)) +
+  geom_linerange(aes(Region, ymin = lowercl, ymax = uppercl)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1) ) +
+  facet_wrap(~ Gender) +
+  scale_fill_manual(values = c("blue", "red")) 
+
+
 
 
 ```

@@ -1,0 +1,301 @@
+Region,age,Gender,id,n
+Al Bahah,22,male,Smoking,14
+Al Bahah,24,female,Smoking,24
+Al Bahah,24,male,Smoking,939
+Al Bahah,25,male,Smoking,92
+Al Bahah,38,male,Smoking,1
+Al Bahah,39,female,Smoking,3
+Al Bahah,39,male,Smoking,163
+Al Bahah,44,female,Smoking,1
+Al Bahah,44,male,Smoking,35
+Al Hudud ash Shamaliyah,22,female,Smoking,1
+Al Hudud ash Shamaliyah,22,male,Smoking,18
+Al Hudud ash Shamaliyah,25,female,Smoking,3
+Al Hudud ash Shamaliyah,25,male,Smoking,318
+Al Hudud ash Shamaliyah,45,male,Smoking,47
+Al Hudud ash Shamaliyah,48,female,Smoking,3
+Al Hudud ash Shamaliyah,48,male,Smoking,80
+Al Jawf,1,male,Smoking,18
+Al Jawf,2,female,Smoking,5
+Al Jawf,2,male,Smoking,184
+Al Jawf,3,female,Smoking,7
+Al Jawf,3,male,Smoking,109
+Al Jawf,4,female,Smoking,6
+Al Jawf,4,male,Smoking,78
+Al Jawf,5,female,Smoking,6
+Al Jawf,5,male,Smoking,87
+Al Jawf,6,female,Smoking,6
+Al Jawf,6,male,Smoking,132
+Al Jawf,7,female,Smoking,6
+Al Jawf,7,male,Smoking,163
+Al Jawf,8,female,Smoking,3
+Al Jawf,8,male,Smoking,87
+Al Jawf,9,female,Smoking,1
+Al Jawf,9,male,Smoking,62
+Al Jawf,20,female,Smoking,23
+Al Jawf,20,male,Smoking,731
+Al Jawf,49,female,Smoking,3
+Al Jawf,49,male,Smoking,30
+Al Jawf,54,female,Smoking,1
+Al Jawf,54,male,Smoking,333
+Al Jawf,55,female,Smoking,4
+Al Jawf,55,male,Smoking,274
+Al Jawf,85,male,Smoking,1
+Al Jawf,86,male,Smoking,1
+Al Jawf,87,female,Smoking,1
+Al Jawf,87,male,Smoking,7
+Al Jawf,88,male,Smoking,2
+Al Jawf,89,male,Smoking,1
+Al Jawf,90,male,Smoking,1
+Al Jawf,92,male,Smoking,2
+Al Jawf,95,male,Smoking,1
+Al Jawf,97,male,Smoking,1
+Al Jawf,104,male,Smoking,1
+Al Madinah,22,female,Smoking,31
+Al Madinah,22,male,Smoking,429
+Al Madinah,32,female,Smoking,55
+Al Madinah,32,male,Smoking,1889
+Al Madinah,33,female,Smoking,75
+Al Madinah,33,male,Smoking,1514
+Al Madinah,37,female,Smoking,23
+Al Madinah,37,male,Smoking,335
+Al Madinah,39,female,Smoking,3
+Al Madinah,39,male,Smoking,92
+Al Madinah,40,female,Smoking,12
+Al Madinah,40,male,Smoking,379
+Al Madinah,44,female,Smoking,6
+Al Madinah,44,male,Smoking,109
+Al Madinah,45,female,Smoking,12
+Al Madinah,45,male,Smoking,144
+Al Madinah,48,female,Smoking,4
+Al Madinah,48,male,Smoking,61
+Al Madinah,49,female,Smoking,9
+Al Madinah,49,male,Smoking,92
+Al Madinah,57,female,Smoking,3
+Al Madinah,57,male,Smoking,98
+Al Madinah,58,female,Smoking,26
+Al Madinah,58,male,Smoking,497
+Al Madinah,59,female,Smoking,28
+Al Madinah,59,male,Smoking,427
+Al Madinah,67,female,Smoking,9
+Al Madinah,67,male,Smoking,199
+Al Madinah,68,female,Smoking,3
+Al Madinah,68,male,Smoking,186
+Al Madinah,69,female,Smoking,1
+Al Madinah,69,male,Smoking,106
+Al Madinah,70,female,Smoking,3
+Al Madinah,70,male,Smoking,96
+Al Quassim,1,male,Smoking,9
+Al Quassim,9,male,Smoking,20
+Al Quassim,20,female,Smoking,3
+Al Quassim,20,male,Smoking,201
+Al Quassim,21,female,Smoking,19
+Al Quassim,21,male,Smoking,1521
+Al Quassim,48,female,Smoking,17
+Al Quassim,48,male,Smoking,565
+Al Quassim,49,female,Smoking,9
+Al Quassim,49,male,Smoking,549
+Ar Riyad,22,female,Smoking,94
+Ar Riyad,22,male,Smoking,1368
+Ar Riyad,23,female,Smoking,96
+Ar Riyad,23,male,Smoking,1534
+Ar Riyad,25,female,Smoking,108
+Ar Riyad,25,male,Smoking,3264
+Ar Riyad,26,female,Smoking,308
+Ar Riyad,26,male,Smoking,3567
+Ar Riyad,26,unknown,Smoking,1
+Ar Riyad,27,female,Smoking,153
+Ar Riyad,27,male,Smoking,3977
+Ar Riyad,28,female,Smoking,326
+Ar Riyad,28,male,Smoking,3925
+Ar Riyad,29,female,Smoking,100
+Ar Riyad,29,male,Smoking,1976
+Ar Riyad,37,male,Smoking,13
+Ar Riyad,38,male,Smoking,30
+Ar Riyad,40,female,Smoking,133
+Ar Riyad,40,male,Smoking,2183
+Ar Riyad,41,female,Smoking,191
+Ar Riyad,41,male,Smoking,2289
+Ar Riyad,42,female,Smoking,256
+Ar Riyad,42,male,Smoking,2010
+Ar Riyad,43,female,Smoking,65
+Ar Riyad,43,male,Smoking,1177
+Ar Riyad,45,female,Smoking,4
+Ar Riyad,45,male,Smoking,31
+Ar Riyad,70,female,Smoking,1
+Ar Riyad,70,male,Smoking,10
+Ar Riyad,71,female,Smoking,5
+Ar Riyad,71,male,Smoking,81
+Ar Riyad,72,female,Smoking,3
+Ar Riyad,72,male,Smoking,77
+Ar Riyad,73,female,Smoking,5
+Ar Riyad,73,male,Smoking,56
+Ar Riyad,74,female,Smoking,3
+Ar Riyad,74,male,Smoking,38
+Ar Riyad,75,female,Smoking,2
+Ar Riyad,75,male,Smoking,42
+Ar Riyad,76,female,Smoking,3
+Ar Riyad,76,male,Smoking,53
+Ar Riyad,77,female,Smoking,5
+Ar Riyad,77,male,Smoking,33
+Ar Riyad,78,female,Smoking,1
+Ar Riyad,78,male,Smoking,20
+Ash Sharqiyah,18,male,Smoking,1
+Ash Sharqiyah,21,female,Smoking,86
+Ash Sharqiyah,21,male,Smoking,1150
+Ash Sharqiyah,22,female,Smoking,17
+Ash Sharqiyah,22,male,Smoking,339
+Ash Sharqiyah,24,female,Smoking,66
+Ash Sharqiyah,24,male,Smoking,2101
+Ash Sharqiyah,29,female,Smoking,97
+Ash Sharqiyah,29,male,Smoking,2202
+Ash Sharqiyah,30,female,Smoking,199
+Ash Sharqiyah,30,male,Smoking,4275
+Ash Sharqiyah,31,female,Smoking,4
+Ash Sharqiyah,31,male,Smoking,145
+Ash Sharqiyah,36,female,Smoking,6
+Ash Sharqiyah,36,male,Smoking,310
+Ash Sharqiyah,37,female,Smoking,74
+Ash Sharqiyah,37,male,Smoking,2959
+Ash Sharqiyah,38,female,Smoking,70
+Ash Sharqiyah,38,male,Smoking,2098
+Ash Sharqiyah,39,female,Smoking,62
+Ash Sharqiyah,39,male,Smoking,1769
+Ash Sharqiyah,44,female,Smoking,3
+Ash Sharqiyah,44,male,Smoking,99
+Ash Sharqiyah,45,female,Smoking,8
+Ash Sharqiyah,45,male,Smoking,165
+Ash Sharqiyah,49,female,Smoking,20
+Ash Sharqiyah,49,male,Smoking,186
+Ash Sharqiyah,60,female,Smoking,3
+Ash Sharqiyah,60,male,Smoking,77
+Ash Sharqiyah,61,female,Smoking,6
+Ash Sharqiyah,61,male,Smoking,493
+Ash Sharqiyah,62,female,Smoking,2
+Ash Sharqiyah,62,male,Smoking,325
+Ash Sharqiyah,63,female,Smoking,6
+Ash Sharqiyah,63,male,Smoking,323
+Ash Sharqiyah,64,female,Smoking,2
+Ash Sharqiyah,64,male,Smoking,307
+Ash Sharqiyah,65,female,Smoking,1
+Ash Sharqiyah,65,male,Smoking,242
+Ash Sharqiyah,66,male,Smoking,225
+Ash Sharqiyah,67,male,Smoking,173
+Ha'il,36,female,Smoking,22
+Ha'il,36,male,Smoking,1455
+Jizan,18,female,Smoking,37
+Jizan,18,male,Smoking,483
+Jizan,19,female,Smoking,77
+Jizan,19,male,Smoking,1897
+Jizan,20,female,Smoking,28
+Jizan,20,male,Smoking,332
+Jizan,44,female,Smoking,3
+Jizan,44,male,Smoking,53
+Jizan,59,male,Smoking,2
+Jizan,60,female,Smoking,13
+Jizan,60,male,Smoking,346
+Makkah,17,male,Smoking,9
+Makkah,18,male,Smoking,1
+Makkah,21,male,Smoking,10
+Makkah,23,female,Smoking,205
+Makkah,23,male,Smoking,1598
+Makkah,23,unknown,Smoking,1
+Makkah,24,female,Smoking,54
+Makkah,24,male,Smoking,316
+Makkah,31,female,Smoking,374
+Makkah,31,male,Smoking,3740
+Makkah,32,female,Smoking,190
+Makkah,32,male,Smoking,2073
+Makkah,34,female,Smoking,269
+Makkah,34,male,Smoking,2163
+Makkah,35,female,Smoking,519
+Makkah,35,male,Smoking,3208
+Makkah,36,female,Smoking,221
+Makkah,36,male,Smoking,1464
+Makkah,37,male,Smoking,28
+Makkah,38,female,Smoking,44
+Makkah,38,male,Smoking,954
+Makkah,39,female,Smoking,61
+Makkah,39,male,Smoking,797
+Makkah,43,female,Smoking,78
+Makkah,43,male,Smoking,889
+Makkah,44,female,Smoking,245
+Makkah,44,male,Smoking,1332
+Makkah,45,female,Smoking,204
+Makkah,45,male,Smoking,663
+Makkah,48,female,Smoking,8
+Makkah,48,male,Smoking,100
+Makkah,53,female,Smoking,24
+Makkah,53,male,Smoking,686
+Makkah,54,female,Smoking,26
+Makkah,54,male,Smoking,340
+Makkah,55,female,Smoking,10
+Makkah,55,male,Smoking,317
+Makkah,56,female,Smoking,12
+Makkah,56,male,Smoking,546
+Makkah,57,female,Smoking,14
+Makkah,57,male,Smoking,412
+Makkah,78,female,Smoking,1
+Makkah,78,male,Smoking,6
+Makkah,79,female,Smoking,4
+Makkah,79,male,Smoking,38
+Makkah,80,female,Smoking,4
+Makkah,80,male,Smoking,12
+Makkah,81,male,Smoking,8
+Makkah,82,female,Smoking,5
+Makkah,82,male,Smoking,26
+Makkah,83,male,Smoking,9
+Makkah,84,female,Smoking,1
+Makkah,84,male,Smoking,12
+Makkah,85,male,Smoking,4
+Najran,20,female,Smoking,82
+Najran,20,male,Smoking,1007
+Najran,45,female,Smoking,3
+Najran,45,male,Smoking,300
+Tabuk,22,female,Smoking,16
+Tabuk,22,male,Smoking,775
+Tabuk,33,female,Smoking,197
+Tabuk,33,male,Smoking,1693
+Tabuk,34,female,Smoking,78
+Tabuk,34,male,Smoking,1408
+Tabuk,44,male,Smoking,11
+Tabuk,45,female,Smoking,9
+Tabuk,45,male,Smoking,257
+Tabuk,46,female,Smoking,60
+Tabuk,46,male,Smoking,1538
+Tabuk,47,female,Smoking,71
+Tabuk,47,male,Smoking,1306
+Tabuk,48,female,Smoking,5
+Tabuk,48,male,Smoking,335
+`Asir,9,male,Smoking,1
+`Asir,10,female,Smoking,1
+`Asir,10,male,Smoking,63
+`Asir,11,female,Smoking,1
+`Asir,11,male,Smoking,71
+`Asir,12,female,Smoking,2
+`Asir,12,male,Smoking,59
+`Asir,13,male,Smoking,51
+`Asir,14,female,Smoking,1
+`Asir,14,male,Smoking,111
+`Asir,15,female,Smoking,4
+`Asir,15,male,Smoking,223
+`Asir,16,female,Smoking,5
+`Asir,16,male,Smoking,535
+`Asir,17,female,Smoking,22
+`Asir,17,male,Smoking,967
+`Asir,18,female,Smoking,8
+`Asir,18,male,Smoking,1019
+`Asir,28,female,Smoking,1
+`Asir,28,male,Smoking,21
+`Asir,31,male,Smoking,155
+`Asir,33,female,Smoking,6
+`Asir,33,male,Smoking,562
+`Asir,49,male,Smoking,17
+`Asir,50,female,Smoking,21
+`Asir,50,male,Smoking,1097
+`Asir,51,female,Smoking,11
+`Asir,51,male,Smoking,962
+`Asir,52,female,Smoking,11
+`Asir,52,male,Smoking,833
+`Asir,53,female,Smoking,1
+`Asir,53,male,Smoking,62

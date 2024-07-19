@@ -1,0 +1,128 @@
+---
+title: "Indicator definitions"
+format: 
+    html:
+        fig-height: 10
+        fig-width: 8
+        toc: true
+        toc-location: right
+        code-fold: true
+        code-tools: true
+execute:
+    freeze: true
+    echo: false
+---
+
+```{r}
+#| label: setup 
+#| include: false
+
+needs(tidyverse, flextable, gt)
+
+indicators <- read_csv("data/indicators.csv")
+
+
+
+```
+
+These are as extracted from the definitions as agreed for the proof of concept
+
+## Anti-microbial resistance
+
+Percentage of bloodstream infections due to selected antimicrobial-resistant organisms (MRSA, Escherichia coli resistant to 3rd-generation cephalosporin (e.g., ESBL- E. coli))
+
+### Staphylococcus aureus
+
+```{r}
+#| label: staph areus
+
+amr_def_sa <- data.frame(
+    title = "Percentage of bloodstream infections due to selected antimicrobial-resistant organisms: MRSA", 
+    denominator = "Total No. of patients with growth of S. aureus in tested blood samples", 
+    numerator = "No. of patients with growth of methicillin-resistant S. aureus in tested blood samples", 
+    metric = "Proportion", 
+    notes = ""
+) 
+
+amr_def_sa |>
+    flextable(cwidth = 6)
+
+```
+
+### Escherichia coli
+
+```{r}
+#| label: e coli
+
+amr_def_ec <- data.frame(
+    title = "Percentage of bloodstream infections due to selected antimicrobial-resistant organisms: E.coli", 
+    denominator = "Total No. of patients with growth of E. coli in tested blood samples", 
+    numerator = "No. of patients with growth of E.coli resistant to 3rd generation cephalosporins in tested blood samples", 
+    metric = "Proportion", 
+    notes = "Resistance to ceftazidine, cefotaxine"
+) 
+
+amr_def_ec |>
+    flextable(cwidth = 6)
+
+```
+
+## Smoking
+
+Current cigarette smoking among women aged 18-44 years
+
+```{r}
+#| label: smoking
+
+smok_def <- data.frame(
+    title = "PCurrent cigarette smoking among women aged 18-44 years", 
+    denominator = "Women aged 18-44 years who information about cigarette smoking (excluding unknowns and refusals).", 
+    numerator = "Women aged 18-44 years who reported that they smoked ≥100 cigarettes in their lifetime and currently smoke every day or some days.", 
+    metric = "Rate with 95% confidence intervals", 
+    notes = "Data provided is attendances at smoking clinics rather than survey based smoking prevalence"
+) 
+
+smok_def |>
+    flextable(cwidth = 6)
+
+```
+
+## Injury
+
+Nonfatal hospitalizations for all injuries
+
+```{r}
+#| label: injury
+
+inj_def <- data.frame(
+    title = "Nonfatal hospitalizations for all injuries", 
+    denominator = "Midyear population for the calendar year under surveillance obtained from the KSA Census or suitable alternative.", 
+    numerator = "Nonfatal hospitalizations with any of the following ICD-10-CM diagnostic codes in the principal diagnosis field", 
+    metric = "Rate with 95% confidence intervals", 
+    notes = "Data provided is attendances at smoking clinics rather than survey based smoking prevalence"
+) 
+
+inj_def |>
+    flextable(cwidth = 6)
+
+```
+
+## Flu vaccination coverage
+
+### Paediatric
+
+```{r}
+
+```
+
+### 65+
+
+```{r}
+
+```
+
+### At-risk groups
+
+```{r}
+
+```

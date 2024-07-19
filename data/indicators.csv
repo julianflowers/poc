@@ -1,0 +1,30 @@
+"Percentage of bloodstream infections due to selected antimicrobial-resistant organisms (MRSA, Escherichia coli resistant to 3rd-generation cephalosporin (e.g., ESBL- E. coli))",Patients seeking care and whose blood sample is taken and tested for selected antimicrobial-resistant organism.
+,No. of patients with growth of methicillin-resistant S. aureus in tested blood samples
+Denominator,Total No. of patients with growth of S. aureus in tested blood samples
+Targeted group,Patients seeking care and whose blood sample is taken and tested for selected antimicrobial-resistant organism.
+Numerator,No. of patients with growth of E. coli resistant to third generation cephalosporins in tested blood samples
+Denominator,Total No. of patients with growth of E. coli in tested blood samples
+Targeted group,Women aged 18-44 years.
+Numerator,Women aged 18-44 years who reported that they smoked ≥100 cigarettes in their lifetime and currently smoke every day or some days.
+Denominator,Women aged 18-44 years who information about cigarette smoking (excluding unknowns and refusals).
+Indicator Name,Nonfatal Hospitalizations for All Injuries
+Indicator Source,CDC
+Demographic group,"Indicator notes: 
+• This indicator corresponds with the recommended Injury case definition for hospitalizations.
+• The case count for nonfatal hospitalizations for all injuries should equal the number of records in the nonfatal injury hospitalization subset. 
+• This indicator for use with hospitalization data is restricted to cases where the principal diagnosis is injury. An analysis of 2016 Health Care Utilization Project (HCUP) National Inpatient Sample (NIS) data identified that of cases with an injury diagnosis anywhere in the record, 36% did not have an injury diagnosis in the principal diagnosis field. A preliminary analysis indicates that the most common chapters for the principal diagnosis of these cases are mental, behavioral, and neurodevelopmental disorders (15%), diseases of the circulatory system (15%), diseases of the respiratory system (10%), and certain infectious and parasitic diseases (10%)."
+Numerator,Nonfatal hospitalizations with any of the following ICD-10-CM diagnostic codes in the principal diagnosis field
+Denominator,Midyear population for the calendar year under surveillance obtained from the U.S. Census Bureau or suitable alternative.
+Measures of frequency,"• Annual number of hospitalizations, by age group and sex. 
+• Annual age-adjusted rates, overall and by sex, standardized by the direct method to the year 2000 standard U.S. population."
+Targeted group,"Flu vaccine uptake (%) in pediatric group 6 months - 18 years old, who received the flu vaccination between 1st Oct to 30th March"
+Numerator,"The total number of children in the respective eligible age cohort that have received at least one dose of influenza vaccine from 1 Oct in school, pharmacy, and general practice."
+Denominator,The total number of children eligible for influenza vaccination
+Targeted group,"Flu vaccine uptake (%) in adults aged 65 and over, who received the flu vaccination between 1st Oct to the end of March in a primary care setting (GPs)"
+Numerator,Numerator is the number of vaccinations administered during the influenza season between 1st Oct to the end of March
+Denominator,"Denominator is the GP registered population on the date of extraction.
+GP practices are asked to provide vaccine uptake data on the number of patients registered on the date of data extraction that fall within each defined eligible group (the denominator), and the number of those vaccinated within each group (the numerator). This means denominator fluctuations will occur as patients join and leave the practice, reach the age of six months, become pregnant, have a change in their clinical status (i.e. joining or leaving a clinical risk group), have a change in carer status or die during the data collection campaign.
+Furthermore, the denominator (number of registered patients) includes within it patients who have been offered the vaccine but refused it, as the uptake rate is measured against the overall eligible population. Data on the number of people that refused the vaccine is not collected in the vaccine uptake survey therefore data providers should not adjust their figures if a patient refused the vaccine."
+Targeted group,"The high risk groups for influenza vaccination coverage include the following: HIV, Chronic Pulmonary Conditions, including Asthma, Cancer, Cardiovascular Diseases, Renal Diseases, Hepatic diseases, Hematological Disorders, Neurological Conditions, Diabetes Miletus, Morbidly Obese, Elders ≥ 65 years, Children 6 months through 5 years, Pregnant, Health Care Workers)"
+Numerator,"Total number of vaccinated individuals under the high risk groups ( HIV, Chronic Pulmonary Conditions, including Asthma, Cancer, Cardiovascular Diseases, Renal Diseases, Hepatic diseases, Hematological Disorders, Neurological Conditions, Diabetes Miletus, Morbidly Obese, Elders ≥ 65 years, Children 6 months through 5 years, Pregnant, Health Care Workers)"
+Denominator,Total number of vaccinated individuals with seasonal flu vaccine

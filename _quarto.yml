@@ -7,11 +7,14 @@ book:
   date: "2024-07-12"
   chapters:
     - index.qmd
+    - ind-def.qmd
+    - data-summaries.qmd
     - getting-started.qmd
+    - demog.qmd
     # - eda.qmd
     #- lookups.qmd
     - amr_poc.qmd
-    #- smoking-poc.qmd
+    - smoking-poc.qmd
     - flu.qmd
     - injury.qmd
     - summary.qmd

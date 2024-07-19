@@ -1,0 +1,157 @@
+---
+title: "Data summaries"
+format: 
+    html: 
+        toc: true
+        toc-location: right
+        code-fold: true
+        code-tools: true
+execute: 
+  warning: false
+  echo: false
+        
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+needs(tidyverse, collapsibleTree, flextable, PHEindicatormethods)
+
+data <- read_rds("data/df.rds")
+
+options(digits = 3)
+
+```
+
+## AMR
+
+### E. coli
+
+```{r}
+#| label: tbl-coli-res
+#| tbl-cap: "E. coli resistance rates to 3rd generation cephalosporins"
+
+## recode antibiotics
+amr_process <- data$amr |>
+    select(`Record Number`, Location, `Patient Hospitalized`, `Specific Location`, age, `Community Origin`, `Pathogen Name`:last_col()) |>
+    pivot_longer(names_to = "antibiotic", values_to = "resistance", cols = Minocycline:Spectinomycin) |>
+    mutate(age_band = cut(age, seq(0, 100, 5), right = FALSE)) |>
+    janitor::clean_names() |>
+    mutate(gen3 = ifelse(str_detect(antibiotic, "^Cef"), "3rd_gen", "other"), 
+           met_res = ifelse(str_detect(antibiotic, "Ox"), "meth", "other")) 
+
+## filter e. coli
+amr_ec <- amr_process |>
+    filter(pathogen_name == "Escherichia coli") |>
+    select(record_number, age_band, resistance, gen3) |>
+    distinct() |>
+    filter(gen3 == "3rd_gen") |>
+    mutate(res = ifelse(resistance == "R", "resistant", "sensitive")) |>
+    filter(resistance != "NA")
+
+```
+
+
+
+```{r}
+#| label: rate calc
+amr_ec_r <- amr_ec |> 
+    count(age_band, res) |>
+    pivot_wider(names_from = res, values_from = n) |>
+    mutate(total = resistant + sensitive, 
+           sum_res = sum(resistant, na.rm = T), 
+           sum_tot = sum(total, na.rm = T ),
+           mean_rate = sum_res / sum_tot) |>
+    phe_proportion(x = resistant, n = total) |>
+    select(-statistic) 
+
+amr_ec_r |>
+    flextable()
+
+mean_ec <- amr_ec_r$mean_rate[1]
+    
+amr_rates <- amr_ec |> 
+    count(age_band, res) |>
+    pivot_wider(names_from = res, values_from = n) |>
+    mutate(total = resistant + sensitive, 
+           sum_res = sum(resistant, na.rm = T), 
+           sum_tot = sum(total, na.rm = T ),
+           mean_rate = sum_res / sum_tot) |>
+    phe_proportion(x = resistant, n = total) 
+
+```
+
+
+```{r}
+#| label: fig-res
+#| fig-cap: "e. coli resistance"
+
+amr_rates |>
+    ggplot() +
+    geom_point(aes(fct_rev(age_band), value)) +
+    geom_linerange(aes(age_band, ymin = lowercl, ymax = uppercl)) +
+    geom_hline(yintercept = mean_ec, colour = "red") +
+    coord_flip() +
+    labs(x = "")
+    
+```
+
+### S.aureus
+
+```{r}
+#| label: tbl-staph-res
+#| tbl-cap: "MRSA"
+
+amr_sa <- amr_process |>
+    filter(pathogen_name == "Staphylococcus aureus") |>
+    select(record_number, age_band, resistance, met_res) |>
+    distinct() |>
+    filter(met_res == "meth") |>
+    mutate(res = ifelse(resistance == "R", "resistant", "sensitive")) |>
+    filter(resistance != "NA")
+
+amr_sa_r <- amr_sa |> 
+    count(age_band, res) |>
+    pivot_wider(names_from = res, values_from = n) |>
+    mutate(total = resistant + sensitive, 
+           sum_res = sum(resistant, na.rm = T), 
+           sum_tot = sum(total, na.rm = T ),
+           mean_rate = sum_res / sum_tot) |>
+    phe_proportion(x = resistant, n = total) |>
+    select(-statistic) 
+
+amr_sa_r |>
+    flextable()
+
+mean_sa <- amr_sa_r$mean_rate[1]
+    
+amr_rates_sa <- amr_sa |> 
+    count(age_band, res) |>
+    pivot_wider(names_from = res, values_from = n) |>
+    mutate(total = resistant + sensitive, 
+           sum_res = sum(resistant, na.rm = T), 
+           sum_tot = sum(total, na.rm = T ),
+           mean_rate = sum_res / sum_tot) |>
+    phe_proportion(x = resistant, n = total) 
+
+
+
+```
+
+
+```{r}
+#| label: fig-res-sa
+#| fig-cap: "Staph aureus resistance rates"
+
+amr_rates_sa |>
+    ggplot() +
+    geom_point(aes(fct_rev(age_band), value)) +
+    geom_linerange(aes(age_band, ymin = lowercl, ymax = uppercl)) +
+    geom_hline(yintercept = mean_sa, colour = "red") +
+    coord_flip() +
+    labs(x = "")
+
+```
+
+
