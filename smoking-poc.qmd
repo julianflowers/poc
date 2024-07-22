@@ -98,21 +98,9 @@ smok_rates |>
     labs(x = " ",
          y = "Rate per 100.000")
     
-## m:f as smoking ratios
-
-smok_ratios_gender <- smok_age_bands |>
-    dplyr::select(age_band, Gender, tot_smokers) |>
-    group_by(age_band, Gender) |>
-    reframe(nat_smokers = sum(tot_smokers)) |>
-    group_by(age_band) |>
-    reframe(att_ratio = nat_smokers[2] / nat_smokers[1]) |>
-    ungroup() |> 
-    mutate(mean_ratio = mean(att_ratio, na.rm = TRUE))
-
 
 ```
 
-The relative attendance rate for males is `r smok_ratios_gender$mean_ration[1]` times that of females.
 
 
 ### Age-specific attendance rates
@@ -120,22 +108,40 @@ The relative attendance rate for males is `r smok_ratios_gender$mean_ration[1]` 
 ```{r}
 smok_age_agg <- smok_age_bands[, .(tot_smokers = sum(smokers)), by = .(age_band, Gender)][]
 
-pop_age |>
+options(scipen = 999, digitds = 2)
+
+## m:f as smoking ratios
+
+smok_rates_gender <- pop_age |>
     dplyr::select(-Region) |>
     mutate(Gender = recode(Gender, "Female" = "female", "Male" = "male")) |>
     left_join(smok_age_agg, by = c("age_band", "Gender")) |>
-    phe_rate(x = tot_smokers, n = sumpops) |>
+    group_by(age_band, Gender) |>
+    reframe(nat_smok = sum(tot_smokers, na.rm = TRUE), 
+           nat_pop = sum(sumpops)) |>
+    phe_rate(x = nat_smok, n = nat_pop) |> 
     mutate(value = ifelse(Gender == "female", -value, value)) |>
     ggplot() +
     geom_col(aes(age_band, value, fill = Gender)) +
     coord_flip() +
-    scale_fill_manual(values = c("blue", "red"))
+    scale_fill_manual(values = c("blue", "red")) +
+    labs(x = "",  y = "Attendance rate per 100000")
 
+smok_rates_gender    
+
+smok_gender_ratio <- pop_age |>
+    dplyr::select(-Region) |>
+    mutate(Gender = recode(Gender, "Female" = "female", "Male" = "male")) |>
+    left_join(smok_age_agg, by = c("age_band", "Gender")) |>
+    group_by(age_band, Gender) |>
+    reframe(nat_smok = sum(tot_smokers, na.rm = TRUE), 
+           nat_pop = sum(sumpops)) |>
+    phe_rate(x = nat_smok, n = nat_pop) |>
+    slice(7:36) |>
+    group_by(age_band) |>
+    reframe(ratio = value[2] / value[1]) |>
+    mutate(mean_ratio = mean(ratio))
 
 ```
 
-The relative attendance rate for males is
-
-## Contextualising
-
-Smoking clinic attendance rates could be used as a proxy for population smoking rates if there is a relationship between attendance and prevalence. From the data 
+The relative attendance rate for males is `r round(smok_gender_ratio$mean_ratio[1],2)` times that of females. Smoking clinic attendance rates could be used as a proxy for population smoking rates if the relationship between attendance and prevalenceis known . For example, survey data suggests that KSA male smoking rates are around 20% which implies a female smoking rate based of `r round(20/smok_gender_ratio$mean_ratio[1], 2)`%. In fact, available survey data, and estimates from the Global BUrden of Disease, suggest a smoking prevalence in females over 15 of 2%, 
