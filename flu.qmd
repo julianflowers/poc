@@ -23,7 +23,7 @@ execute:
 #| label: setup
 #| include: false
 
-needs(data.table, tidyverse, conflicted, PHEindicatormethods)
+needs(data.table, tidyverse, conflicted, PHEindicatormethods, flextable)
 
 conflicts_prefer(base::intersect, 
 dplyr::filter, 
@@ -32,7 +32,7 @@ dplyr::between)
 
 # rates <- fread("/Users/julianflowers/proof-of-concept/data/pop_rates.csv")
 
-pops <- fread("/Users/julianflowers/proof-of-concept/data/pops.csv")
+popns <- fread("/Users/julianflowers/proof-of-concept/data/pops_1.csv")
 
 flu_data <- read_csv("data/Flu Vaccine Coverage 2023 updated.csv") |>
     rename(age = AgeAtAdministration, Region = region_en) |>
@@ -46,8 +46,8 @@ theme_set(ggthemes::theme_base() + theme(text = element_text(size = 9), panel.ba
 ## Workflow
 
 ```{mermaid}
-%%| label: fig-workflow
-%%| fig-cap: "Proopsed workflow for calculating flu vaccination coverage"
+%%| label: fig-workflow-flu
+%%| fig-cap: "Proposed workflow for calculating flu vaccination coverage"
 
 flowchart TD
 A[Data] --> B[population data]
@@ -98,14 +98,14 @@ flu_data <- flu_data |>
 ```{r}
 #| label: calculate region x gender populations and vaccinations
 
-pop_paed <- pops |>
+pop_paed <- popns |>
     group_by(Region, Gender, paed) |>
     reframe(pop = sum(Population)) |>
     filter(paed == "TRUE") |>
     mutate(Gender = recode(Gender, "Female" = "female", "Male" = "male"), 
            Region = recode(Region, "`Asir" = "'Asir"))
 
-pop_older <-pops |>
+pop_older <-popns |>
     group_by(Region, Gender, older) |>
     reframe(pop = sum(Population)) |>
     filter(older == "TRUE") |>
@@ -142,21 +142,51 @@ paed_nd <- paed_flu |>
 older_nd <- older_flu |>
   left_join(pop_older) |>
   select(-older)
+
 ```
 
-## Calculate coverage
+## Calculate coverage by age group
 
 ```{r}
 #| label: coverage
 
 paed_coverage <- paed_nd |>
-  phe_proportion(x = n, n = pop)
+  phe_proportion(x = n, n = pop) |>
+  mutate(age = "0-18")    
 
 older_coverage <- older_nd |>
-  phe_proportion(x = n, n = pop)
+  phe_proportion(x = n, n = pop) |>
+  mutate(age = "65+")
 
+bind_rows(paed_coverage, older_coverage) |>
+    write_csv("data/flu_coverage.csv")
 
 ```
+
+## Tabulate
+
+```{r}
+#| label: tbl-coverage
+#| tbl-cap: "Flu vaccination coverage"
+#| tbl-subcap: 
+#|      - "Paediatric"
+#|      - "65+"
+
+options(digits = 3)
+
+paed_coverage |>
+  select(-c(statistic, method)) |>
+  head() |>
+  flextable()
+
+older_coverage |>
+  select(-c(statistic, method)) |>
+  head() |>
+  flextable()
+
+```
+
+
 
 ## Visualise
 

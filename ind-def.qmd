@@ -112,17 +112,23 @@ inj_def |>
 ### Paediatric
 
 ```{r}
+#| label: flu paediatric
 
-```
+inj_def <- data.frame(
+    title = "Population vaccination coverage - Flu (pediatric group 6 months - 18 years old))", 
+    denominator = "The total number of children eligible for influenza vaccination",
+    numerator = "The total number of children in the respective eligible age cohort that have received at least one dose of influenza vaccine from 1 Oct in school, pharmacy, and general practice.", 
+    metric = "ProportionSt with 95% confidence intervals", 
+    notes = "Data provided is attendances at smoking clinics rather than survey based smoking prevalence"
+) 
 
-### 65+
+inj_def |>
+    flextable(cwidth = 6)
 
-```{r}
 
 ```
 
 ### At-risk groups
 
-```{r}
+### 65+
 
-```

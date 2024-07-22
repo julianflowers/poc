@@ -36,10 +36,7 @@ I --> J[calculate rates and ci]
 
 ```
 
-
-
-
-### load census population and create age bands
+### Load census population and create age bands
 
 ```{r}
 #| label: smoking pop data
@@ -56,7 +53,9 @@ pop15F <- pops[, .(n = .N, sumpops = sum(Population, na.rm = TRUE)), by = .(Regi
 
 ```
 
-### load smoking data and calculate age bands
+### Load smoking data and calculate age bands
+
+Note: it is not clear if the dummy data is a random sample of clinic attendance data.
 
 ```{r}
 #| label: create age bands - 5 yr, 18-44, 15+
@@ -72,7 +71,7 @@ smok15F <- smok_age[, .(n = .N, smokers = sum(n, na.rm = TRUE)), by = .(Region, 
 
 ```
 
-### join datasets and calculate rates
+### Join datasets and calculate rates
 
 This step uses Byar's method for confidence interval for rates
 
@@ -87,6 +86,9 @@ smok_rates <- pop1844F |>
 smok_rates |>
     dplyr::select(Region, smokers, population = sumpops, value, lowercl, uppercl) |>
     flextable::flextable()
+
+smok_rates |>
+    write_csv("data/smok_rates.csv")
    
 smok_rates |>
     ggplot() +
@@ -96,6 +98,44 @@ smok_rates |>
     labs(x = " ",
          y = "Rate per 100.000")
     
-    
+## m:f as smoking ratios
+
+smok_ratios_gender <- smok_age_bands |>
+    dplyr::select(age_band, Gender, tot_smokers) |>
+    group_by(age_band, Gender) |>
+    reframe(nat_smokers = sum(tot_smokers)) |>
+    group_by(age_band) |>
+    reframe(att_ratio = nat_smokers[2] / nat_smokers[1]) |>
+    ungroup() |> 
+    mutate(mean_ratio = mean(att_ratio, na.rm = TRUE))
+
 
 ```
+
+The relative attendance rate for males is `r smok_ratios_gender$mean_ration[1]` times that of females.
+
+
+### Age-specific attendance rates
+
+```{r}
+smok_age_agg <- smok_age_bands[, .(tot_smokers = sum(smokers)), by = .(age_band, Gender)][]
+
+pop_age |>
+    dplyr::select(-Region) |>
+    mutate(Gender = recode(Gender, "Female" = "female", "Male" = "male")) |>
+    left_join(smok_age_agg, by = c("age_band", "Gender")) |>
+    phe_rate(x = tot_smokers, n = sumpops) |>
+    mutate(value = ifelse(Gender == "female", -value, value)) |>
+    ggplot() +
+    geom_col(aes(age_band, value, fill = Gender)) +
+    coord_flip() +
+    scale_fill_manual(values = c("blue", "red"))
+
+
+```
+
+The relative attendance rate for males is
+
+## Contextualising
+
+Smoking clinic attendance rates could be used as a proxy for population smoking rates if there is a relationship between attendance and prevalence. From the data 

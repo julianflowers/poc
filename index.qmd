@@ -2,6 +2,8 @@
 
 Outline an end-to-end process for creating public health indicators and generating public health profiles.
 
+## Global workflow
+
 ```{mermaid}
 %%| label: fig-comp
 %%| fig-cap: "Workflow"

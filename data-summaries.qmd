@@ -6,10 +6,11 @@ format:
         toc-location: right
         code-fold: true
         code-tools: true
+        fig-width: 8
+        fig-height: 6
 execute: 
   warning: false
   echo: false
-        
 ---
 
 ```{r}
@@ -26,6 +27,8 @@ options(digits = 3)
 
 ## AMR
 
+The dummy data is per patient sample based.
+
 ### E. coli
 
 ```{r}
@@ -34,6 +37,7 @@ options(digits = 3)
 
 ## recode antibiotics
 amr_process <- data$amr |>
+    rename(age = `Age Year`) |>
     select(`Record Number`, Location, `Patient Hospitalized`, `Specific Location`, age, `Community Origin`, `Pathogen Name`:last_col()) |>
     pivot_longer(names_to = "antibiotic", values_to = "resistance", cols = Minocycline:Spectinomycin) |>
     mutate(age_band = cut(age, seq(0, 100, 5), right = FALSE)) |>
@@ -51,8 +55,6 @@ amr_ec <- amr_process |>
     filter(resistance != "NA")
 
 ```
-
-
 
 ```{r}
 #| label: rate calc
@@ -81,7 +83,6 @@ amr_rates <- amr_ec |>
     phe_proportion(x = resistant, n = total) 
 
 ```
-
 
 ```{r}
 #| label: fig-res
@@ -139,7 +140,6 @@ amr_rates_sa <- amr_sa |>
 
 ```
 
-
 ```{r}
 #| label: fig-res-sa
 #| fig-cap: "Staph aureus resistance rates"
@@ -154,4 +154,97 @@ amr_rates_sa |>
 
 ```
 
+## Flu vaccination coverage
+
+```{r}
+#| label: tbl-flu
+#| tbl-cap: "Counts of flu vaccination by age group, gender and region"
+
+
+flu <- data$flu |>
+    janitor::clean_names() |>
+    rename(age = age_at_administration) |>
+    mutate(age_groups = case_when(between(age, 0, 18) ~ "0-18",
+                                  age >= 65 ~ "65+", 
+                                  TRUE ~ "other"), 
+           gender = recode(gender, "F" = "female", 
+                           "M" = "male"))
+
+flu |>
+    count(age_groups, gender, region = region_en) |>
+    pivot_wider(names_from = region, values_from = n) |>
+    flextable()
+
+
+```
+
+## Smoking
+
+Counts of female smoking clinic attendees by directorate for 15+ and 18-44 years
+
+```{r}
+#| label: tbl-smoking
+#| tbl-cap: "Counts of female attendees at smoking cessation clinics"
+#| tbl-subcap: 
+#|      - "18-44"
+#|      - "15+"
+
+
+
+smoking <- data$smoking |>
+    rename(gender = patient_gender, record_id = `Record Number`) |>
+    mutate(age_1844 = ifelse(between(age, 18, 44), 1,0),
+           age_15 = ifelse(age >= 15, 1, 0)
+    )
+               
+
+smoking |>
+    filter(gender == "female", age_1844 == 1) |>
+    count(age_1844, directorate_name, gender) |>
+    pivot_wider(names_from = gender, values_from = n) |>
+    flextable()
+    
+smoking |>
+    filter(gender == "female", age_15 == 1) |>
+    count(age_15, directorate_name, gender) |>
+    pivot_wider(names_from = gender, values_from = n) |>
+    flextable()
+```
+
+## Injury
+
+```{r}
+#| label: fig-inj
+#| fig-cap: "Alluvial plot of counts of hospitalisation for injury be age, gender and ICD10 code"
+
+
+needs(ggalluvial)
+
+injury <- data$injury |>
+    janitor::clean_names() |>
+    mutate(age = ceiling(as.numeric(as.POSIXct("2023-06-01") - date_of_birth)/ 365), 
+           age_band = cut(age, seq(0, 105, 5), right = FALSE))
+
+
+# injury |>
+#     count(age_band, gender, region) |>
+#     pivot_wider(names_from = region, values_from = n) |>
+#     arrange(gender, age_band) |>
+#     flextable()
+
+
+injury_counts <- injury |>
+    count(age_band, gender, code) |>
+    top_n(50)
+
+ggplot(injury_counts, aes(y = n, axis1 = age_band, axis2 = gender, axis3 = code)) +
+    geom_alluvium(aes(fill = n), width = 1/12) +
+    geom_stratum(width = 1/12, fill = "black", colour = "grey") +
+    ggrepel::geom_label_repel(stat = "stratum", aes(label = after_stat(stratum), size = 5)) +
+    scale_fill_viridis_c()
+    
+
+
+
+```
 

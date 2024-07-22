@@ -17,7 +17,7 @@ book:
     - smoking-poc.qmd
     - flu.qmd
     - injury.qmd
-    - summary.qmd
+    - profile.qmd
     - references.qmd
 
 bibliography: references.bib

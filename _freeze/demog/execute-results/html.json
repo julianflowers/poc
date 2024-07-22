@@ -1,5 +1,5 @@
 {
-  "hash": "f701047137394d997239c12a42af512f",
+  "hash": "f4a6321d2cee4fd135fa8f4047115a5a",
   "result": {
     "engine": "knitr",
     "markdown": "---\ntitle: \"Population demography\"\nformat: \n    html:\n        fig-height: 10\n        fig-width: 8\n        toc: true\n        toc-location: right\n        code-fold: true\n        code-tools: true\nexecute:\n    freeze: true\n    echo: false\n---\n\n\n\n\n## Population pyramids\n\n\n::: {#fig-pyramid .cell}\n::: {.cell-output-display}\n![Absolute population](demog_files/figure-html/fig-pyramid-1.png){#fig-pyramid-1 width=768}\n:::\n\n::: {.cell-output-display}\n![Relative population](demog_files/figure-html/fig-pyramid-2.png){#fig-pyramid-2 width=768}\n:::\n\nPopulation pyramids\n:::\n",

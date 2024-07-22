@@ -71,4 +71,5 @@ pop_age |>
     facet_wrap(~ Region, ncol = 3) +
     scale_fill_manual(values = c("blue", "red"))
 
+
 ```

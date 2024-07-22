@@ -5,7 +5,7 @@
 # install.packages("devtools")
 #devtools::install_github("yutannihilation/ggsflabel")
 needs(fs, tidyverse, data.table, readxl, conflicted)
-conflicted::conflicts_prefer(dplyr::select, dplyr::filter)
+conflicted::conflicts_prefer(dplyr::select, dplyr::filter, purrr::map)
 
 ## load data
 
@@ -64,6 +64,9 @@ dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data
 
 dfs1 <- set_names(dfs[c(1:5)], c("amr", "injury", "flu", "pop", "smoking"))
 
+dfs1 |>
+    write_rds("data/df.rds")
+
 
 
 pops <- dfs1$pop |>
@@ -77,11 +80,13 @@ pops <- pops |>
     mutate(age = parse_number(age), 
            age_band = cut(age, seq(0, 105, 5), right = FALSE) ,
            `1844` = dplyr::between(age, 18, 44), 
-           `15+` = age >= 15)
+           `15+` = age >= 15, 
+           paed = dplyr::between(age, 0, 18), 
+           older = age >= 65)
 
 ## write to file
 pops |> 
-    write_csv("~/proof-of-concept/data/pops.csv")
+    write_csv("~/proof-of-concept/data/pops_1.csv")
 
 ## rename age field for indicator data
 
@@ -101,7 +106,12 @@ dfs1$smoking <- dfs1$smoking |>
 ## 
 
 dfs1$flu <- dfs1$flu |>
-    rename(Region = region_en)
+    rename(Region = region_en) 
+
+## export flu data
+
+
+    
 
 
 ## area names
@@ -306,6 +316,11 @@ dfs_4 <- dfs_3 |>
                               str_detect(Region, "Northern Frontier") ~ "Al Hudud ash Shamaliyah",
                               str_detect(Region, "Riyad") ~ "Ar Riyadh",
                               TRUE ~ Region ))
+
+dfs_4 |>
+    filter(id == "flu") |>
+    write_csv("data/flu.csv")
+    
 
 ## now create age bands with 80+ as terminal age band to match census data
 ## 
