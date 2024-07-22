@@ -9,8 +9,8 @@ book:
     - index.qmd
     - ind-def.qmd
     - data-summaries.qmd
-    - getting-started.qmd
     - demog.qmd
+    - getting-started.qmd
     # - eda.qmd
     #- lookups.qmd
     - amr_poc.qmd

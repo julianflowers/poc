@@ -4,7 +4,7 @@
 ## 
 # install.packages("devtools")
 #devtools::install_github("yutannihilation/ggsflabel")
-needs(fs, tidyverse, data.table, readxl, conflicted)
+needs(fs, tidyverse, data.table, readxl, conflicted, curl)
 conflicted::conflicts_prefer(dplyr::select, dplyr::filter, purrr::map)
 
 ## load data
@@ -199,11 +199,11 @@ sc_ll <- sc_coords |>
     unnest_wider(ll)
 
 ## convert to sf file (need to remove missing coordinate values)
-
 sc_ll_sf <- sc_ll |>
     drop_na() |>
     st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
 
+## download 
 sa_shp <- curl_download("https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/a0188b1b-2f40-4f27-8a43-25913a7378ca/download/sau_adm_gadm_20210525_shp.zip", destfile = tempfile())
 
 tmpd <- tempdir()

@@ -5,47 +5,63 @@ format:
       toc: true
       toc-location: right
 editor: visual
+execute: 
+  echo: false
+  output: true
+  warning: false
+  message: false
 ---
 
 ## Injury
 
+First, load injury and population data
+
 ```{r}
 #| label: setup
-#| include: false
+#| include: true
 
 needs(data.table, tidyverse, readxl)
 
-pops <- fread("/Users/julianflowers/Library/CloudStorage/GoogleDrive-julian.flowers12@gmail.com/My Drive/Saudi/data/pop_ests.csv")
+dfs1 <- read_rds("data/df.rds")
 
-injury <- read_xlsx("/Users/julianflowers/spha/data/fwdatastrategypocpublichealthframeworkindicators/Nonfatal Hospitalizations for Injuries data 2023 (8-7-2024).xlsx") |>
-    setDT()
+pops <- dfs1$pop |>
+  rename(region = 8) 
+    
+injury <- dfs1$injury 
 
+## convert date of birth to age and recode region names
+## 
+injury <- injury |>
+  mutate(age = round(as.numeric(as.POSIXct("2023-06-01") - DateOfBirth) / 365, 0))
 
 ```
 
 ```{r}
-#| label: missing
+#| label: fig-agehist
+#| fig-cap: "Age distribution of injury admissions"
+
 options(digits = 2)
 summary(injury)
 
-obs <- nrow(injury)
-na_dob <- injury[is.na(DateOfBirth), ]
-na_dob_n <- nrow(na_dob)
+hist(injury$age)
 
 ```
 
-Overall there are `r obs` records, of which `r na_dob_n` (`r 100 * na_dob_n/obs`% ) have missing dates of of birth.
+Overall there are `r nrow(injury)` records, of which `r sum(is.na(injury$age))` (`r 100 * mean(is.na(injury$age))`% ) have missing dates of of birth. These are excluded from analyis
 
 ```{r}
-#| label: imjury types
+#| label: remove missing ages
 
-injury[, .N, by = .(diagnosis, code, Gender, Region )]
+injury <- injury |>
+  drop_na(age)
+
+
 ```
 
 ```{r}
 #| label: recode region names to enable linkage to population data
 
-unique(injury$Region)
+inj_names <- unique(injury$Region)
 
 
 ```
@@ -53,12 +69,10 @@ unique(injury$Region)
 The data contains values for `r length(unique(injury$Region))` of the 13 regions.
 
 ```{r}
-#| label: estimate ages and create age band
+#| label: create age bands
 
-## exclude missing DoB
-injury_dob <-  injury[!is.na(DateOfBirth),]
-
-injury_dob <- injury_dob[!is.na(DateOfBirth), age := .(as.POSIXct(ymd("2023-06-01")) - DateOfBirth)][, age_year := floor(as.numeric(age) / 365)][, age_band := cut(age_year, seq(0, 120, 5))][]
+injury_dob <- injury |>
+  mutate(age_band = cut(age, seq(0, 120, 5), right = FALSE)) 
 
 
 ```
@@ -68,24 +82,197 @@ injury_dob <- injury_dob[!is.na(DateOfBirth), age := .(as.POSIXct(ymd("2023-06-0
 ```{r}
 #| label: aggregate injury data
 
-injury_dob[, .N, by = .(Region, diagnosis, code, age_band, Gender)][order(Region)] |>
-    pivot_wider(names_from = Region, values_from = N) |>
-    arrange(age_band, code, Gender) |>
+injury_dob |>
+  count(Region, diagnosis, code, age_band, Gender) |>
+    pivot_wider(names_from = Gender, values_from = n) |>
+    arrange(code, diagnosis) |>
+    head() |>
     flextable::flextable()
     
 
 ```
 
+## Recode region names to match census names
+
+```{r}
+#| label: recode regions
+
+census_names <- pops |>
+  rename(region = 8) |>
+  pluck("region") |> unique()
+
+## do names overlap
+
+intersect(census_names, inj_names) ## only 3 regions have names in common
+
+## recode 
+
+injury_dob <- injury_dob |>
+  mutate(region  = recode(Region, "Asir" = "'Asir", 
+                          "Al Baha" = "Al Bahah",
+                          "Sharqiya" = "Al Mintaqah ash Sharqiyah",
+                          "Riyadh" = "Ar Riyadh",
+                          "Al Qassim" = "Al Qasim",
+                           "Hail" = "Ha'il", 
+                          "Makkah" = "Makkah al Mukarramah" ,
+                          "Madinah" = "Al Madinah al Munawwarah",
+                          "Northern Frontier" = "Al Hudud ash Shamaliyah"))
+```
+
+```{r}
+#| label: recode age bands
+
+## recode age bands 
+## 
+
+pops$`Five-Year Age Group` |> unique()
+
+injury_dob$age_band |> unique()
+
+injury_dob <- injury_dob |>
+  mutate(age_band = recode(age_band, "[0,5)" = "0-4", 
+                           "[5,10)" = "5-9", 
+                           "[10,15)" = "10-14", 
+                           "[15,20)" = "15-19", 
+                           "[20,25)" = "20-24", 
+                           "[25,30)" = "25-29", 
+                           "[30,35)" = "30-34", 
+                           "[35,40)" = "35-39",
+                           "[40,45)" = "40-44", 
+                           "[45,50)" = "45-49",
+                           "[50,55)" = "50-54", 
+                           "[55,60)" = "55-59",
+                           "[60,65)" = "60-64", 
+                           "[65,70)" = "65-69",
+                           "[70,75)" = "70-74",
+                           "[75,80)" = "75-79",
+                           "[80,85)" = "80+",
+                           "[85,90)" = "80+", 
+                           "[90,95)" = "80+", 
+                           "[95,100)" = "80+",
+                           "[100,105)" = "80+", 
+                           "[105,110)" = "80+",
+                           "[110,115)" = "80+", 
+                           "[115,120)" = "80+")) 
+
+
+```
+
+```{r}
+#| label: aggregate pop data
+
+pop_agg <- pops |>
+  group_by(region, Gender, age_band = `Five-Year Age Group`) |>
+  reframe(tot_pop = sum(Population))
+
+
+
+```
+
+
 ```{r}
 #| label: calculate age-standardised hospitalisation rates - link population data
 
+injury_dob <- injury_dob |>
+  select(region, Gender, age_band, code, diagnosis) |>
+  mutate(age_band = fct_relevel(age_band, "5-9", after = 1))
 
+## count by region, ageband, gender and complete missing levels. Fill missing levels with 0
+
+injury_rate_agg <- injury_dob |>
+  group_by(region,  age_band, Gender) |>
+  reframe(n = n()) |>
+  arrange(region) |>
+  complete(region, age_band, Gender, fill = list(0)) |>
+ # pivot_wider(names_from = Gender, values_from = n) |>
+  mutate_if(is.numeric, \(x) ifelse(is.na(x), 0, x))
+
+
+## link to pop data
+## 
+
+injury_rate <- injury_rate_agg |>
+  full_join(
+    pop_agg, by = c("Gender", "region", "age_band")) |>
+  drop_na() |>
+  mutate(age_band = fct_relevel(age_band, "5-9", after = 1))
+
+injury_rate$age_band |>
+  unique()
 
 ```
 
 ```{r}
 #| label: add uncertainty intervals
+#| eval: false
 
+injury_rate_as <- injury_rate |> phe_rate(x = n, n = tot_pop)
 
+injury_rate_as |>
+  arrange(age_band) |>
+  ggplot(aes(age_band, value, group = region, fill = region), ) +
+  geom_col(position = position_dodge()) +
+  facet_wrap(~ Gender)
 
 ```
+
+## Calculate directly age standardised rates for injury admission by region and gender
+
+Use `epitools::ageadjust.direct`.
+
+To iterate over regions and gender we'll split by gender and use the `nest_by` function to group data by region and apply standardiastion function.
+
+```{r}
+#| label: fig-dsr
+#| fig-cap: "Age standardised injury admission rate per 100,000 by region and gender"
+
+needs(epitools)
+
+ref_pops <- pop_agg |>
+  group_by(age_band, Gender) |>
+  reframe(ksa_pop = sum(tot_pop))
+
+
+## Calculate standard population male and female 
+fstd <- ref_pops |> filter(Gender == "Female") |> select(ksa_pop)
+mstd <- ref_pops |> filter(Gender == "Male") |> select(ksa_pop)
+ 
+
+irf <- injury_rate |>
+  filter(Gender == "Female") 
+irm <- injury_rate |>
+  filter(Gender == "Male")
+
+## add reference population
+irf <- irf |>
+  bind_cols(ref = rep(fstd$ksa_pop, times = 12)) 
+irm <- irm |>
+  bind_cols(ref = rep(mstd$ksa_pop, times = 12)) 
+
+## calculate dsr
+female_dsr <- irf |> 
+  nest_by(region) |>
+  mutate(dsr = list(epitools::ageadjust.direct(count = data$n, pop = data$tot_pop, stdpop = data$ref))) |>
+  unnest_wider(dsr)
+
+male_dsr <- irm |> 
+  nest_by(region) |>
+  mutate(dsr = list(epitools::ageadjust.direct(count = data$n, pop = data$tot_pop, stdpop = data$ref))) |>
+  unnest_wider(dsr)
+
+
+## bind m and f values
+
+female_dsr |>
+  mutate(gender = "female") |>
+  bind_rows(male_dsr |>
+              mutate(gender = "male")) |>
+  ggplot() +
+  geom_point(aes(fct_rev(region), 100000 * adj.rate, colour = gender), position = position_dodge(width = 1)) +
+  geom_linerange(aes(fct_rev(region), ymin = 100000 * lci, ymax = 100000 * uci, colour = gender), position = position_dodge(width = 1)) +
+  coord_flip() +
+  labs(y = "Age standardised injury admission rate per 100,000") +
+  scale_colour_manual(values = c("red", "blue"))
+
+```
+

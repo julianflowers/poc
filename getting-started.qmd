@@ -34,7 +34,7 @@ The full code is made available as a Github repository at
 <https://github.com/julianflowers/poc>. The files can be cloned
 (downloaded)
 
--   In RStudio, go to “File \> New Project”
+-   In RStudio, go to “File > New Project”
 
 -   Click on “Version Control:
 

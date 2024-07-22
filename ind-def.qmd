@@ -9,7 +9,7 @@ format:
         code-fold: true
         code-tools: true
 execute:
-    freeze: true
+    freeze: false
     echo: false
 ---
 
@@ -98,7 +98,7 @@ inj_def <- data.frame(
     title = "Nonfatal hospitalizations for all injuries", 
     denominator = "Midyear population for the calendar year under surveillance obtained from the KSA Census or suitable alternative.", 
     numerator = "Nonfatal hospitalizations with any of the following ICD-10-CM diagnostic codes in the principal diagnosis field", 
-    metric = "Rate with 95% confidence intervals", 
+    metric = "Rate (age standardised) with 95% confidence intervals", 
     notes = "Data provided is attendances at smoking clinics rather than survey based smoking prevalence"
 ) 
 
@@ -114,15 +114,15 @@ inj_def |>
 ```{r}
 #| label: flu paediatric
 
-inj_def <- data.frame(
+flu_def <- data.frame(
     title = "Population vaccination coverage - Flu (pediatric group 6 months - 18 years old))", 
     denominator = "The total number of children eligible for influenza vaccination",
     numerator = "The total number of children in the respective eligible age cohort that have received at least one dose of influenza vaccine from 1 Oct in school, pharmacy, and general practice.", 
-    metric = "ProportionSt with 95% confidence intervals", 
+    metric = "Proportion with 95% confidence intervals", 
     notes = "Data provided is attendances at smoking clinics rather than survey based smoking prevalence"
 ) 
 
-inj_def |>
+flu_def |>
     flextable(cwidth = 6)
 
 
@@ -130,5 +130,16 @@ inj_def |>
 
 ### At-risk groups
 
+The dataset required for calculating coverage for at-risk groups is much more complex than for age-specific coverage rates because it needs details of underlying diseases e.g. asthma, COPD.
+
 ### 65+
 
+```{r}
+
+#| label: flu 65 and over
+
+flu_def_65 <- data.frame( title = "Population vaccination coverage - Flu (65+))", denominator = "The total number of adults 65+ eligible for influenza vaccination", numerator = "The total number of children in the respective eligible age cohort", metric = "Proportion with 95% confidence intervals", notes = "Data provided is attendances at smoking clinics rather than survey based smoking prevalence" )
+
+flu_def_65 |> flextable(cwidth = 6)
+
+```
