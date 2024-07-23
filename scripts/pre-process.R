@@ -4,8 +4,9 @@
 ## 
 # install.packages("devtools")
 #devtools::install_github("yutannihilation/ggsflabel")
+library(needs)
 needs(fs, tidyverse, data.table, readxl, conflicted, curl)
-conflicted::conflicts_prefer(dplyr::select, dplyr::filter, purrr::map)
+conflicted::conflicts_prefer(dplyr::select, dplyr::filter, purrr::map, dplyr::between)
 
 ## load data
 
@@ -25,7 +26,7 @@ csvs <- map(csv, read_csv, show_col_types = FALSE)
 ## combine into single list
 dfs <- c(xls, csvs)
 
-dfs$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv` 
+#dfs$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv` 
 
 ## look at structure
 ## area names - AMR data is saudi wide (not stratified be geographical or admnistrative unit) and not split be gender
@@ -60,7 +61,7 @@ gender_names <- c(
 dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv` <- dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv` |>
     cbind(dfs$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv`$Region)
 
-dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv`
+#dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv`
 
 dfs1 <- set_names(dfs[c(1:5)], c("amr", "injury", "flu", "pop", "smoking"))
 
@@ -146,7 +147,7 @@ dfs2_agg <- map(2:3, \(x) dfs1[[x]] |> count(Region, age, Gender) |> mutate(id =
 
 dfs3 <- bind_rows(dfs2_agg) |> drop_na(age) ## now have a long dataset of person counts with age, sex and area for injury, flu vacc and region 
 
-summary(dfs3)
+#summary(dfs3)
 
 ## next we need to map directorates to regions for smoking data
 ## this is quite complicated
@@ -370,7 +371,7 @@ final_poc_data <- regional_counts_complete |>
 ## add uncertainty
 ## 
 
-needs(PHEindicatormethods)
+needs(PHEindicatormethods, epitools)
     
     
 f_r <- phe_rate(final_poc_data, x = `_f`, n = Female) |>

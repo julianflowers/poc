@@ -169,7 +169,6 @@ pop_agg <- pops |>
 
 ```
 
-
 ```{r}
 #| label: calculate age-standardised hospitalisation rates - link population data
 
@@ -275,4 +274,3 @@ female_dsr |>
   scale_colour_manual(values = c("red", "blue"))
 
 ```
-

@@ -1,6 +1,6 @@
 project:
   type: book
-
+  pre-render: "scripts/pre-process.R"
 book:
   title: "Proof of concept for health indicators"
   author: "Julian Flowers"
@@ -18,6 +18,7 @@ book:
     - flu.qmd
     - injury.qmd
     - profile.qmd
+    - hp-2.qmd
     - references.qmd
 
 bibliography: references.bib
@@ -33,4 +34,9 @@ format:
   docx: default
   
 editor: visual
+
+execute: 
+  freeze: auto
+  warning: false
+  message: false
 

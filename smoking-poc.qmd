@@ -101,8 +101,6 @@ smok_rates |>
 
 ```
 
-
-
 ### Age-specific attendance rates
 
 ```{r}
@@ -144,4 +142,4 @@ smok_gender_ratio <- pop_age |>
 
 ```
 
-The relative attendance rate for males is `r round(smok_gender_ratio$mean_ratio[1],2)` times that of females. Smoking clinic attendance rates could be used as a proxy for population smoking rates if the relationship between attendance and prevalenceis known . For example, survey data suggests that KSA male smoking rates are around 20% which implies a female smoking rate based of `r round(20/smok_gender_ratio$mean_ratio[1], 2)`%. In fact, available survey data, and estimates from the Global BUrden of Disease, suggest a smoking prevalence in females over 15 of 2%, 
+The relative attendance rate for males is `r round(smok_gender_ratio$mean_ratio[1],2)` times that of females. Smoking clinic attendance rates could be used as a proxy for population smoking rates if the relationship between attendance and prevalenceis known . For example, survey data suggests that KSA male smoking rates are around 20% which implies a female smoking rate based of `r round(20/smok_gender_ratio$mean_ratio[1], 2)`%. In fact, available survey data, and estimates from the Global BUrden of Disease, suggest a smoking prevalence in females over 15 of 2%,

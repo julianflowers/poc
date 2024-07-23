@@ -164,7 +164,7 @@ amr_rates_sa |>
 flu <- data$flu |>
     janitor::clean_names() |>
     rename(age = age_at_administration) |>
-    mutate(age_groups = case_when(between(age, 0, 18) ~ "0-18",
+    mutate(age_groups = case_when(dplyr::between(age, 0, 18) ~ "0-18",
                                   age >= 65 ~ "65+", 
                                   TRUE ~ "other"), 
            gender = recode(gender, "F" = "female", 
@@ -193,7 +193,7 @@ Counts of female smoking clinic attendees by directorate for 15+ and 18-44 years
 
 smoking <- data$smoking |>
     rename(gender = patient_gender, record_id = `Record Number`) |>
-    mutate(age_1844 = ifelse(between(age, 18, 44), 1,0),
+    mutate(age_1844 = ifelse(dplyr::between(age, 18, 44), 1,0),
            age_15 = ifelse(age >= 15, 1, 0)
     )
                
@@ -241,10 +241,9 @@ ggplot(injury_counts, aes(y = n, axis1 = age_band, axis2 = gender, axis3 = code)
     geom_alluvium(aes(fill = n), width = 1/12) +
     geom_stratum(width = 1/12, fill = "black", colour = "grey") +
     ggrepel::geom_label_repel(stat = "stratum", aes(label = after_stat(stratum), size = 5)) +
-    scale_fill_viridis_c()
+    scale_fill_viridis_c() 
     
 
 
 
 ```
-

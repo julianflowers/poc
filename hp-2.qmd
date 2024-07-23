@@ -1,0 +1,33 @@
+---
+title: "Health profile (2)"
+subtitle: "Maps"
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+needs(tidyverse, mapview)
+
+```
+
+### Boundary file
+
+A regional boundary file is downloaded as part of the data pre-processing step and is contained in the object `sa_bound`.
+
+This can be plotted as a static or interactive map:
+
+```{r}
+#| label: fig-basic-map
+#| fig-cap: "KSA boundary map"
+#| fig-subcap: 
+#|     - "static"
+#|     - "interactive"
+
+sa_bound |>
+    ggplot() +
+    geom_sf()
+
+mapview(sa_bound)
+
+```

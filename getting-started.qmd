@@ -1,5 +1,5 @@
 ---
-title: "Getting started"
+title: "Data pre-processing"
 format: html
 editor: 
   markdown: 
@@ -8,6 +8,7 @@ execute:
    cache: false
    message: false
    warning: false
+   freeze: auto
 ---
 
 ```{r}
@@ -121,7 +122,7 @@ The script can be run by typing
 
 ````         
 ```
-`source("~/proof-of-concept/scripts/pre-process.R")`
+#`source("~/proof-of-concept/scripts/pre-process.R")`
 
 ```
 ````
