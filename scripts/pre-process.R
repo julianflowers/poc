@@ -9,25 +9,31 @@ needs(fs, tidyverse, data.table, readxl, conflicted, curl)
 conflicted::conflicts_prefer(dplyr::select, dplyr::filter, purrr::map, dplyr::between)
 
 ## load data
-
+#
 ## go to data directory
 data <- here::here("data")
+#
 
-## read data
+## identify data
 ## needs different functions for xlsx and csv files
-
+#
 xl <- fs::dir_ls(data, regexp = "xls")
 csv <- fs::dir_ls(data, regexp = "csv")
+#
 
+####################################
 ## read datasets into R
 xls <- map(xl, readxl::read_xlsx)
 csvs <- map(csv, read_csv, show_col_types = FALSE)
+##
 
 ## combine into single list
 dfs <- c(xls, csvs)
+###################################
+
 
 #dfs$`/Users/julianflowers/proof-of-concept/data/Translated_Population_Data_with_Regions.csv` 
-
+###################################
 ## look at structure
 ## area names - AMR data is saudi wide (not stratified be geographical or admnistrative unit) and not split be gender
 ## ## we want to make key diemnsion names and variable names consistent between datasets
@@ -53,7 +59,7 @@ gender_names <- c(
                   cnames[4]$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data.csv`[6],
                   cnames[5]$`/Users/julianflowers/proof-of-concept/data/Smoking 2022.csv`[6]
                   )
-
+#########################################
 
 
 ## population data
@@ -65,10 +71,14 @@ dfs$`/Users/julianflowers/proof-of-concept/data/Fully_Translated_Population_Data
 
 dfs1 <- set_names(dfs[c(1:5)], c("amr", "injury", "flu", "pop", "smoking"))
 
+## write datasets to file
 dfs1 |>
     write_rds("data/df.rds")
 
+###########################################
+###########################################
 
+## resape population data
 
 pops <- dfs1$pop |>
     dplyr::select(Region = 8, Gender, age = `Single Age Group`, Population)
@@ -88,7 +98,8 @@ pops <- pops |>
 ## write to file
 pops |> 
     write_csv("~/proof-of-concept/data/pops_1.csv")
-
+############################################
+############################################
 ## rename age field for indicator data
 
 dfs1$amr <- rename(dfs1$amr, age = colnames(dfs1$amr[7]))
@@ -108,19 +119,7 @@ dfs1$smoking <- dfs1$smoking |>
 
 dfs1$flu <- dfs1$flu |>
     rename(Region = region_en) 
-
-## export flu data
-
-
-    
-
-
-## area names
-## 
-
-pops |>
-   purrr::pluck("Region") |>
-    unique()
+##############################################
 
 ## for injury data convert dote of birth to age  - assume admission is 1st June 2023
 ## 
@@ -141,20 +140,26 @@ dfs1$injury <- dfs1$injury |>
 ## 
 ## 
 
+## write datasets to file
+dfs1 |>
+    write_rds("data/df.rds")
 
 
 dfs2_agg <- map(2:3, \(x) dfs1[[x]] |> count(Region, age, Gender) |> mutate(id = names(dfs1[x]))) 
 
 dfs3 <- bind_rows(dfs2_agg) |> drop_na(age) ## now have a long dataset of person counts with age, sex and area for injury, flu vacc and region 
+##################################################
 
-#summary(dfs3)
 
 ## next we need to map directorates to regions for smoking data
 ## this is quite complicated
 
-# devtools::install_github("yutannihilation/ggsflabel", force = TRUE)
-needs(myScrapers, sf, curl, ggsflabel)
+if(!require("ggsflabel")) devtools::install_github("yutannihilation/ggsflabel", force = TRUE)
 
+ needs(myScrapers, sf, curl, ggsflabel)
+
+###################################################
+## scrape sc data
 url <- "https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx"
 
 scc_dir <- get_page_links(url) %>%
@@ -165,12 +170,16 @@ sc_dir_links <- paste0("https://www.moh.gov.sa", scc_dir)
 sc_dir_names <- sc_dir_links |>
     basename()
 
+#####################################################
+
 ## extract Google maps link of scc for each region and create data frame
 sc_loc <- map(sc_dir_links, get_page_links) %>%
     map(\(x) x[grepl("https://goo.gl", x)]) %>%
     set_names(., sc_dir_names) |>
     enframe() |>
     mutate(name = str_remove(name, ".aspx"))
+
+#####################################################
 
 ## function to extract lat - long from google map urls
 get_coordinates_from_google_maps <- function(url) {
@@ -190,6 +199,8 @@ get_coordinates_from_google_maps <- function(url) {
     }
 }
 
+###########################################
+
 ## run on scc locations
 sc_coords <- sc_loc |>
     unnest(value) |>
@@ -204,7 +215,10 @@ sc_ll_sf <- sc_ll |>
     drop_na() |>
     st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
 
-## download 
+##############################################
+
+## download KSA shape files
+
 sa_shp <- curl_download("https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/a0188b1b-2f40-4f27-8a43-25913a7378ca/download/sau_adm_gadm_20210525_shp.zip", destfile = tempfile())
 
 tmpd <- tempdir()
@@ -221,6 +235,8 @@ sa_shp_1 <- unzip(sa_shp_1, exdir = tmpd)
 
 shps <- fs::dir_ls(tmpd, regexp = "shp$")
 
+##########################################################
+
 ## boundary polygon file
 sa_bound <- read_sf(shps[2]) 
 
@@ -235,6 +251,11 @@ sa_bound |>
 # pops$Region |>
 #     unique() |>
 #     enframe() 
+#     
+#
+############################################################
+
+## create directorate - region lookup
 
 reg_dir_lu <- sa_bound |>
     st_join(sc_ll_sf) |>
@@ -264,6 +285,8 @@ smok_1 <- dfs1$smoking |>
     select(Region, age, Gender) |>
     mutate(id = "Smoking")
 
+
+## aggregate smoking data
 smok_agg <- smok_1 |>
     count(Region, age, Gender, id) |>
     drop_na(age)
@@ -271,10 +294,9 @@ smok_agg <- smok_1 |>
 smok_agg |>
     write_csv("~/proof-of-concept/data/smoking.csv")
 
-#summary(smok_agg)
+########################################################
 
-## add to `dfs3`
-## 
+## combine datasets and rename regions
 
 dfs_3 <- bind_rows(dfs3, smok_agg) |>
     mutate(Gender = case_when(str_detect(Gender, "^[Ff]" ) ~ "female",
@@ -319,8 +341,8 @@ dfs_4 <- dfs_3 |>
                               TRUE ~ Region ))
 
 dfs_4 |>
-    filter(id == "flu") |>
-    write_csv("data/flu.csv")
+    #filter(id == "flu") |>
+    write_rds("data/counts.rds")
     
 
 ## now create age bands with 80+ as terminal age band to match census data
@@ -328,7 +350,7 @@ dfs_4 |>
 needs(Hmisc)
 regional_counts <- dfs_4 |>
     filter(!is.na(age)) |>
-    mutate(age_band = cut2(age, cuts = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 118))) |>
+    mutate(age_band = cut(age, breaks = seq(0, 118, 5), right = FALSE)) |>
     arrange(age) |>
     #fill(age_band, .direction = "down") |>
     #filter(is.na(age_band))
@@ -349,7 +371,7 @@ regional_counts_complete <- regional_counts |>
 ## 
 
 pop_agg <- pops |>
-    mutate(age_band = cut2(age, cuts = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 118))) |>
+    mutate(age_band = cut(age, breaks = seq(0, 118, 5), right = FALSE)) |>
     group_by(Region, Gender, age_band) |>
     reframe(sum_pop = sum(Population)) |>
     pivot_wider(names_from = Gender, values_from = sum_pop)
@@ -361,12 +383,16 @@ pop_agg |>
 ## 
 
 final_poc_data <- regional_counts_complete |>
-    bind_cols(pop_agg |> select(Female:Male)) |>
+    filter(!is.na(age_band)) |>
+    mutate(Region = recode(Region, "`Asir" = "'Asir")) |>
+    left_join(pop_agg, by = c("Region", "age_band")) |>
     pivot_longer(names_to = "Indicator", values_to = "Values", cols = 3:8) |>
-    mutate(Gender = str_extract(Indicator, "_(m|f)")) |>
+    filter(!is.na(Values)) |>
+    mutate(Gender = str_extract(Indicator, "_(m|f)"), 
+           Indicator = str_remove(Indicator, "sum_(f|m)_"), 
+           Gender = str_remove(Gender, "_")) |>
     #mutate(rate = ifelse(Gender == "_f", 100000 * Values / Female, 100000 * Values / Male)) |>
-    pivot_wider(names_from = Gender, values_from = Values) |>
-    mutate(Indicator = str_remove(Indicator, "sum_(m|f)_"))
+    pivot_wider(names_from = Gender, values_from = Values) 
 
 ## add uncertainty
 ## 
@@ -374,15 +400,15 @@ final_poc_data <- regional_counts_complete |>
 needs(PHEindicatormethods, epitools)
     
     
-f_r <- phe_rate(final_poc_data, x = `_f`, n = Female) |>
-    select(Region, age_band, Indicator, value, lowercl, uppercl, pop = Female, count = `_f`) |>
+female_rates <- phe_rate(final_poc_data, x = f, n = Female) |>
+    select(Region, age_band, Indicator, value, lowercl, uppercl, pop = Female, count = f) |>
     mutate(gender = "Female")
 
-m_r <- phe_rate(final_poc_data, x = `_m`, n = Male) |>
-    select(Region, age_band, Indicator, value, lowercl, uppercl, pop = Male, count = `_m`) |>
+males_rates <- phe_rate(final_poc_data, x = m, n = Male) |>
+    select(Region, age_band, Indicator, value, lowercl, uppercl, pop = Male, count = m) |>
     mutate(gender = "Male")
 
-bind_rows(f_r, m_r) |>
+bind_rows(female_rates, males_rates) |>
     write_csv("~/proof-of-concept/data/pop_rates.csv")
 
 regional_counts_complete |>
