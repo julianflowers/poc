@@ -1,6 +1,6 @@
 # Proof of concept
 
 Code https://julianflowers.quarto.pub/spha/ 
-<b>
+<br>
 Dashboard https://julianflowers.quarto.pub/dash/
-</b>
+</br>
