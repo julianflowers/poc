@@ -186,8 +186,6 @@ older_coverage |>
 
 ```
 
-
-
 ## Visualise
 
 ```{r}

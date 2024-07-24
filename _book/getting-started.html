@@ -204,6 +204,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./hp-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Health profile (2)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -294,10 +300,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <p>The intermediate tables can be reused for further analysis and generating profiles.</p>
 <p>The script can be run by typing</p>
-<pre><code>```
-`source("~/proof-of-concept/scripts/pre-process.R")`
-
-```</code></pre>
+<pre><code>`source("~/proof-of-concept/scripts/pre-process.R")`
+</code></pre>
 <p>at the prompt in the console</p>
 <p>This generates a set of objects in the R environment</p>
 <div class="cell">
@@ -306,27 +310,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">objects</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "age_names"                        "area_names"                      
- [3] "census_names"                     "cnames"                          
- [5] "csv"                              "csvs"                            
- [7] "data"                             "dfs"                             
- [9] "dfs_3"                            "dfs_4"                           
-[11] "dfs1"                             "dfs2_agg"                        
-[13] "dfs3"                             "f_r"                             
-[15] "final_poc_data"                   "gender_names"                    
-[17] "get_coordinates_from_google_maps" "m_r"                             
-[19] "pop_agg"                          "pops"                            
-[21] "reg_dir_lu"                       "regional_counts"                 
-[23] "regional_counts_complete"         "RETICULATE_PYTHON"               
-[25] "sa_bound"                         "sa_shp"                          
-[27] "sa_shp_1"                         "sc_coords"                       
-[29] "sc_dir_links"                     "sc_dir_names"                    
-[31] "sc_ll"                            "sc_ll_sf"                        
-[33] "sc_loc"                           "scc_dir"                         
-[35] "shps"                             "smok_1"                          
-[37] "smok_agg"                         "tmpd"                            
-[39] "url"                              "xl"                              
-[41] "xls"                             </code></pre>
+<pre><code>[1] "RETICULATE_PYTHON"</code></pre>
 </div>
 </div>
 <p>Objects called <code>dfs</code> reflect pre-processing of the original datasets. Objects containing <code>names</code>, contain the different variables used for age, gender and area variables across datasets. Those called <code>sc</code> are used to map locations of smoking clinics as part of recoding directorates to regions for the smoking data (see below).</p>
@@ -334,15 +318,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell" data-tbl-cap-location="bottom">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/regional_counts.csv"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="tbl-counts" class="cell quarto-float anchored" data-tbl-cap-location="bottom">
 <figure class="quarto-float quarto-float-tbl figure">
 <div aria-describedby="tbl-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div class="tabwid"><style>.cl-e0e7bbbc{}.cl-e0e27242{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-e0e4911c{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-e0e49126{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-e0e4a2a6{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e0e4a2b0{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e0e4a2b1{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e0e4a2ba{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e0e4a2c4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-e0e4a2c5{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-e0e7bbbc"><thead><tr style="overflow-wrap:break-word;"><th class="cl-e0e4a2a6"><p class="cl-e0e4911c"><span class="cl-e0e27242">Region</span></p></th><th class="cl-e0e4a2a6"><p class="cl-e0e4911c"><span class="cl-e0e27242">age_band</span></p></th><th class="cl-e0e4a2b0"><p class="cl-e0e49126"><span class="cl-e0e27242">sum_f_Smoking</span></p></th><th class="cl-e0e4a2b0"><p class="cl-e0e49126"><span class="cl-e0e27242">sum_f_flu</span></p></th><th class="cl-e0e4a2b0"><p class="cl-e0e49126"><span class="cl-e0e27242">sum_f_injury</span></p></th><th class="cl-e0e4a2b0"><p class="cl-e0e49126"><span class="cl-e0e27242">sum_m_Smoking</span></p></th><th class="cl-e0e4a2b0"><p class="cl-e0e49126"><span class="cl-e0e27242">sum_m_flu</span></p></th><th class="cl-e0e4a2b0"><p class="cl-e0e49126"><span class="cl-e0e27242">sum_m_injury</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">`Asir</span></p></td><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">[  0,  5)</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">140</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">160</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">26</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">`Asir</span></p></td><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">[  5, 10)</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">0</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">7</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">1</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">1</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">`Asir</span></p></td><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">[ 10, 15)</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">5</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">4</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">355</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">2</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">`Asir</span></p></td><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">[ 15, 20)</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">39</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">13</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">2,744</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">4</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">`Asir</span></p></td><td class="cl-e0e4a2b1"><p class="cl-e0e4911c"><span class="cl-e0e27242">[ 20, 25)</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">79</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242">25</span></p></td><td class="cl-e0e4a2ba"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-e0e4a2c4"><p class="cl-e0e4911c"><span class="cl-e0e27242">`Asir</span></p></td><td class="cl-e0e4a2c4"><p class="cl-e0e4911c"><span class="cl-e0e27242">[ 25, 30)</span></p></td><td class="cl-e0e4a2c5"><p class="cl-e0e49126"><span class="cl-e0e27242">1</span></p></td><td class="cl-e0e4a2c5"><p class="cl-e0e49126"><span class="cl-e0e27242">76</span></p></td><td class="cl-e0e4a2c5"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td><td class="cl-e0e4a2c5"><p class="cl-e0e49126"><span class="cl-e0e27242">21</span></p></td><td class="cl-e0e4a2c5"><p class="cl-e0e49126"><span class="cl-e0e27242">22</span></p></td><td class="cl-e0e4a2c5"><p class="cl-e0e49126"><span class="cl-e0e27242"></span></p></td></tr></tbody></table></div>
+<div class="tabwid"><style>.cl-c81593d0{}.cl-c81081d8{font-family:'Helvetica';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-c812919e{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c81291a8{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-c812a0da{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c812a0db{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 1.5pt solid rgba(102, 102, 102, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c812a0e4{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c812a0e5{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c812a0ee{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-c812a0ef{width:0.75in;background-color:transparent;vertical-align: middle;border-bottom: 1.5pt solid rgba(102, 102, 102, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing="true" class="cl-c81593d0"><thead><tr style="overflow-wrap:break-word;"><th class="cl-c812a0da"><p class="cl-c812919e"><span class="cl-c81081d8">Region</span></p></th><th class="cl-c812a0da"><p class="cl-c812919e"><span class="cl-c81081d8">age_band</span></p></th><th class="cl-c812a0db"><p class="cl-c81291a8"><span class="cl-c81081d8">sum_f_Smoking</span></p></th><th class="cl-c812a0db"><p class="cl-c81291a8"><span class="cl-c81081d8">sum_f_flu</span></p></th><th class="cl-c812a0db"><p class="cl-c81291a8"><span class="cl-c81081d8">sum_f_injury</span></p></th><th class="cl-c812a0db"><p class="cl-c81291a8"><span class="cl-c81081d8">sum_m_Smoking</span></p></th><th class="cl-c812a0db"><p class="cl-c81291a8"><span class="cl-c81081d8">sum_m_flu</span></p></th><th class="cl-c812a0db"><p class="cl-c81291a8"><span class="cl-c81081d8">sum_m_injury</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">`Asir</span></p></td><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">[0,5)</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">140</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">160</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">26</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">0</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">`Asir</span></p></td><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">[5,10)</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">0</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">7</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">1</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">1</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">`Asir</span></p></td><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">[10,15)</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">5</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">4</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">355</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">2</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">`Asir</span></p></td><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">[15,20)</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">39</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">13</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">2,744</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">4</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">`Asir</span></p></td><td class="cl-c812a0e4"><p class="cl-c812919e"><span class="cl-c81081d8">[20,25)</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">79</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8">25</span></p></td><td class="cl-c812a0e5"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-c812a0ee"><p class="cl-c812919e"><span class="cl-c81081d8">`Asir</span></p></td><td class="cl-c812a0ee"><p class="cl-c812919e"><span class="cl-c81081d8">[25,30)</span></p></td><td class="cl-c812a0ef"><p class="cl-c81291a8"><span class="cl-c81081d8">1</span></p></td><td class="cl-c812a0ef"><p class="cl-c81291a8"><span class="cl-c81081d8">76</span></p></td><td class="cl-c812a0ef"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td><td class="cl-c812a0ef"><p class="cl-c81291a8"><span class="cl-c81081d8">21</span></p></td><td class="cl-c812a0ef"><p class="cl-c81291a8"><span class="cl-c81081d8">22</span></p></td><td class="cl-c812a0ef"><p class="cl-c81291a8"><span class="cl-c81081d8"></span></p></td></tr></tbody></table></div>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-tbl" id="tbl-counts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -369,10 +355,13 @@ Table&nbsp;5.1: Region age-band specific counts by gender and indicator
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> sa_bound) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> name)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sa_bound <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/ksa_bound.gml"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/smok_loc.gml"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> sa_bound) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> name)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-map" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -995,94 +984,90 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>The script can be run by typing</span>
 <span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">`r source("~/proof-of-concept/scripts/pre-process.R")`</span></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a><span class="in">````         </span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="in">`source("~/proof-of-concept/scripts/pre-process.R")`</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="in">`source("~/proof-of-concept/scripts/pre-process.R")`</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a>at the prompt in the console</span>
-<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a>This generates a set of objects in the R environment</span>
-<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: environment objects</span></span>
-<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a>at the prompt in the console</span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>This generates a set of objects in the R environment</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: environment objects</span></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="fu">objects</span>() </span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a><span class="fu">objects</span>() </span>
-<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a>Objects called <span class="in">`dfs`</span> reflect pre-processing of the original datasets.</span>
-<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>Objects containing <span class="in">`names`</span>, contain the different variables used for</span>
-<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>age, gender and area variables across datasets. Those called <span class="in">`sc`</span> are</span>
-<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>used to map locations of smoking clinics as part of recoding</span>
-<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>directorates to regions for the smoking data (see below).</span>
-<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>The object <span class="in">`regional_counts_complete`</span> is a data frame of regional</span>
-<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>age_band, gender specific counts for each indicator and forms the basis</span>
-<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>of indicator generation. Note, this includes region-age-band-gender</span>
-<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a>combinations for which there is no data (because these combinations are</span>
-<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>not present in the original data - although they maybe in the full</span>
-<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a>datasets).</span>
-<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-counts</span></span>
-<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap-location: bottom</span></span>
-<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Region age-band specific counts by gender and indicator"</span></span>
-<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a>Objects called <span class="in">`dfs`</span> reflect pre-processing of the original datasets.</span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>Objects containing <span class="in">`names`</span>, contain the different variables used for</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>age, gender and area variables across datasets. Those called <span class="in">`sc`</span> are</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a>used to map locations of smoking clinics as part of recoding</span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a>directorates to regions for the smoking data (see below).</span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>The object <span class="in">`regional_counts_complete`</span> is a data frame of regional</span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a>age_band, gender specific counts for each indicator and forms the basis</span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a>of indicator generation. Note, this includes region-age-band-gender</span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a>combinations for which there is no data (because these combinations are</span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>not present in the original data - although they maybe in the full</span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>datasets).</span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: tbl-counts</span></span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap-location: bottom</span></span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a><span class="co">#| tbl-cap: "Region age-band specific counts by gender and indicator"</span></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/regional_counts.csv"</span>)</span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="sc">|&gt;</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span>
 <span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>regional_counts_complete <span class="sc">|&gt;</span></span>
-<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>() <span class="sc">|&gt;</span></span>
-<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>    flextable<span class="sc">::</span><span class="fu">flextable</span>()</span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mapping health directorates to regions for smoking data</span></span>
 <span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mapping health directorates to regions for smoking data</span></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a>The smoking data provided is clinic based data disaggregated at the</span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>level of health directorate. There are 20 directorates in KSA, and 13</span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>regions.</span>
 <span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>The smoking data provided is clinic based data disaggregated at the</span>
-<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>level of health directorate. There are 20 directorates in KSA, and 13</span>
-<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a>regions.</span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>Available population data is at regional level, so to generate</span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>population denominators for the smoking data I have mapped directorates</span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a>to regions as follows:</span>
 <span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a>Available population data is at regional level, so to generate</span>
-<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a>population denominators for the smoking data I have mapped directorates</span>
-<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a>to regions as follows:</span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I used a dataset which contained spatial locations of healthcare</span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a>    facilities (smoking cessation clinics) at health directorate</span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a>    level<span class="ot">[^getting-started-3]</span></span>
 <span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I used a dataset which contained spatial locations of healthcare</span>
-<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a>    facilities (smoking cessation clinics) at health directorate</span>
-<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a>    level<span class="ot">[^getting-started-3]</span></span>
-<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For each location I extracted spatial coordinates (longitude and</span>
-<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a>    latitude)</span>
-<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I obtained a regional boundary file (shape file) from</span>
-<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a>    <span class="ot">&lt;https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip&gt;</span></span>
-<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I spatially joined the clinic location and boundary files (see</span>
-<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a>    @fig-map)</span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>For each location I extracted spatial coordinates (longitude and</span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a>    latitude)</span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I obtained a regional boundary file (shape file) from</span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a>    <span class="ot">&lt;https://data.humdata.org/dataset/41ce9023-1d21-4549-a485-94316200aba0/resource/99834c81-ad34-415e-91c5-af053d8e55b4/download/sau_capp_adm1_1m_ocha.zip&gt;</span></span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I spatially joined the clinic location and boundary files (see</span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a>    @fig-map)</span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>This created a lookup table for directorates and regions and enabled</span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a>    the smoking data to be recoded to regions and calculation of rates</span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a>    using the census regional population estimates</span>
 <span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>This created a lookup table for directorates and regions and enabled</span>
-<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a>    the smoking data to be recoded to regions and calculation of rates</span>
-<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a>    using the census regional population estimates</span>
-<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="ot">[^getting-started-3]: </span><span class="co">[</span><span class="ot">https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx</span><span class="co">](https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx")</span></span>
-<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-map</span></span>
-<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Location map of smoking clinics mapped to KSA regional boundaries"</span></span>
-<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="sc">|&gt;</span></span>
-<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> sa_bound) <span class="sc">+</span></span>
-<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> name)) </span>
-<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a><span class="ot">[^getting-started-3]: </span><span class="co">[</span><span class="ot">https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx</span><span class="co">](https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx")</span></span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-map</span></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Location map of smoking clinics mapped to KSA regional boundaries"</span></span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a>sa_bound <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/ksa_bound.gml"</span>)</span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"data/smok_loc.gml"</span>)</span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a>sc_ll_sf <span class="sc">|&gt;</span></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="at">data =</span> sa_bound) <span class="sc">+</span></span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">colour =</span> name)) </span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

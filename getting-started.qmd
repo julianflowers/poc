@@ -118,14 +118,11 @@ generating profiles.
 
 The script can be run by typing
 
-`r source("~/proof-of-concept/scripts/pre-process.R")`
-
-````         
 ```
-#`source("~/proof-of-concept/scripts/pre-process.R")`
+`source("~/proof-of-concept/scripts/pre-process.R")`
 
 ```
-````
+
 
 at the prompt in the console
 
@@ -133,8 +130,6 @@ This generates a set of objects in the R environment
 
 ```{r}
 #| label: environment objects
-
-
 
 objects() 
 
@@ -158,6 +153,7 @@ datasets).
 #| tbl-cap-location: bottom
 #| tbl-cap: "Region age-band specific counts by gender and indicator"
 
+regional_counts_complete <- read_csv("data/regional_counts.csv")
 
 regional_counts_complete |>
     head() |>
@@ -198,11 +194,11 @@ to regions as follows:
 #| label: fig-map
 #| fig-cap: "Location map of smoking clinics mapped to KSA regional boundaries"
 
+sa_bound <- read_sf("data/ksa_bound.gml")
+sc_ll_sf <- read_sf("data/smok_loc.gml")
 
 sc_ll_sf |>
     ggplot() +
     geom_sf(data = sa_bound) +
     geom_sf(aes(colour = name)) 
-    
-
 ```

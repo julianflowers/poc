@@ -20,20 +20,22 @@ First, load injury and population data
 #| label: setup
 #| include: true
 
-needs(data.table, tidyverse, readxl)
+needs(data.table, tidyverse, readxl, conflicted)
 
-dfs1 <- read_rds("data/df.rds")
+conflicts_prefer(base::intersect, dplyr::filter)
 
-pops <- dfs1$pop |>
+df_counts <- read_rds("data/counts.rds")
+df_raw <- read_rds("data/df.rds")
+pops <- read_csv("~/proof-of-concept/data/pops_1.csv")
+
+
+pops <- df_raw$pop |>
   rename(region = 8) 
     
-injury <- dfs1$injury 
+injury <- df_raw$injury 
 
 ## convert date of birth to age and recode region names
 ## 
-injury <- injury |>
-  mutate(age = round(as.numeric(as.POSIXct("2023-06-01") - DateOfBirth) / 365, 0))
-
 ```
 
 ```{r}
@@ -260,6 +262,14 @@ male_dsr <- irm |>
   unnest_wider(dsr)
 
 
+dsrs_injury <-  female_dsr |>
+  mutate(gender = "female") |>
+  bind_rows(male_dsr |>
+              mutate(gender = "male")) |>
+    select(-data)
+
+dsrs_injury |> write_csv("data/injury_dsr.csv")
+
 ## bind m and f values
 
 female_dsr |>
@@ -270,7 +280,7 @@ female_dsr |>
   geom_point(aes(fct_rev(region), 100000 * adj.rate, colour = gender), position = position_dodge(width = 1)) +
   geom_linerange(aes(fct_rev(region), ymin = 100000 * lci, ymax = 100000 * uci, colour = gender), position = position_dodge(width = 1)) +
   coord_flip() +
-  labs(y = "Age standardised injury admission rate per 100,000") +
+  labs(y = "Age standardised injury admission rate per 100,000", x = "") +
   scale_colour_manual(values = c("red", "blue"))
 
 ```

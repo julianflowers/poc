@@ -163,7 +163,7 @@ if(!require("ggsflabel")) devtools::install_github("yutannihilation/ggsflabel", 
 url <- "https://www.moh.gov.sa/en/Ministry/Projects/TCP/Pages/default.aspx"
 
 scc_dir <- get_page_links(url) %>%
-    .[159:178] 
+    .[157:176] 
 
 sc_dir_links <- paste0("https://www.moh.gov.sa", scc_dir)
 
@@ -206,7 +206,7 @@ sc_coords <- sc_loc |>
     unnest(value) |>
     mutate(ll = map(value, get_coordinates_from_google_maps, .progress = TRUE))
 
-## create table of sc clinic locations 
+## create table of sc clinic locations
 sc_ll <- sc_coords |>
     unnest_wider(ll)
 
@@ -214,6 +214,9 @@ sc_ll <- sc_coords |>
 sc_ll_sf <- sc_ll |>
     drop_na() |>
     st_as_sf(coords = c("longitude", "latitude"), crs = 4326)
+
+sc_ll_sf
+    read_sf("data/smok_loc.gml")
 
 ##############################################
 
@@ -239,6 +242,10 @@ shps <- fs::dir_ls(tmpd, regexp = "shp$")
 
 ## boundary polygon file
 sa_bound <- read_sf(shps[2]) 
+
+sa_bound |> write_sf("data/ksa_bound.gml")
+
+sc_ll_sf <- read_sf("data/smok_loc.gml")
 
 sa_bound |>
     ggplot() +

@@ -1,13 +1,25 @@
 ---
 title: "Health profile (2)"
 subtitle: "Maps"
+format: 
+    html: 
+        fig-width: 8
+        fig-height: 8
+        fig-cap: bottom
+execute: 
+  freeze: true
 ---
 
 ```{r}
 #| label: setup
 #| include: false
 
-needs(tidyverse, mapview)
+needs(tidyverse, mapview, sf)
+
+## load boundary file
+
+ksa_bound <- read_sf("data/ksa_bound.gml")
+
 
 ```
 
@@ -24,10 +36,78 @@ This can be plotted as a static or interactive map:
 #|     - "static"
 #|     - "interactive"
 
-sa_bound |>
+ksa_bound |>
     ggplot() +
     geom_sf()
 
-mapview(sa_bound)
+mapview(ksa_bound)
+
+```
+
+### Plot data
+
+Attribute data (e..g area rates) needs to be combined with the boundary data in order to map them. Taking the example of injury....
+
+```{r}
+
+inj <- read_csv("data/injury_dsr.csv")
+
+
+```
+
+### Rename regions to link to spatial file
+
+```{r}
+
+setdiff(inj$region, ksa_bound$ADM1_EN)
+  
+ksa_bound$ADM1_EN 
+
+## recode area names and join to boundary data
+inj_sf <- inj |>
+    mutate(region1 = recode(region, 
+                           "'Asir" = "`Asir", 
+                           "Al Madinah al Munawwarah" = "Al Madinah",
+                           "Al Qasim" = "Al Quassim", 
+                           "Makkah al Mukarramah" = "Makkah", 
+                           "Al Mintaqah ash Sharqiyah" = "Ash Sharqiyah", 
+                           "Ar Riyadh" = "Ar Riyad", 
+                           "Jazan" = "Jizan"), 
+           region1 = ifelse(region1 != region, region1, region)
+           )
+
+inj_sf <- left_join(ksa_bound, inj_sf,  by = c("ADM1_EN" = "region1")) 
+
+inj_sf |>
+    filter(is.na(gender))
+    
+
+
+```
+
+### Plot smoking rates as choropleth map
+
+```{r}
+#| label: fig-sm-map
+#| fig-cap: "Smoking rate map"
+#| fig-subcap: 
+#|      - "Static"
+#|      - "Interactive"
+
+## convert back to spatial data and plot
+inj_sf |> st_as_sf() |>
+    filter(!is.na(gender)) |>
+    ggplot() +
+    geom_sf(data = ksa_bound) +
+    geom_sf(aes(fill = 100000 * adj.rate)) +
+    ggplot2::geom_sf_label(aes(label = ADM1_EN)) +
+    facet_wrap(~ gender, ncol = 1) +
+    theme_void() +
+    scale_fill_viridis_c(name = "DSR Injury\nper 100,000")
+
+mapview(inj_sf |> st_as_sf() |>
+    filter(gender == "female") |> mutate(adj.rate = 100000 * adj.rate), zcol = "adj.rate") 
+
+
 
 ```

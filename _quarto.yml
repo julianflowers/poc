@@ -1,6 +1,6 @@
 project:
   type: book
-  pre-render: "scripts/pre-process.R"
+ # pre-render: "scripts/pre-process.R"
 book:
   title: "Proof of concept for health indicators"
   author: "Julian Flowers"

@@ -1,222 +1,313 @@
 Region,age_band,sum_f_Smoking,sum_f_flu,sum_f_injury,sum_m_Smoking,sum_m_flu,sum_m_injury
-`Asir,"[  0,  5)",NA,140,160,NA,26,0
-`Asir,"[  5, 10)",0,7,NA,1,1,NA
-`Asir,"[ 10, 15)",5,4,NA,355,2,NA
-`Asir,"[ 15, 20)",39,13,NA,2744,4,NA
-`Asir,"[ 20, 25)",NA,79,NA,NA,25,NA
-`Asir,"[ 25, 30)",1,76,NA,21,22,NA
-`Asir,"[ 30, 35)",6,252,NA,717,102,NA
-`Asir,"[ 35, 40)",NA,49,NA,NA,24,NA
-`Asir,"[ 40, 45)",NA,70,NA,NA,32,NA
-`Asir,"[ 45, 50)",0,95,NA,17,51,NA
-`Asir,"[ 50, 55)",44,24,NA,2954,9,NA
-`Asir,"[ 55, 60)",NA,58,NA,NA,21,NA
-`Asir,"[ 60, 65)",NA,47,NA,NA,9,NA
-`Asir,"[ 65, 70)",NA,12,NA,NA,5,NA
-`Asir,"[ 70, 75)",NA,25,NA,NA,1,NA
-`Asir,"[ 75, 80)",NA,9,NA,NA,4,NA
-`Asir,"[ 80,118]",NA,3,NA,NA,0,NA
-Al Bahah,"[  0,  5)",NA,32,NA,NA,2,NA
-Al Bahah,"[  5, 10)",NA,4,NA,NA,0,NA
-Al Bahah,"[ 10, 15)",NA,NA,NA,NA,NA,NA
-Al Bahah,"[ 15, 20)",NA,2,NA,NA,0,NA
-Al Bahah,"[ 20, 25)",24,2,16,953,0,0
-Al Bahah,"[ 25, 30)",0,3,11,92,0,0
-Al Bahah,"[ 30, 35)",NA,0,22,NA,1,7
-Al Bahah,"[ 35, 40)",3,4,0,164,0,3
-Al Bahah,"[ 40, 45)",1,1,1,35,0,1
-Al Bahah,"[ 45, 50)",NA,2,33,NA,1,7
-Al Bahah,"[ 50, 55)",NA,4,NA,NA,0,NA
-Al Bahah,"[ 55, 60)",NA,32,NA,NA,6,NA
-Al Bahah,"[ 60, 65)",NA,21,NA,NA,1,NA
-Al Bahah,"[ 65, 70)",NA,NA,NA,NA,NA,NA
-Al Bahah,"[ 70, 75)",NA,1,NA,NA,0,NA
-Al Bahah,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Al Bahah,"[ 80,118]",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[  0,  5)",NA,1,NA,NA,0,NA
-Al Hudud ash Shamaliyah,"[  5, 10)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 10, 15)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 15, 20)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 20, 25)",1,1,30,18,0,0
-Al Hudud ash Shamaliyah,"[ 25, 30)",3,NA,21,318,NA,0
-Al Hudud ash Shamaliyah,"[ 30, 35)",NA,0,31,NA,1,12
-Al Hudud ash Shamaliyah,"[ 35, 40)",NA,NA,0,NA,NA,4
-Al Hudud ash Shamaliyah,"[ 40, 45)",NA,NA,16,NA,NA,5
-Al Hudud ash Shamaliyah,"[ 45, 50)",3,NA,66,127,NA,13
-Al Hudud ash Shamaliyah,"[ 50, 55)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 55, 60)",NA,1,NA,NA,0,NA
-Al Hudud ash Shamaliyah,"[ 60, 65)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 65, 70)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Al Hudud ash Shamaliyah,"[ 80,118]",NA,NA,NA,NA,NA,NA
-Al Jawf,"[  0,  5)",18,1,NA,389,0,NA
-Al Jawf,"[  5, 10)",22,NA,NA,531,NA,NA
-Al Jawf,"[ 10, 15)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 15, 20)",NA,NA,160,NA,NA,0
-Al Jawf,"[ 20, 25)",23,NA,NA,731,NA,NA
-Al Jawf,"[ 25, 30)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 30, 35)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 35, 40)",NA,0,NA,NA,1,NA
-Al Jawf,"[ 40, 45)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 45, 50)",3,NA,NA,30,NA,NA
-Al Jawf,"[ 50, 55)",1,NA,NA,333,NA,NA
-Al Jawf,"[ 55, 60)",4,NA,NA,274,NA,NA
-Al Jawf,"[ 60, 65)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 65, 70)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Al Jawf,"[ 80,118]",1,NA,NA,18,NA,NA
-Al Madinah al Munawwarah,"[  0,  5)",NA,96,0,NA,74,320
-Al Madinah al Munawwarah,"[  5, 10)",NA,5,NA,NA,2,NA
-Al Madinah al Munawwarah,"[ 10, 15)",NA,7,16,NA,3,160
-Al Madinah al Munawwarah,"[ 15, 20)",NA,42,3,NA,17,219
-Al Madinah al Munawwarah,"[ 20, 25)",31,105,294,429,80,21
-Al Madinah al Munawwarah,"[ 25, 30)",NA,118,63,NA,64,320
-Al Madinah al Munawwarah,"[ 30, 35)",130,88,119,3403,59,49
-Al Madinah al Munawwarah,"[ 35, 40)",26,67,0,427,41,15
-Al Madinah al Munawwarah,"[ 40, 45)",18,51,160,488,45,76
-Al Madinah al Munawwarah,"[ 45, 50)",25,36,143,297,27,32
-Al Madinah al Munawwarah,"[ 50, 55)",NA,66,0,NA,27,20
-Al Madinah al Munawwarah,"[ 55, 60)",57,102,NA,1022,51,NA
-Al Madinah al Munawwarah,"[ 60, 65)",NA,122,20,NA,44,0
-Al Madinah al Munawwarah,"[ 65, 70)",13,18,NA,491,13,NA
-Al Madinah al Munawwarah,"[ 70, 75)",3,2,NA,96,0,NA
-Al Madinah al Munawwarah,"[ 75, 80)",NA,2,NA,NA,1,NA
-Al Madinah al Munawwarah,"[ 80,118]",NA,2,0,NA,0,160
-Al Mintaqah ash Sharqiyah,"[  0,  5)",NA,28,NA,NA,19,NA
-Al Mintaqah ash Sharqiyah,"[  5, 10)",NA,3,NA,NA,0,NA
-Al Mintaqah ash Sharqiyah,"[ 10, 15)",NA,0,NA,NA,1,NA
-Al Mintaqah ash Sharqiyah,"[ 15, 20)",0,0,NA,1,4,NA
-Al Mintaqah ash Sharqiyah,"[ 20, 25)",169,7,NA,3590,28,NA
-Al Mintaqah ash Sharqiyah,"[ 25, 30)",97,5,NA,2202,12,NA
-Al Mintaqah ash Sharqiyah,"[ 30, 35)",203,5,NA,4420,92,NA
-Al Mintaqah ash Sharqiyah,"[ 35, 40)",212,11,NA,7136,8,NA
-Al Mintaqah ash Sharqiyah,"[ 40, 45)",3,6,NA,99,4,NA
-Al Mintaqah ash Sharqiyah,"[ 45, 50)",28,5,0,351,16,160
-Al Mintaqah ash Sharqiyah,"[ 50, 55)",NA,3,NA,NA,3,NA
-Al Mintaqah ash Sharqiyah,"[ 55, 60)",NA,35,NA,NA,30,NA
-Al Mintaqah ash Sharqiyah,"[ 60, 65)",19,25,NA,1525,5,NA
-Al Mintaqah ash Sharqiyah,"[ 65, 70)",1,1,NA,640,0,NA
-Al Mintaqah ash Sharqiyah,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Al Mintaqah ash Sharqiyah,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Al Mintaqah ash Sharqiyah,"[ 80,118]",NA,NA,NA,NA,NA,NA
-Al Qasim,"[  0,  5)",0,44,NA,9,15,NA
-Al Qasim,"[  5, 10)",0,4,NA,20,2,NA
-Al Qasim,"[ 10, 15)",NA,1,NA,NA,0,NA
-Al Qasim,"[ 15, 20)",NA,2,NA,NA,1,NA
-Al Qasim,"[ 20, 25)",22,5,NA,1722,4,NA
-Al Qasim,"[ 25, 30)",NA,15,NA,NA,10,NA
-Al Qasim,"[ 30, 35)",NA,14,NA,NA,5,NA
-Al Qasim,"[ 35, 40)",NA,20,NA,NA,2,NA
-Al Qasim,"[ 40, 45)",NA,10,NA,NA,6,NA
-Al Qasim,"[ 45, 50)",26,7,160,1114,2,0
-Al Qasim,"[ 50, 55)",NA,6,NA,NA,6,NA
-Al Qasim,"[ 55, 60)",NA,43,NA,NA,29,NA
-Al Qasim,"[ 60, 65)",NA,36,NA,NA,10,NA
-Al Qasim,"[ 65, 70)",NA,NA,NA,NA,NA,NA
-Al Qasim,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Al Qasim,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Al Qasim,"[ 80,118]",NA,NA,NA,NA,NA,NA
-Ar Riyadh,"[  0,  5)",NA,307,NA,NA,89,NA
-Ar Riyadh,"[  5, 10)",NA,16,NA,NA,12,NA
-Ar Riyadh,"[ 10, 15)",NA,4,8,NA,8,0
-Ar Riyadh,"[ 15, 20)",NA,50,0,NA,16,160
-Ar Riyadh,"[ 20, 25)",190,132,30,2902,62,280
-Ar Riyadh,"[ 25, 30)",995,136,8,16709,55,160
-Ar Riyadh,"[ 30, 35)",NA,186,34,NA,60,172
-Ar Riyadh,"[ 35, 40)",0,113,0,43,42,722
-Ar Riyadh,"[ 40, 45)",645,109,8,7659,35,1
-Ar Riyadh,"[ 45, 50)",4,57,57,31,67,14
-Ar Riyadh,"[ 50, 55)",NA,54,320,NA,28,0
-Ar Riyadh,"[ 55, 60)",NA,221,280,NA,115,0
-Ar Riyadh,"[ 60, 65)",NA,236,280,NA,69,0
-Ar Riyadh,"[ 65, 70)",NA,12,0,NA,5,160
-Ar Riyadh,"[ 70, 75)",17,5,NA,262,5,NA
-Ar Riyadh,"[ 75, 80)",11,0,NA,148,1,NA
-Ar Riyadh,"[ 80,118]",NA,2,NA,NA,2,NA
-Ha'il,"[  0,  5)",NA,29,NA,NA,5,NA
-Ha'il,"[  5, 10)",NA,2,NA,NA,1,NA
-Ha'il,"[ 10, 15)",NA,NA,NA,NA,NA,NA
-Ha'il,"[ 15, 20)",NA,4,NA,NA,2,NA
-Ha'il,"[ 20, 25)",NA,35,NA,NA,6,NA
-Ha'il,"[ 25, 30)",NA,25,NA,NA,9,NA
-Ha'il,"[ 30, 35)",NA,15,NA,NA,8,NA
-Ha'il,"[ 35, 40)",22,14,0,1455,3,160
-Ha'il,"[ 40, 45)",NA,17,NA,NA,3,NA
-Ha'il,"[ 45, 50)",NA,9,NA,NA,1,NA
-Ha'il,"[ 50, 55)",NA,6,NA,NA,1,NA
-Ha'il,"[ 55, 60)",NA,25,NA,NA,3,NA
-Ha'il,"[ 60, 65)",NA,20,NA,NA,1,NA
-Ha'il,"[ 65, 70)",NA,2,NA,NA,0,NA
-Ha'il,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Ha'il,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Ha'il,"[ 80,118]",NA,1,NA,NA,0,NA
-Jazan,"[  0,  5)",NA,27,NA,NA,18,NA
-Jazan,"[  5, 10)",NA,4,NA,NA,2,NA
-Jazan,"[ 10, 15)",NA,1,NA,NA,0,NA
-Jazan,"[ 15, 20)",114,5,NA,2380,1,NA
-Jazan,"[ 20, 25)",28,4,NA,332,3,NA
-Jazan,"[ 25, 30)",NA,14,NA,NA,10,NA
-Jazan,"[ 30, 35)",NA,10,NA,NA,9,NA
-Jazan,"[ 35, 40)",NA,8,0,NA,7,140
-Jazan,"[ 40, 45)",3,8,NA,53,6,NA
-Jazan,"[ 45, 50)",NA,6,NA,NA,1,NA
-Jazan,"[ 50, 55)",NA,1,NA,NA,33,NA
-Jazan,"[ 55, 60)",0,16,NA,2,44,NA
-Jazan,"[ 60, 65)",13,38,NA,346,6,NA
-Jazan,"[ 65, 70)",NA,2,NA,NA,2,NA
-Jazan,"[ 70, 75)",NA,0,NA,NA,2,NA
-Jazan,"[ 75, 80)",NA,NA,NA,NA,NA,NA
-Jazan,"[ 80,118]",NA,NA,NA,NA,NA,NA
-Makkah al Mukarramah,"[  0,  5)",NA,218,0,NA,141,40
-Makkah al Mukarramah,"[  5, 10)",NA,15,NA,NA,15,NA
-Makkah al Mukarramah,"[ 10, 15)",NA,13,0,NA,9,160
-Makkah al Mukarramah,"[ 15, 20)",0,46,0,10,31,39
-Makkah al Mukarramah,"[ 20, 25)",259,117,2,1924,135,21
-Makkah al Mukarramah,"[ 25, 30)",NA,139,22,NA,122,200
-Makkah al Mukarramah,"[ 30, 35)",833,227,4,7976,117,339
-Makkah al Mukarramah,"[ 35, 40)",845,90,20,6451,84,502
-Makkah al Mukarramah,"[ 40, 45)",323,144,10,2221,99,321
-Makkah al Mukarramah,"[ 45, 50)",212,64,22,763,51,182
-Makkah al Mukarramah,"[ 50, 55)",50,130,220,1026,104,60
-Makkah al Mukarramah,"[ 55, 60)",36,142,0,1275,136,160
-Makkah al Mukarramah,"[ 60, 65)",NA,119,60,NA,82,200
-Makkah al Mukarramah,"[ 65, 70)",NA,47,20,NA,16,160
-Makkah al Mukarramah,"[ 70, 75)",NA,11,160,NA,10,20
-Makkah al Mukarramah,"[ 75, 80)",5,4,20,44,3,0
-Makkah al Mukarramah,"[ 80,118]",10,2,340,71,0,0
-Najran,"[  0,  5)",NA,16,NA,NA,2,NA
-Najran,"[  5, 10)",NA,1,NA,NA,0,NA
-Najran,"[ 10, 15)",NA,NA,NA,NA,NA,NA
-Najran,"[ 15, 20)",NA,1,NA,NA,0,NA
-Najran,"[ 20, 25)",82,NA,NA,1007,NA,NA
-Najran,"[ 25, 30)",NA,3,0,NA,0,160
-Najran,"[ 30, 35)",NA,1,NA,NA,0,NA
-Najran,"[ 35, 40)",NA,3,NA,NA,11,NA
-Najran,"[ 40, 45)",NA,3,NA,NA,0,NA
-Najran,"[ 45, 50)",3,1,NA,300,1,NA
-Najran,"[ 50, 55)",NA,2,NA,NA,0,NA
-Najran,"[ 55, 60)",NA,23,NA,NA,36,NA
-Najran,"[ 60, 65)",NA,12,NA,NA,2,NA
-Najran,"[ 65, 70)",NA,NA,NA,NA,NA,NA
-Najran,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Najran,"[ 75, 80)",NA,0,NA,NA,2,NA
-Najran,"[ 80,118]",NA,3,NA,NA,3,NA
-Tabuk,"[  0,  5)",NA,15,NA,NA,38,NA
-Tabuk,"[  5, 10)",NA,NA,NA,NA,NA,NA
-Tabuk,"[ 10, 15)",NA,2,NA,NA,1,NA
-Tabuk,"[ 15, 20)",NA,2,NA,NA,6,NA
-Tabuk,"[ 20, 25)",16,11,NA,775,23,NA
-Tabuk,"[ 25, 30)",NA,23,NA,NA,33,NA
-Tabuk,"[ 30, 35)",275,24,NA,3101,22,NA
-Tabuk,"[ 35, 40)",NA,31,NA,NA,30,NA
-Tabuk,"[ 40, 45)",0,12,NA,11,23,NA
-Tabuk,"[ 45, 50)",145,8,NA,3436,11,NA
-Tabuk,"[ 50, 55)",NA,6,NA,NA,1,NA
-Tabuk,"[ 55, 60)",NA,6,NA,NA,70,NA
-Tabuk,"[ 60, 65)",NA,6,NA,NA,16,NA
-Tabuk,"[ 65, 70)",NA,5,NA,NA,1,NA
-Tabuk,"[ 70, 75)",NA,NA,NA,NA,NA,NA
-Tabuk,"[ 75, 80)",NA,1,NA,NA,0,NA
-Tabuk,"[ 80,118]",NA,0,NA,NA,1,NA
+`Asir,"[0,5)",NA,140,160,NA,26,0
+`Asir,"[5,10)",0,7,NA,1,1,NA
+`Asir,"[10,15)",5,4,NA,355,2,NA
+`Asir,"[15,20)",39,13,NA,2744,4,NA
+`Asir,"[20,25)",NA,79,NA,NA,25,NA
+`Asir,"[25,30)",1,76,NA,21,22,NA
+`Asir,"[30,35)",6,252,NA,717,102,NA
+`Asir,"[35,40)",NA,49,NA,NA,24,NA
+`Asir,"[40,45)",NA,70,NA,NA,32,NA
+`Asir,"[45,50)",0,95,NA,17,51,NA
+`Asir,"[50,55)",44,24,NA,2954,9,NA
+`Asir,"[55,60)",NA,58,NA,NA,21,NA
+`Asir,"[60,65)",NA,47,NA,NA,9,NA
+`Asir,"[65,70)",NA,12,NA,NA,5,NA
+`Asir,"[70,75)",NA,25,NA,NA,1,NA
+`Asir,"[75,80)",NA,9,NA,NA,4,NA
+`Asir,"[80,85)",NA,2,NA,NA,0,NA
+`Asir,"[85,90)",NA,1,NA,NA,0,NA
+`Asir,"[90,95)",NA,NA,NA,NA,NA,NA
+`Asir,"[95,100)",NA,NA,NA,NA,NA,NA
+`Asir,"[100,105)",NA,NA,NA,NA,NA,NA
+`Asir,"[105,110)",NA,NA,NA,NA,NA,NA
+`Asir,"[110,115)",NA,NA,NA,NA,NA,NA
+`Asir,NA,NA,NA,NA,NA,NA,NA
+Al Bahah,"[0,5)",NA,32,NA,NA,2,NA
+Al Bahah,"[5,10)",NA,4,NA,NA,0,NA
+Al Bahah,"[10,15)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[15,20)",NA,2,NA,NA,0,NA
+Al Bahah,"[20,25)",24,2,16,953,0,0
+Al Bahah,"[25,30)",0,3,11,92,0,0
+Al Bahah,"[30,35)",NA,0,22,NA,1,7
+Al Bahah,"[35,40)",3,4,0,164,0,3
+Al Bahah,"[40,45)",1,1,1,35,0,1
+Al Bahah,"[45,50)",NA,2,33,NA,1,7
+Al Bahah,"[50,55)",NA,4,NA,NA,0,NA
+Al Bahah,"[55,60)",NA,32,NA,NA,6,NA
+Al Bahah,"[60,65)",NA,21,NA,NA,1,NA
+Al Bahah,"[65,70)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[70,75)",NA,1,NA,NA,0,NA
+Al Bahah,"[75,80)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[80,85)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[85,90)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[90,95)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[95,100)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[100,105)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[105,110)",NA,NA,NA,NA,NA,NA
+Al Bahah,"[110,115)",NA,NA,NA,NA,NA,NA
+Al Bahah,NA,NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[0,5)",NA,1,NA,NA,0,NA
+Al Hudud ash Shamaliyah,"[5,10)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[10,15)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[15,20)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[20,25)",1,1,30,18,0,0
+Al Hudud ash Shamaliyah,"[25,30)",3,NA,21,318,NA,0
+Al Hudud ash Shamaliyah,"[30,35)",NA,0,31,NA,1,12
+Al Hudud ash Shamaliyah,"[35,40)",NA,NA,0,NA,NA,4
+Al Hudud ash Shamaliyah,"[40,45)",NA,NA,16,NA,NA,5
+Al Hudud ash Shamaliyah,"[45,50)",3,NA,66,127,NA,13
+Al Hudud ash Shamaliyah,"[50,55)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[55,60)",NA,1,NA,NA,0,NA
+Al Hudud ash Shamaliyah,"[60,65)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[65,70)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[70,75)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[75,80)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[80,85)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[85,90)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[90,95)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[95,100)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[100,105)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[105,110)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,"[110,115)",NA,NA,NA,NA,NA,NA
+Al Hudud ash Shamaliyah,NA,NA,NA,NA,NA,NA,NA
+Al Jawf,"[0,5)",18,1,NA,389,0,NA
+Al Jawf,"[5,10)",22,NA,NA,531,NA,NA
+Al Jawf,"[10,15)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[15,20)",NA,NA,160,NA,NA,0
+Al Jawf,"[20,25)",23,NA,NA,731,NA,NA
+Al Jawf,"[25,30)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[30,35)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[35,40)",NA,0,NA,NA,1,NA
+Al Jawf,"[40,45)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[45,50)",3,NA,NA,30,NA,NA
+Al Jawf,"[50,55)",1,NA,NA,333,NA,NA
+Al Jawf,"[55,60)",4,NA,NA,274,NA,NA
+Al Jawf,"[60,65)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[65,70)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[70,75)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[75,80)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[80,85)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[85,90)",1,NA,NA,12,NA,NA
+Al Jawf,"[90,95)",0,NA,NA,3,NA,NA
+Al Jawf,"[95,100)",0,NA,NA,2,NA,NA
+Al Jawf,"[100,105)",0,NA,NA,1,NA,NA
+Al Jawf,"[105,110)",NA,NA,NA,NA,NA,NA
+Al Jawf,"[110,115)",NA,NA,NA,NA,NA,NA
+Al Jawf,NA,NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,"[0,5)",NA,96,0,NA,74,320
+Al Madinah al Munawwarah,"[5,10)",NA,5,NA,NA,2,NA
+Al Madinah al Munawwarah,"[10,15)",NA,7,16,NA,3,160
+Al Madinah al Munawwarah,"[15,20)",NA,42,3,NA,17,219
+Al Madinah al Munawwarah,"[20,25)",31,105,294,429,80,21
+Al Madinah al Munawwarah,"[25,30)",NA,118,63,NA,64,320
+Al Madinah al Munawwarah,"[30,35)",130,88,119,3403,59,49
+Al Madinah al Munawwarah,"[35,40)",26,67,0,427,41,15
+Al Madinah al Munawwarah,"[40,45)",18,51,160,488,45,76
+Al Madinah al Munawwarah,"[45,50)",25,36,143,297,27,32
+Al Madinah al Munawwarah,"[50,55)",NA,66,0,NA,27,20
+Al Madinah al Munawwarah,"[55,60)",57,102,NA,1022,51,NA
+Al Madinah al Munawwarah,"[60,65)",NA,122,20,NA,44,0
+Al Madinah al Munawwarah,"[65,70)",13,18,NA,491,13,NA
+Al Madinah al Munawwarah,"[70,75)",3,2,NA,96,0,NA
+Al Madinah al Munawwarah,"[75,80)",NA,2,NA,NA,1,NA
+Al Madinah al Munawwarah,"[80,85)",NA,1,0,NA,0,160
+Al Madinah al Munawwarah,"[85,90)",NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,"[90,95)",NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,"[95,100)",NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,"[100,105)",NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,"[105,110)",NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,"[110,115)",NA,NA,NA,NA,NA,NA
+Al Madinah al Munawwarah,NA,NA,1,NA,NA,0,NA
+Al Mintaqah ash Sharqiyah,"[0,5)",NA,28,NA,NA,19,NA
+Al Mintaqah ash Sharqiyah,"[5,10)",NA,3,NA,NA,0,NA
+Al Mintaqah ash Sharqiyah,"[10,15)",NA,0,NA,NA,1,NA
+Al Mintaqah ash Sharqiyah,"[15,20)",0,0,NA,1,4,NA
+Al Mintaqah ash Sharqiyah,"[20,25)",169,7,NA,3590,28,NA
+Al Mintaqah ash Sharqiyah,"[25,30)",97,5,NA,2202,12,NA
+Al Mintaqah ash Sharqiyah,"[30,35)",203,5,NA,4420,92,NA
+Al Mintaqah ash Sharqiyah,"[35,40)",212,11,NA,7136,8,NA
+Al Mintaqah ash Sharqiyah,"[40,45)",3,6,NA,99,4,NA
+Al Mintaqah ash Sharqiyah,"[45,50)",28,5,0,351,16,160
+Al Mintaqah ash Sharqiyah,"[50,55)",NA,3,NA,NA,3,NA
+Al Mintaqah ash Sharqiyah,"[55,60)",NA,35,NA,NA,30,NA
+Al Mintaqah ash Sharqiyah,"[60,65)",19,25,NA,1525,5,NA
+Al Mintaqah ash Sharqiyah,"[65,70)",1,1,NA,640,0,NA
+Al Mintaqah ash Sharqiyah,"[70,75)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[75,80)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[80,85)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[85,90)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[90,95)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[95,100)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[100,105)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[105,110)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,"[110,115)",NA,NA,NA,NA,NA,NA
+Al Mintaqah ash Sharqiyah,NA,NA,NA,NA,NA,NA,NA
+Al Qasim,"[0,5)",0,44,NA,9,15,NA
+Al Qasim,"[5,10)",0,4,NA,20,2,NA
+Al Qasim,"[10,15)",NA,1,NA,NA,0,NA
+Al Qasim,"[15,20)",NA,2,NA,NA,1,NA
+Al Qasim,"[20,25)",22,5,NA,1722,4,NA
+Al Qasim,"[25,30)",NA,15,NA,NA,10,NA
+Al Qasim,"[30,35)",NA,14,NA,NA,5,NA
+Al Qasim,"[35,40)",NA,20,NA,NA,2,NA
+Al Qasim,"[40,45)",NA,10,NA,NA,6,NA
+Al Qasim,"[45,50)",26,7,160,1114,2,0
+Al Qasim,"[50,55)",NA,6,NA,NA,6,NA
+Al Qasim,"[55,60)",NA,43,NA,NA,29,NA
+Al Qasim,"[60,65)",NA,36,NA,NA,10,NA
+Al Qasim,"[65,70)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[70,75)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[75,80)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[80,85)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[85,90)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[90,95)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[95,100)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[100,105)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[105,110)",NA,NA,NA,NA,NA,NA
+Al Qasim,"[110,115)",NA,NA,NA,NA,NA,NA
+Al Qasim,NA,NA,NA,NA,NA,NA,NA
+Ar Riyadh,"[0,5)",NA,307,NA,NA,89,NA
+Ar Riyadh,"[5,10)",NA,16,NA,NA,12,NA
+Ar Riyadh,"[10,15)",NA,4,8,NA,8,0
+Ar Riyadh,"[15,20)",NA,50,0,NA,16,160
+Ar Riyadh,"[20,25)",190,132,30,2902,62,280
+Ar Riyadh,"[25,30)",995,136,8,16709,55,160
+Ar Riyadh,"[30,35)",NA,186,34,NA,60,172
+Ar Riyadh,"[35,40)",0,113,0,43,42,722
+Ar Riyadh,"[40,45)",645,109,8,7659,35,1
+Ar Riyadh,"[45,50)",4,57,57,31,67,14
+Ar Riyadh,"[50,55)",NA,54,320,NA,28,0
+Ar Riyadh,"[55,60)",NA,221,280,NA,115,0
+Ar Riyadh,"[60,65)",NA,236,280,NA,69,0
+Ar Riyadh,"[65,70)",NA,12,0,NA,5,160
+Ar Riyadh,"[70,75)",17,5,NA,262,5,NA
+Ar Riyadh,"[75,80)",11,0,NA,148,1,NA
+Ar Riyadh,"[80,85)",NA,2,NA,NA,1,NA
+Ar Riyadh,"[85,90)",NA,NA,NA,NA,NA,NA
+Ar Riyadh,"[90,95)",NA,NA,NA,NA,NA,NA
+Ar Riyadh,"[95,100)",NA,NA,NA,NA,NA,NA
+Ar Riyadh,"[100,105)",NA,0,NA,NA,1,NA
+Ar Riyadh,"[105,110)",NA,NA,NA,NA,NA,NA
+Ar Riyadh,"[110,115)",NA,NA,NA,NA,NA,NA
+Ar Riyadh,NA,NA,NA,NA,NA,NA,NA
+Ha'il,"[0,5)",NA,29,NA,NA,5,NA
+Ha'il,"[5,10)",NA,2,NA,NA,1,NA
+Ha'il,"[10,15)",NA,NA,NA,NA,NA,NA
+Ha'il,"[15,20)",NA,4,NA,NA,2,NA
+Ha'il,"[20,25)",NA,35,NA,NA,6,NA
+Ha'il,"[25,30)",NA,25,NA,NA,9,NA
+Ha'il,"[30,35)",NA,15,NA,NA,8,NA
+Ha'il,"[35,40)",22,14,0,1455,3,160
+Ha'il,"[40,45)",NA,17,NA,NA,3,NA
+Ha'il,"[45,50)",NA,9,NA,NA,1,NA
+Ha'il,"[50,55)",NA,6,NA,NA,1,NA
+Ha'il,"[55,60)",NA,25,NA,NA,3,NA
+Ha'il,"[60,65)",NA,20,NA,NA,1,NA
+Ha'il,"[65,70)",NA,2,NA,NA,0,NA
+Ha'il,"[70,75)",NA,NA,NA,NA,NA,NA
+Ha'il,"[75,80)",NA,NA,NA,NA,NA,NA
+Ha'il,"[80,85)",NA,NA,NA,NA,NA,NA
+Ha'il,"[85,90)",NA,1,NA,NA,0,NA
+Ha'il,"[90,95)",NA,NA,NA,NA,NA,NA
+Ha'il,"[95,100)",NA,NA,NA,NA,NA,NA
+Ha'il,"[100,105)",NA,NA,NA,NA,NA,NA
+Ha'il,"[105,110)",NA,NA,NA,NA,NA,NA
+Ha'il,"[110,115)",NA,NA,NA,NA,NA,NA
+Ha'il,NA,NA,NA,NA,NA,NA,NA
+Jazan,"[0,5)",NA,27,NA,NA,18,NA
+Jazan,"[5,10)",NA,4,NA,NA,2,NA
+Jazan,"[10,15)",NA,1,NA,NA,0,NA
+Jazan,"[15,20)",114,5,NA,2380,1,NA
+Jazan,"[20,25)",28,4,NA,332,3,NA
+Jazan,"[25,30)",NA,14,NA,NA,10,NA
+Jazan,"[30,35)",NA,10,NA,NA,9,NA
+Jazan,"[35,40)",NA,8,0,NA,7,140
+Jazan,"[40,45)",3,8,NA,53,6,NA
+Jazan,"[45,50)",NA,6,NA,NA,1,NA
+Jazan,"[50,55)",NA,1,NA,NA,33,NA
+Jazan,"[55,60)",0,16,NA,2,44,NA
+Jazan,"[60,65)",13,38,NA,346,6,NA
+Jazan,"[65,70)",NA,2,NA,NA,2,NA
+Jazan,"[70,75)",NA,0,NA,NA,2,NA
+Jazan,"[75,80)",NA,NA,NA,NA,NA,NA
+Jazan,"[80,85)",NA,NA,NA,NA,NA,NA
+Jazan,"[85,90)",NA,NA,NA,NA,NA,NA
+Jazan,"[90,95)",NA,NA,NA,NA,NA,NA
+Jazan,"[95,100)",NA,NA,NA,NA,NA,NA
+Jazan,"[100,105)",NA,NA,NA,NA,NA,NA
+Jazan,"[105,110)",NA,NA,NA,NA,NA,NA
+Jazan,"[110,115)",NA,NA,NA,NA,NA,NA
+Jazan,NA,NA,NA,NA,NA,NA,NA
+Makkah al Mukarramah,"[0,5)",NA,218,0,NA,141,40
+Makkah al Mukarramah,"[5,10)",NA,15,NA,NA,15,NA
+Makkah al Mukarramah,"[10,15)",NA,13,0,NA,9,160
+Makkah al Mukarramah,"[15,20)",0,46,0,10,31,39
+Makkah al Mukarramah,"[20,25)",259,117,2,1924,135,21
+Makkah al Mukarramah,"[25,30)",NA,139,22,NA,122,200
+Makkah al Mukarramah,"[30,35)",833,227,4,7976,117,339
+Makkah al Mukarramah,"[35,40)",845,90,20,6451,84,502
+Makkah al Mukarramah,"[40,45)",323,144,10,2221,99,321
+Makkah al Mukarramah,"[45,50)",212,64,22,763,51,182
+Makkah al Mukarramah,"[50,55)",50,130,220,1026,104,60
+Makkah al Mukarramah,"[55,60)",36,142,0,1275,136,160
+Makkah al Mukarramah,"[60,65)",NA,119,60,NA,82,200
+Makkah al Mukarramah,"[65,70)",NA,47,20,NA,16,160
+Makkah al Mukarramah,"[70,75)",NA,11,160,NA,10,20
+Makkah al Mukarramah,"[75,80)",5,4,20,44,3,0
+Makkah al Mukarramah,"[80,85)",10,2,340,67,0,0
+Makkah al Mukarramah,"[85,90)",0,NA,NA,4,NA,NA
+Makkah al Mukarramah,"[90,95)",NA,NA,NA,NA,NA,NA
+Makkah al Mukarramah,"[95,100)",NA,NA,NA,NA,NA,NA
+Makkah al Mukarramah,"[100,105)",NA,NA,NA,NA,NA,NA
+Makkah al Mukarramah,"[105,110)",NA,NA,NA,NA,NA,NA
+Makkah al Mukarramah,"[110,115)",NA,NA,NA,NA,NA,NA
+Makkah al Mukarramah,NA,NA,NA,NA,NA,NA,NA
+Najran,"[0,5)",NA,16,NA,NA,2,NA
+Najran,"[5,10)",NA,1,NA,NA,0,NA
+Najran,"[10,15)",NA,NA,NA,NA,NA,NA
+Najran,"[15,20)",NA,1,NA,NA,0,NA
+Najran,"[20,25)",82,NA,NA,1007,NA,NA
+Najran,"[25,30)",NA,3,0,NA,0,160
+Najran,"[30,35)",NA,1,NA,NA,0,NA
+Najran,"[35,40)",NA,3,NA,NA,11,NA
+Najran,"[40,45)",NA,3,NA,NA,0,NA
+Najran,"[45,50)",3,1,NA,300,1,NA
+Najran,"[50,55)",NA,2,NA,NA,0,NA
+Najran,"[55,60)",NA,23,NA,NA,36,NA
+Najran,"[60,65)",NA,12,NA,NA,2,NA
+Najran,"[65,70)",NA,NA,NA,NA,NA,NA
+Najran,"[70,75)",NA,NA,NA,NA,NA,NA
+Najran,"[75,80)",NA,0,NA,NA,2,NA
+Najran,"[80,85)",NA,3,NA,NA,2,NA
+Najran,"[85,90)",NA,0,NA,NA,1,NA
+Najran,"[90,95)",NA,NA,NA,NA,NA,NA
+Najran,"[95,100)",NA,NA,NA,NA,NA,NA
+Najran,"[100,105)",NA,NA,NA,NA,NA,NA
+Najran,"[105,110)",NA,NA,NA,NA,NA,NA
+Najran,"[110,115)",NA,NA,NA,NA,NA,NA
+Najran,NA,NA,NA,NA,NA,NA,NA
+Tabuk,"[0,5)",NA,15,NA,NA,38,NA
+Tabuk,"[5,10)",NA,NA,NA,NA,NA,NA
+Tabuk,"[10,15)",NA,2,NA,NA,1,NA
+Tabuk,"[15,20)",NA,2,NA,NA,6,NA
+Tabuk,"[20,25)",16,11,NA,775,23,NA
+Tabuk,"[25,30)",NA,23,NA,NA,33,NA
+Tabuk,"[30,35)",275,24,NA,3101,22,NA
+Tabuk,"[35,40)",NA,31,NA,NA,30,NA
+Tabuk,"[40,45)",0,12,NA,11,23,NA
+Tabuk,"[45,50)",145,8,NA,3436,11,NA
+Tabuk,"[50,55)",NA,6,NA,NA,1,NA
+Tabuk,"[55,60)",NA,6,NA,NA,70,NA
+Tabuk,"[60,65)",NA,6,NA,NA,16,NA
+Tabuk,"[65,70)",NA,5,NA,NA,1,NA
+Tabuk,"[70,75)",NA,NA,NA,NA,NA,NA
+Tabuk,"[75,80)",NA,1,NA,NA,0,NA
+Tabuk,"[80,85)",NA,0,NA,NA,1,NA
+Tabuk,"[85,90)",NA,NA,NA,NA,NA,NA
+Tabuk,"[90,95)",NA,NA,NA,NA,NA,NA
+Tabuk,"[95,100)",NA,NA,NA,NA,NA,NA
+Tabuk,"[100,105)",NA,NA,NA,NA,NA,NA
+Tabuk,"[105,110)",NA,NA,NA,NA,NA,NA
+Tabuk,"[110,115)",NA,NA,NA,NA,NA,NA
+Tabuk,NA,NA,NA,NA,NA,NA,NA
