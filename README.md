@@ -1,3 +1,4 @@
 # Proof of concept
 
-https://julianflowers.quarto.pub/spha/
+Code https://julianflowers.quarto.pub/spha/
+Dashboard https://julianflowers.quarto.pub/dash/
