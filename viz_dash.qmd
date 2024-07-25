@@ -3,7 +3,7 @@ title: "Visualisation"
 format: dashboard
 ---
 
-# {.sidebar}
+#  {.sidebar}
 
 ```{r}
 needs(tidyverse, crosstalk, DT, plotly, gt, readxl, Hmisc)
@@ -36,8 +36,6 @@ filter_select("age_band", "Age band", shared_amr, ~ age_band)
 # AMR data
 
 Record exploration - drill down through data dimensions[^viz_dash-1] in `r nrow(shared_amr$data())` samples
-
-[^viz_dash-1]: Assumes each record is a separate sample
 
 ```{r}
 amr <- DT::datatable(shared_amr,
@@ -106,4 +104,4 @@ phe_proportion(agg_amr_1, x = res, n = den) |>
 
 ```
 
-
+[^viz_dash-1]: Assumes each record is a separate sample

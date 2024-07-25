@@ -1,71 +1,114 @@
 ---
-title: "Dashboard"
+title: "Sample profile for KSA indicators"
 format: dashboard
 ---
 
 ```{r}
+#| label: setup
+#| include: false
+#| 
 needs(tidyverse, crosstalk, DT, plotly, gt, readxl, Hmisc)
 
-data <- read_csv("data/pop_rates.csv")
+prof_data <- read_csv("data/pop_rates.csv") |>
+    select(Indicator, Region, age_band, gender, everything())
+    
 
-amr <- read_xlsx("data/AMR 2022 POC.xlsx") |>
-    janitor::clean_names() |>
-    select(age_year, community_origin, location, patient_hospitalized, community_origin, pathogen_name:spectinomycin) |>
-    pivot_longer(names_to = "antibiotic", values_to = "resistance", cols = 6:last_col()) |>
-        mutate(age_band = cut2(age_year, cuts = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 118))) |>
-    count(community_origin, patient_hospitalized, age_band, pathogen_name, antibiotic, resistance)
-
-
-sharedP <- SharedData$new(data)
-shared_amr <- SharedData$new(amr)
+sharedP <- SharedData$new(prof_data)
 
 
 ```
 
+##  {.sidebar}
 
-## {.sidebar}
-
-Simple static dashboard
+Select
 
 ```{r}
-filter_checkbox("path", "Pathogen", shared_amr, ~ pathogen_name)
-filter_select("patient_hospitalized", "Hospitalised", shared_amr, ~ patient_hospitalized)
-filter_checkbox("community_origin", "Source", shared_amr, ~ community_origin)
-filter_select("antibiotic", "Antibiotic", shared_amr, ~ antibiotic)
+filter_checkbox("sex", "Gender", sharedP, ~ gender)
+filter_checkbox("ind", "Indicator", sharedP, ~ Indicator)
+filter_select("age", "Age band", sharedP, ~ age_band)
+filter_select("region", "Region", sharedData = sharedP, ~ Region)
+
 
 ```
 
+# Indicator table
 
-# AMR
-
-## {.toolbar}
+##  {.toolbar}
 
 ## Row {height = 20%}
 
 ## Column {width = 70%}
 
 ```{r}
-#| title: "AMR data"
+#| title: "Indicator data"
 
-DT::datatable(shared_amr)
+DT::datatable(sharedP) |>
+    DT::formatRound(c("value", "lowercl", "uppercl"), digits = 2)
 
 ```
 
-
-
-
-
-
-
-
-# AMR charts
-
+# Regional comparison
 
 ```{r}
 
-amr |>
-    head()
+national <- sharedP$data() |>
+    group_by(Indicator, gender) |>
+    reframe(meanv = mean(value), 
+            meanlcl = mean(lowercl), 
+            meanucl = mean(uppercl)) |>
+    mutate(Region = "KSA")
 
 
+regional <- sharedP$data() |>
+    group_by(Region, Indicator, gender) |>
+    reframe(meanv = mean(value), 
+            meanlcl = mean(lowercl), 
+            meanucl = mean(uppercl))
+
+complete <- bind_rows(national, regional) 
+
+complete |>
+    ggplot() +
+    geom_col(aes(Region, meanv, fill = gender), position = position_dodge(width = 2)) +
+    geom_linerange(aes(Region, ymin = meanlcl, ymax = meanucl, group = gender), colour = "black", position = position_dodge(width = 2)) +
+    geom_hline(yintercept = complete |> filter(Region == "ksa")) |>
+    theme (axis.text.x = element_text(angle = 45, hjust = 1)) +
+    facet_grid(Indicator ~ gender, scales = "free")
+```
+
+# Tartan rug
+
+```{r}
+
+regional |> 
+    left_join(national, by = c("Indicator", "gender")) |>
+    select(-c(8:9)) |>
+    mutate(significance =  case_when(meanlcl.x > meanv.y ~"high" ,
+                                     meanucl.x < meanv.y~ "low",
+                                    TRUE ~ "ns")) |>
+    ggplot() +
+    geom_tile(aes(Region.x, Indicator, fill = significance)) +
+    facet_wrap(~ gender, ncol = 1) +
+    scale_fill_manual(values = c("red", "darkgreen", "goldenrod")) +
+    scale_x_discrete(position = "top") +
+    theme(axis.text.x = element_text(angle = 90, hjust = 0.5)) + 
+    labs(x = "")
+    
+
+
+
+```
+
+# Indicator comparison
+
+```{r}
+
+needs(GGally)
+
+sharedP$data() |>
+    select(Indicator:value) |>
+    pivot_wider(names_from = c("Indicator", "gender"), values_from = value) |>
+    GGally::ggpairs(columns = 3:8)
+    
 
 ```

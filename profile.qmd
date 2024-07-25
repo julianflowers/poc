@@ -45,6 +45,45 @@ smok_rates <- smok_rates |>
 
 Health profiles combine multiple indicators to allow comparison, usually between population or administrative units e.g. regions, hospitals, ethnic groups, age groups and provide tools to facilitate a range of comparison.
 
+### Workflow
+
+#### Preparing data
+
+To generate profile-style presentations per-indicator datasets need to be configured in a standard way and pooled. The minimum meta-data (variable names) for each indicator would be:
+
+| Indicator name                    |
+|-----------------------------------|
+| Area name                         |
+| Age group                         |
+| Gender                            |
+| Value                             |
+| Count (numerator)                 |
+| Denominator                       |
+| Metric type e.g. proportion, rate |
+| Unit e.g. per 100,000, %          |
+| Lower uncertainty interval        |
+| Upper uncertainty interval        |
+| Uncertainty e.g. 95%, 99.8%       |
+
+: Meta-data for profile data
+
+```{mermaid}
+%%| label: fig-workflow-prof
+%%| fig-cap: "Proposed workflow for creating health profiles"
+
+flowchart TD
+A[Configure per-indicator data] --> B[bind datasets]
+
+
+
+```
+
+```{r}
+
+prof_data <- 
+    
+```
+
 UK health profiles (for example, Public Health Outcome Framework) offer a wide range of comparison:
 
 -   Between and within areas
@@ -54,7 +93,7 @@ UK health profiles (for example, Public Health Outcome Framework) offer a wide r
 ## Visualisation
 
 | Comparison                            | Visualisation                         | Comment                                                                                                                                                                                                     |
-|---------------------------------------|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|-------------|-------------|----------------------------------------------|
 | Single area, multiple indicators      | Spine or bullet chart                 | Indicator values are scaled so that they can be directly compared. Single area (unit) values are usually encoded as a dot or line, plotted on a bar representing the range of values for all areas / units. |
 | Multiple areas, single indicator      | Column / bar chart                    | Plots can be ordered and plotted horizontally to enable rapid appraisal of relative performance. Confidence intervals can be added                                                                          |
 | Indicator pairs / multiple indicators | Scatter plot or scatter plot matrices | May include smooths (lines representing fit to the data - common options are linear, loess and generalised additive models)                                                                                 |
