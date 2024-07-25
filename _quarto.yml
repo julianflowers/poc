@@ -6,6 +6,7 @@ book:
   author: "Julian Flowers"
   date: "2024-07-12"
   chapters:
+    - prereq.qmd
     - index.qmd
     - ind-def.qmd
     - data-summaries.qmd

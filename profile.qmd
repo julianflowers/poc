@@ -78,12 +78,6 @@ A[Configure per-indicator data] --> B[bind datasets]
 
 ```
 
-```{r}
-
-prof_data <- 
-    
-```
-
 UK health profiles (for example, Public Health Outcome Framework) offer a wide range of comparison:
 
 -   Between and within areas
@@ -93,7 +87,7 @@ UK health profiles (for example, Public Health Outcome Framework) offer a wide r
 ## Visualisation
 
 | Comparison                            | Visualisation                         | Comment                                                                                                                                                                                                     |
-|-------------|-------------|----------------------------------------------|
+|---------------|---------------|------------------------------------------|
 | Single area, multiple indicators      | Spine or bullet chart                 | Indicator values are scaled so that they can be directly compared. Single area (unit) values are usually encoded as a dot or line, plotted on a bar representing the range of values for all areas / units. |
 | Multiple areas, single indicator      | Column / bar chart                    | Plots can be ordered and plotted horizontally to enable rapid appraisal of relative performance. Confidence intervals can be added                                                                          |
 | Indicator pairs / multiple indicators | Scatter plot or scatter plot matrices | May include smooths (lines representing fit to the data - common options are linear, loess and generalised additive models)                                                                                 |
