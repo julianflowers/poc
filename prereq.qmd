@@ -38,14 +38,12 @@ Using this resource requires:
 
 -   Install R packages  - copy this code and run at the \> prompt in the console
 
-    \`\`\`
-
-    install.packages(c("needs", "tidyverse", "quarto", "sf" , "mapview", "ggalluvial" , "GGally", "devtools", "flextable", "data.table", "epitools", "PHEindicatormethods"))
+    ```         
+    install.packages(c("needs", "tidyverse",  "quarto", "sf" , "mapview",  "ggalluvial" , "GGally", "devtools", "flextable", "data.table",  "epitools", "PHEindicatormethods"))
 
     library(needs, devtools)
 
     devtools::install_github("julianflowers/myScrapers", dependencies = TRUE)
 
     library(myScrapers)
-
-    \`\`\`
+    ```

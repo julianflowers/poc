@@ -24,7 +24,7 @@
     "href": "prereq.html",
     "title": "1  Pre-requisites",
     "section": "",
-    "text": "Using this resource requires:\n\nR\nRStudio\nquarto - download from https://quarto.org/docs/download/\nR packages\n\nneeds\ntidyverse\nquarto\nsf\nmapview\ndata.table\nflextable\nggalluvial\nGGally\nmyScrapers\nepitools\nPHEindicatormethods\n\nInstall R packages - copy this code and run at the &gt; prompt in the console\n```\ninstall.packages(c(“needs”, “tidyverse”, “quarto”, “sf” , “mapview”, “ggalluvial” , “GGally”, “devtools”, “flextable”, “data.table”, “epitools”, “PHEindicatormethods”))\nlibrary(needs, devtools)\ndevtools::install_github(“julianflowers/myScrapers”, dependencies = TRUE)\nlibrary(myScrapers)\n```",
+    "text": "Using this resource requires:\n\nR\nRStudio\nquarto - download from https://quarto.org/docs/download/\nR packages\n\nneeds\ntidyverse\nquarto\nsf\nmapview\ndata.table\nflextable\nggalluvial\nGGally\nmyScrapers\nepitools\nPHEindicatormethods\n\nInstall R packages - copy this code and run at the &gt; prompt in the console\ninstall.packages(c(\"needs\", \"tidyverse\",  \"quarto\", \"sf\" , \"mapview\",  \"ggalluvial\" , \"GGally\", \"devtools\", \"flextable\", \"data.table\",  \"epitools\", \"PHEindicatormethods\"))\n\nlibrary(needs, devtools)\n\ndevtools::install_github(\"julianflowers/myScrapers\", dependencies = TRUE)\n\nlibrary(myScrapers)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Pre-requisites</span>"
     ]
